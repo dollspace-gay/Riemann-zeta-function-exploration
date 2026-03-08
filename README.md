@@ -164,4 +164,4 @@ Probably not. We found one new observation (Lehmer pairs as null space) and one 
 The Lean-verified parts are mechanically certain. The numerical observations are reproducible. The initial "bounded conditioning" claim was wrong due to a bug, and this is documented.
 
 **Can someone without a math degree do mathematical research?**
-That's the real question this project raises. See [`papers/process_paper.md`](papers/process_paper.md).
+That's the real question this project raises. See [`papers/rh_process_paper.md`](papers/rh_process_paper.md).
