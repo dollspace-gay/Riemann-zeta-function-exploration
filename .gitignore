@@ -1,0 +1,27 @@
+# Lean 4 / Lake build artifacts
+lean/.lake/
+lean/lake-packages/
+lean/build/
+
+# Rust build artifacts
+rust/target/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Data files (too large for git, downloaded by scripts)
+*.gz
+zeros1
+zeros6
+zeta_zeros.csv
+*_zeros.csv
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
