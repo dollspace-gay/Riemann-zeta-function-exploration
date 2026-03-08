@@ -39,8 +39,7 @@ If it builds, the symmetry theorem is machine-verified. Check `#print axioms` ou
 
 ```bash
 # Download 2 million precomputed zeros
-powershell -File compute/download_zeros.ps1   # Windows
-# or: bash compute/download_zeros.sh           # Linux
+bash compute/download_zeros.sh
 
 # Install dependencies
 pip install torch numpy sympy
@@ -52,13 +51,13 @@ python compute/rh_gpu.py
 python compute/rh_postfix.py
 
 # Perturbation test + complex characters
-python compute/rh_gap_analysis.py
+python compute/rhgap.py
 ```
 
 ### Read the papers
 
-- [`papers/mathematical_results.md`](papers/mathematical_results.md) — The corrected mathematical findings
-- [`papers/process_paper.md`](papers/process_paper.md) — How we did it, what went wrong, and who gets to do math
+- [`papers/rh_crystal_v3_final.md`](papers/rh_crystal_v3_final.md) — The corrected mathematical findings
+- [`papers/rh_process_paper.md`](papers/rh_process_paper.md) — How we did it, what went wrong, and who gets to do math
 
 ---
 
@@ -67,8 +66,8 @@ python compute/rh_gap_analysis.py
 ```
 rh-crystal/
 ├── papers/
-│   ├── mathematical_results.md   # Corrected math paper (v3)
-│   └── process_paper.md          # Process, methodology, access
+│   ├── rh_crystal_v3_final.md    # Corrected math paper (v3)
+│   └── rh_process_paper.md       # Process, methodology, access
 ├── figures/
 │   ├── fig1_corrected_scaling.png
 │   ├── fig2_corrected_sigma.png
@@ -83,14 +82,12 @@ rh-crystal/
 │   ├── precompute_zeros.py       # Generate zeros via mpmath (slow)
 │   ├── rh_gpu.py                 # GPU analysis (PyTorch, main results)
 │   ├── rh_postfix.py             # Eigenvector + height analysis
-│   ├── rh_gap_analysis.py        # Perturbation + complex characters
-│   ├── download_zeros.ps1        # Download Odlyzko's zeros (Windows)
+│   ├── rhgap.py                  # Perturbation + complex characters
 │   └── download_zeros.sh         # Download Odlyzko's zeros (Linux)
 ├── rust/
 │   ├── Cargo.toml
 │   ├── src/main.rs
 │   └── BUGFIX.md                 # Documents the diagonal doubling bug
-├── METHOD.md                     # Verification-Driven Development
 └── README.md                     # You are here
 ```
 
@@ -106,7 +103,7 @@ rh-crystal/
 | Bounded conditioning (κ < 4) | **WRONG** (bug) | See `rust/BUGFIX.md` |
 | κ grows as N^{0.61} | **Observed** | `rh_gpu.py` Test 1 |
 | λ_min eigenvector localized on Lehmer pairs | **Observed** (new) | `rh_postfix.py` Test 3 |
-| Off-line zeros increase κ | **Observed** | `rh_gap_analysis.py` Gap 2 |
+| Off-line zeros increase κ | **Observed** | `rhgap.py` Gap 2 |
 
 ---
 

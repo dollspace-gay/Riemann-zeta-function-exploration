@@ -21,6 +21,7 @@ zeta_zeros.csv
 # OS
 .DS_Store
 Thumbs.db
+*:Zone.Identifier
 
 # IDE
 .vscode/
