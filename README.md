@@ -1,5 +1,3 @@
-# rh-crystal
-
 **A GED-holder and a language model investigated the Riemann Hypothesis.**
 
 Here's what we found, what we got wrong, and what survived.
