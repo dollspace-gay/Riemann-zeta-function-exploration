@@ -12,7 +12,7 @@ In one evening (March 2026), a trans woman with no formal math education and Cla
 
 - **One robust geometric property:** The Xi-weighted Gram matrix has minimum condition number at σ = 1/2, confirmed across 10 L-functions, at scales up to N = 20,000, and at zero heights up to 600,000. Machine-precision symmetry under σ ↔ 1−σ.
 
-- **One machine-verified proof:** The symmetry κ(σ) = κ(1−σ) is formally proven in Lean 4 with zero custom axioms.
+- **Two machine-verified proofs:** The symmetry κ(σ) = κ(1−σ), and the interlacing pair bound λ_min(G) ≤ Σ_p w(p,σ)(1 − cos(δ·log p)) — the latter ties the smallest eigenvalue to close zero pairs. Both formally proven in Lean 4, zero sorries, zero custom axioms.
 
 - **One bug:** The initial Rust implementation doubled the diagonal, inflating results by 10×. The "bounded conditioning" result reported in early drafts was wrong. This is documented in full.
 
@@ -31,7 +31,7 @@ lake exe cache get   # Downloads prebuilt Mathlib (~3GB, one-time)
 lake build           # Should complete cleanly (zero sorries)
 ```
 
-If it builds, the symmetry theorem is machine-verified. Check `#print axioms` output for no hidden assumptions.
+If it builds, both machine-verified results hold: the symmetry theorem κ(σ) = κ(1−σ), and the interlacing pair bound λ_min(G) ≤ Σ_p w(p,σ)(1 − cos((γ_i−γ_j) log p)). Check `#print axioms` output for no hidden assumptions.
 
 ### Run the GPU computation (requires NVIDIA GPU + PyTorch)
 
@@ -105,7 +105,7 @@ rh-crystal/
 | Bounded conditioning (κ < 4) | **WRONG** (bug) | See `rust/BUGFIX.md` |
 | κ grows as N^{0.61} | **Observed** | `rh_gpu.py` Test 1 |
 | λ_min eigenvector localized on tight clusters (v4; v3 said "Lehmer pairs") | **Observed** (new) | `rh_windows.py` |
-| λ_min ≤ pair/window bound (Cauchy interlacing) | **Proven** (paper §3.3) | `rh_progress.py` Test A |
+| λ_min ≤ pair bound B(δ) (interlacing/Rayleigh) | **Proven** (Lean 4) | `lean/RHCrystal/RHCrystal.lean` |
 | κ scaling reproduced by GUE, destroyed by Poisson | **Observed** (v4) | `rh_progress.py` Test B |
 | Height degradation removable by raising prime cutoff | **Observed** (v4) | `rh_progress.py` Test D |
 | Off-line zeros increase κ | **Observed** | `rhgap.py` Gap 2 |

@@ -105,7 +105,7 @@ and more generally λ_min(G) ≤ λ_min(M) for every principal submatrix M. For 
 
 *Proof.* The 2×2 principal submatrix at an adjacent pair is [[1, c], [c, 1]] with c = Σ_p ŵ(p) cos(δ log p) = 1 − B(δ); its smaller eigenvalue is min(1 − c, 1 + c) ≤ 1 − c = B(δ). Cauchy interlacing gives λ_min(G) ≤ λ_min of any principal submatrix. ∎
 
-This is an elementary but rigorous statement, and a candidate for Lean formalization. Numerically the 2×2 bound is valid but loose (λ_min/min B ≈ 0.2–0.6; see §5.5 for why), while 3×3 and larger windows are far sharper.
+This statement is **machine-verified in Lean 4** (`gram_eigenvalue_le_pair_bound` in `lean/RHCrystal/RHCrystal.lean`, zero sorries, zero custom axioms; Appendix A). The formal proof goes through the Rayleigh-quotient argument: for real symmetric A, the test vector e_i − e_j witnesses an eigenvalue at most (A_ii + A_jj)/2 − A_ij, instantiated with the Gram entries. Numerically the 2×2 bound is valid but loose (λ_min/min B ≈ 0.2–0.6; see §5.5 for why), while 3×3 and larger windows are far sharper.
 
 ---
 
@@ -363,7 +363,7 @@ Status of v3's problems: (1) is extended but still open; (2) and (3) are sharpen
 
 5. **Test non-principal characters and higher-degree L-functions.** Extending universality beyond Dirichlet L-functions to Hecke L-functions, symmetric power L-functions, or Artin L-functions would strengthen or weaken the claim.
 
-6. **Formalize the interlacing bound (§3.3) in Lean.** The statement is elementary (2×2 principal submatrix eigenvalue + Cauchy interlacing); Mathlib has the spectral machinery. This would extend the machine-verified portion of this work from the weight symmetry to a genuine spectral bound.
+6. **Formalize the interlacing bound (§3.3) in Lean.** **Done** (June 2026): `exists_eigenvalue_mul_le_rayleigh`, `exists_eigenvalue_le_pair_bound`, and `gram_eigenvalue_le_pair_bound` are proven in `lean/RHCrystal/RHCrystal.lean` with zero sorries and zero custom axioms, extending the machine-verified portion of this work from the weight symmetry to a genuine spectral bound. Remaining extension: the k×k window version (W_k of §5.5), which would require formalizing principal-submatrix interlacing in general.
 
 ---
 
@@ -407,7 +407,15 @@ Status of v3's problems: (1) is extended but still open; (2) and (3) are sharpen
 
 ## Appendix A: Lean 4 Formalization
 
-The symmetry theorem w(p, σ) = w(p, 1−σ) and its corollaries (G(σ) = G(1−σ), κ(σ) = κ(1−σ)) are machine-verified in Lean 4, together with cosh(x) ≥ 1 (via AM-GM on exp(x/2), exp(−x/2)). The formalization contains zero sorries and introduces zero axioms beyond Lean's standard foundations (propext, Classical.choice, Quot.sound). Build: `lake update && lake exe cache get && lake build`.
+Machine-verified in Lean 4 (`lean/RHCrystal/RHCrystal.lean`):
+
+1. The symmetry theorem w(p, σ) = w(p, 1−σ) and its corollaries (G(σ) = G(1−σ), hence κ(σ) = κ(1−σ)), together with cosh(x) ≥ 1 (via AM-GM on exp(x/2), exp(−x/2)).
+2. **The interlacing pair bound (§3.3), new in v4:**
+   - `exists_eigenvalue_mul_le_rayleigh` — for real symmetric A and any vector x, some eigenvalue λ_k satisfies λ_k·(x⬝x) ≤ x⬝(Ax) (proven via the spectral theorem and unitary conjugation of quadratic forms);
+   - `exists_eigenvalue_le_pair_bound` — the test vector e_i − e_j gives 2λ_k ≤ A_ii + A_jj − 2A_ij;
+   - `gram_eigenvalue_le_pair_bound` — instantiated for the Gram matrix: some eigenvalue is at most Σ_p w(p,σ)·(1 − cos((γ_i − γ_j)·log p)).
+
+The formalization contains zero sorries and introduces zero axioms beyond Lean's standard foundations (propext, Classical.choice, Quot.sound), confirmed by `#print axioms` for every theorem. Build: `lake update && lake exe cache get && lake build`.
 
 ## Appendix B: Bug Disclosure
 
