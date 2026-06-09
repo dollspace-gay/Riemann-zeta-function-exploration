@@ -170,3 +170,41 @@ chains of Session 1, now cleanly visible at scale.
    partial sums get corrected — Möbius inversion truncation errors live
    on smooth numbers).
 4. Residual profile r_N(t) (unchanged from Session 1 list).
+
+---
+
+## Session 3 — June 9, 2026: the doubling-chain mechanism, dissected
+
+Code: `chains.py`; theory write-up: `chains_theory.md`. Raw output:
+`~/rh_output/nb_chains.txt`.
+
+### Proved exactly (elementary)
+
+- **Square-wave identity:** e_{mk} = e_k/m + (⌊1/(kt)⌋ mod m)/m, so chain
+  differences are square waves supported on (0, 1/k]; verified pointwise
+  to machine precision and against the Gram data at 1e−12.
+- **C₂ = (log 2)/4**, and the closed form
+  A(1,2) = ∫ρ(1/t)ρ(1/2t)dt = (3/4)(log 2π − γ) − (log 2)/4, agreeing with
+  the computed entry to all digits.
+- **Zero-sum reduction:** on Σα = 0, chain combinations reduce to the
+  oscillatory functional (1/16)∫[Σα_k(−1)^{⌊u/k⌋}]²u⁻²du.
+
+### Measured
+
+- **The chain subspace attains λ_min within a stable factor 1.19–1.23**
+  across N = 500…2500, saturating at ~20 chains; 3-chains add nothing.
+  The optimal α: alternating signs, smooth envelope, Σα = 0.0000.
+- **Kernel law:** M_{jk} = C₂/max(j,k) − φ(|j−k|)/K² with
+  φ(d) = d(1.073 − 0.143·log d), fit to ~3 decimals over d = 1…159.
+- Block-averaged zero hunt (queued item): still negative; one minor peak
+  at 32.87 near γ₅ = 32.935 but isolated among larger non-zero peaks —
+  not a detection.
+
+### Status
+
+λ_min(G_N) ≍ N⁻²·(slowly varying) now has a complete mechanistic account
+with a concrete proof program (chains_theory.md §5); the nearest rigorous
+target is the upper bound λ_min = O(N⁻² log N) via the explicit zero-sum
+test family, pending only error-term bookkeeping in the kernel
+asymptotics. If completed: κ(G_N) ≍ N², a deterministic conditioning law
+for the NB basis (literature check pending — the mechanism may be new).
