@@ -8,7 +8,7 @@ Here's what we found, what we got wrong, and what survived.
 
 In one evening (March 2026), a trans woman with no formal math education and Claude (Anthropic) computationally explored the geometric structure of Riemann zeta zeros. The investigation produced:
 
-- **One genuinely new observation:** The null space of the prime-zero Gram matrix is dominated by Lehmer pairs (closely-spaced zeros). This connects two previously separate phenomena — Lehmer's near-collisions and the resolution limit of the explicit formula.
+- **One genuinely new observation:** The null space of the prime-zero Gram matrix is dominated by tight *clusters* of zeros, located exactly by a 3-zero window eigenvalue. This connects two previously separate phenomena — anomalously close zeros (Lehmer's phenomenon) and the resolution limit of the explicit formula. (v3 said "Lehmer pairs"; v4 refines this — the famous Lehmer pair actually *loses* to a compound cluster at N=8000. See the revision history in the paper.)
 
 - **One robust geometric property:** The Xi-weighted Gram matrix has minimum condition number at σ = 1/2, confirmed across 10 L-functions, at scales up to N = 20,000, and at zero heights up to 600,000. Machine-precision symmetry under σ ↔ 1−σ.
 
@@ -54,7 +54,9 @@ python compute/rhgap.py
 
 ### Read the papers
 
-- [`papers/rh_crystal_v3_final.md`](papers/rh_crystal_v3_final.md) — The corrected mathematical findings
+- [`papers/rh_crystal_v4.md`](papers/rh_crystal_v4.md) — The mathematical findings (current version)
+- [`papers/rh_crystal_v3_final.md`](papers/rh_crystal_v3_final.md) — v3, kept as the historical record
+- [`papers/progress_notes_2026-06-09.md`](papers/progress_notes_2026-06-09.md) — Lab notes for the v4 experiments
 - [`papers/rh_process_paper.md`](papers/rh_process_paper.md) — How we did it, what went wrong, and who gets to do math
 
 ---
@@ -64,7 +66,9 @@ python compute/rhgap.py
 ```
 rh-crystal/
 ├── papers/
-│   ├── rh_crystal_v3_final.md    # Corrected math paper (v3)
+│   ├── rh_crystal_v4.md          # Math paper (current, v4)
+│   ├── rh_crystal_v3_final.md    # v3 (historical record)
+│   ├── progress_notes_2026-06-09.md  # Lab notes for v4 experiments
 │   └── rh_process_paper.md       # Process, methodology, access
 ├── figures/
 │   ├── fig1_corrected_scaling.png
@@ -100,7 +104,10 @@ rh-crystal/
 | σ = 1/2 minimum holds at all heights | **Observed** (γ up to 600k) | `rh_postfix.py` Test 5 |
 | Bounded conditioning (κ < 4) | **WRONG** (bug) | See `rust/BUGFIX.md` |
 | κ grows as N^{0.61} | **Observed** | `rh_gpu.py` Test 1 |
-| λ_min eigenvector localized on Lehmer pairs | **Observed** (new) | `rh_postfix.py` Test 3 |
+| λ_min eigenvector localized on tight clusters (v4; v3 said "Lehmer pairs") | **Observed** (new) | `rh_windows.py` |
+| λ_min ≤ pair/window bound (Cauchy interlacing) | **Proven** (paper §3.3) | `rh_progress.py` Test A |
+| κ scaling reproduced by GUE, destroyed by Poisson | **Observed** (v4) | `rh_progress.py` Test B |
+| Height degradation removable by raising prime cutoff | **Observed** (v4) | `rh_progress.py` Test D |
 | Off-line zeros increase κ | **Observed** | `rhgap.py` Gap 2 |
 
 ---
@@ -153,7 +160,7 @@ All code and writing in this repository is released under [CC BY 4.0](https://cr
 No.
 
 **Did you make progress toward proving it?**
-Probably not. We found one new observation (Lehmer pairs as null space) and one geometric characterization of the critical line (isotropy minimum). Neither constitutes progress toward a proof.
+Probably not. We found one new observation (tight zero clusters as null space) and one geometric characterization of the critical line (isotropy minimum). Neither constitutes progress toward a proof.
 
 **Is the math correct?**
 The Lean-verified parts are mechanically certain. The numerical observations are reproducible. The initial "bounded conditioning" claim was wrong due to a bug, and this is documented.
