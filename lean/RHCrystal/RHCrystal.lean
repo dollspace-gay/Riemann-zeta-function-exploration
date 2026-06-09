@@ -4,15 +4,13 @@
   PROVEN (no sorry, no new axioms):
   ✓ cosh(-x) = cosh(x)
   ✓ cosh(0) = 1
+  ✓ cosh(x) ≥ 1
   ✓ w(p,σ) = w(p,1-σ)
   ✓ w(p,1/2) = log(p)·1/√p
   ✓ G_{ij}(σ) = G_{ij}(1-σ)
   ✓ G(σ) = G(1-σ), hence κ(σ) = κ(1-σ)
 
-  ONE SORRY (AM-GM for exp — provable but tedious):
-  ⚠ cosh(x) ≥ 1
-
-  ZERO NEW AXIOMS.
+  ZERO SORRIES. ZERO NEW AXIOMS.
 -/
 
 import Mathlib.Tactic
@@ -35,10 +33,17 @@ theorem cosh_zero : cosh 0 = 1 := by
   simp [Real.exp_zero]
 
 /-- **cosh(x) ≥ 1** for all x.
-    Math: AM-GM on exp(x) and exp(-x).
-    Marked sorry — provable but requires tedious inequality chaining. -/
+    AM-GM on exp(x/2) and exp(-x/2):
+    (e^{x/2} - e^{-x/2})² ≥ 0  ⟹  e^x + e^{-x} ≥ 2·e^{x/2}e^{-x/2} = 2. -/
 theorem cosh_ge_one (x : ℝ) : 1 ≤ cosh x := by
-  sorry
+  unfold cosh
+  have h1 : Real.exp (x/2) * Real.exp (-(x/2)) = 1 := by
+    rw [← Real.exp_add]; simp
+  have h2 : Real.exp (x/2) * Real.exp (x/2) = Real.exp x := by
+    rw [← Real.exp_add]; congr 1; ring
+  have h3 : Real.exp (-(x/2)) * Real.exp (-(x/2)) = Real.exp (-x) := by
+    rw [← Real.exp_add]; congr 1; ring
+  nlinarith [sq_nonneg (Real.exp (x/2) - Real.exp (-(x/2))), h1, h2, h3]
 
 /-- The Xi weight: w(p, σ) = log(p) · cosh((σ - 1/2) · log(p)) / √p -/
 def xi_weight (p : ℝ) (σ : ℝ) : ℝ :=
@@ -90,6 +95,7 @@ theorem gram_matrix_symm {n : ℕ} (primes : List ℝ)
   exact gram_entry_symm primes γ σ i j
 
 #print axioms cosh_neg
+#print axioms cosh_ge_one
 #print axioms xi_weight_symm
 #print axioms gram_entry_symm
 #print axioms gram_matrix_symm

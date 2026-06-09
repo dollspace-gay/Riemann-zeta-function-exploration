@@ -327,7 +327,7 @@ The isotropy minimum is a geometric characterization of σ = 1/2, not a proof st
 
 ## Appendix A: Lean 4 Formalization
 
-The symmetry theorem w(p, σ) = w(p, 1−σ) and its corollaries (G(σ) = G(1−σ), κ(σ) = κ(1−σ)) are machine-verified in Lean 4. The proof introduces zero axioms beyond Lean's standard foundations. One `sorry` remains for cosh(x) ≥ 1 (AM-GM for exp, mechanically provable). Build: `lake update && lake exe cache get && lake build`.
+The symmetry theorem w(p, σ) = w(p, 1−σ) and its corollaries (G(σ) = G(1−σ), κ(σ) = κ(1−σ)) are machine-verified in Lean 4, together with cosh(x) ≥ 1 (via AM-GM on exp(x/2), exp(−x/2)). The formalization contains zero sorries and introduces zero axioms beyond Lean's standard foundations (propext, Classical.choice, Quot.sound). Build: `lake update && lake exe cache get && lake build`.
 
 ## Appendix B: Bug Disclosure
 

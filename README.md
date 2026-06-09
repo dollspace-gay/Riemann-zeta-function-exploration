@@ -28,7 +28,7 @@ In one evening (March 2026), a trans woman with no formal math education and Cla
 cd lean
 lake update
 lake exe cache get   # Downloads prebuilt Mathlib (~3GB, one-time)
-lake build           # Should complete with one expected 'sorry' warning
+lake build           # Should complete cleanly (zero sorries)
 ```
 
 If it builds, the symmetry theorem is machine-verified. Check `#print axioms` output for no hidden assumptions.
