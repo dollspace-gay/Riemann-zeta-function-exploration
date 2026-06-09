@@ -95,3 +95,78 @@ structure of d_N lives.
    exact algebra over our existing formalized machinery's style).
 4. Residual function profile r_N(t): where the unapproximable mass lives.
 5. Deviation field δ_k = c_k + μ(k)(1 − log k/log N): structure?
+
+---
+
+## Session 2 — June 9, 2026: full curve to N = 2500, zero hunt, chain structure at scale
+
+Code: `oscillations.py` (+ shared `nb_gram.py`). Raw output:
+`~/rh_output/nb_oscillations.txt`. Gram build to N = 2500: ~3 min GPU;
+the **single-Cholesky trick** then gives the entire d_N curve at once
+(leading-submatrix property: y = L⁻¹b, d_N² = 1 − Σ_{k≤N} y_k²; the
+Gram–Schmidt energies y_k² = d_{k−1}² − d_k² are themselves forensic data).
+
+### d_N²·log N at larger N — the rate law holds
+
+| N | 500 | 1000 | 1500 | 2000 | 2500 |
+|---|------|------|------|------|------|
+| d²logN | 0.04611 | 0.04529 | 0.04567 | 0.04647 | 0.04651 |
+
+Slow oscillation around C = 0.0461914 continues; at N = 2500 we sit 0.7%
+above it.
+
+### Zero hunt: honest negative
+
+Two statistics, two failures to detect the zeta zeros:
+
+- *Cumulative*: periodogram of d_N²logN − C after 1/log-power drift
+  removal. Peaks at freq 3.0, 5.1, 10.3, 8.1 (drift-removal artifacts at
+  low frequency); nothing at γ₁ = 14.13 / γ₂ = 21.02 / γ₃ = 25.01 above
+  amplitude ~5×10⁻⁵.
+- *Increments*: s_N = N log²N · y_N² has mean 0.0412 (≈ C, consistent
+  at finite-N level) but rms fluctuation 0.058 — the sequence is dominated
+  by **arithmetic noise** (divisor structure of each N), and its
+  periodogram peaks are not at zero frequencies either.
+
+Conclusion: at N ≤ 2500 the fine structure of d_N is arithmetic
+fluctuation, not visible zero oscillation. Detecting the zeros here needs
+larger N, smarter averaging of the increments, or a theoretical prediction
+of the expected amplitude (which may be genuinely tiny). Parked with data
+saved (`nb_periodogram.npz`).
+
+### λ_min = Θ(N^{−2+o(1)}), and the chain structure strengthens
+
+| N | 500 | 1000 | 1500 | 2000 | 2500 |
+|---|------|------|------|------|------|
+| λ_min·N² | 1.365 | 1.432 | 1.504 | 1.526 | 1.548 |
+
+The slow upward drift suggests λ_min ~ (a + b·log N)/N². At N = 2500 the
+null direction (PR = 13) is supported on **even** k near N — 2478…2496 —
+paired with their halves 1242…1246 near N/2, exactly the (k, 2k) doubling
+chains of Session 1, now cleanly visible at scale.
+
+### Two new structural observations
+
+1. **Gram–Schmidt energies are arithmetically flat.** For k ≥ 100, mean
+   y_k² is 1.82×10⁻⁶ (squarefree) vs 1.72×10⁻⁶ (non-squarefree) —
+   essentially no difference, despite the coefficients c_k tracking −μ(k)
+   at r = 0.88. The Möbius structure lives in the *correlations between*
+   dilations, not in the marginal contribution of each new one.
+2. **The deviation field δ_k = c_k + μ(k)(1 − log k/log N) concentrates
+   on smooth squarefree numbers.** Largest |δ_k| at k = 2500 (boundary),
+   2370 = 2·3·5·79, 2262 = 2·3·13·29, 1155 = 3·5·7·11, and notably
+   2310 = 2·3·5·7·11 (the 5th primorial). rms(δ) = 0.17 on squarefree vs
+   0.086 on non-squarefree: the refinement of the Möbius profile happens
+   where numbers have many small prime factors.
+
+### Next steps (revised)
+
+1. Prove λ_min ≍ N⁻²(log N?) via the doubling-chain structure — most
+   tractable, now well-supported empirically across 5× in N.
+2. Zero hunt v2: window-averaged increments (sum y_k² over dyadic blocks
+   kills arithmetic noise ∝ 1/√width), or push N to 10⁴ (Gram build
+   ~N³ → ~3 h; feasible overnight).
+3. Theory for the smooth-number deviation field (connects to how 1/ζ
+   partial sums get corrected — Möbius inversion truncation errors live
+   on smooth numbers).
+4. Residual profile r_N(t) (unchanged from Session 1 list).
