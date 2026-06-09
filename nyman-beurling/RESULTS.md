@@ -208,3 +208,45 @@ target is the upper bound λ_min = O(N⁻² log N) via the explicit zero-sum
 test family, pending only error-term bookkeeping in the kernel
 asymptotics. If completed: κ(G_N) ≍ N², a deterministic conditioning law
 for the NB basis (literature check pending — the mechanism may be new).
+
+---
+
+## Session 4 — June 9, 2026: THEOREM 1 (the upper bound), kernel constants derived
+
+### Theorem 1 (proved; chains_theory.md §0)
+
+    λ_min(G_N) ≤ (H_{K−1} + 1)/(10·K(K−1)),   K = ⌊N/2⌋,
+
+so λ_min(G_N) = O(N⁻²·log N) and κ(G_N) ≥ c·N²/log N. The witness is a
+four-term integer combination of dilations (the difference of two adjacent
+doubling chains at K−1, K); the proof is the square-wave identity, an
+exact disagreement-interval lemma (the parity-mismatch set of adjacent
+counters is ⋃_{ℓ≤K−1}[(K−1)ℓ, Kℓ), a disjoint union), a harmonic sum, and
+a one-line tail bound. Every step numerically validated: exact
+enumeration vs Gram data agree to 0.12%; the tail term sits at 54% of its
+proven bound; the theorem bound evaluates to 5.58e−7 at N = 2500 against
+the true λ_min = 2.477e−7 (valid, factor 2.3).
+
+First theorem of the NB phase. Candidate for Lean formalization (finite
+sums + interval measure arithmetic; heavier than the interlacing bound
+but feasible).
+
+### Kernel constants derived (Session-3 fit superseded)
+
+Exact decomposition M_{jk} = (log2/8)(1/j + 1/k) − P_{jk}/16 with P the
+parity-disagreement integral; enumeration at K = 1250 gives
+P·K²/(2d) = log(K/d) + γ + c(d), c(d): 0.545 → 0.661 over d = 1…32,
+drifting toward log 2. **The kernel's log-slope is exactly 1/8**; Session
+3's fitted 0.143 was contamination from normalizing mixed-scale pairs by
+a single K² — a useful cautionary note on fitted constants.
+
+### Remaining for λ_min ≍ N⁻²(slowly varying)
+
+The matching lower bound (conditionally-positive-kernel program,
+chains_theory.md §5) and closing the factor-1.2 chain-subspace gap.
+
+### Overnight job launched
+
+`overnight_10k.py`: Gram to N = 10⁴ (~2 h), full d_N curve, Theorem-1
+check at scale, zero hunt v3 with 800 geometric blocks. Results next
+session.

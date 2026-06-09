@@ -1,8 +1,59 @@
 # The Doubling-Chain Structure of the Nyman–Beurling Gram Matrix
 
-*Working notes, June 2026. Companion code: `chains.py`. Status: the
-identities of §1–2 are proved (elementary); the kernel law of §4 is a
-numerical fit of striking quality; §5 is a proof program, not a proof.*
+*Working notes, June 2026. Companion code: `chains.py`. Status: §1–2 and
+the **Theorem in §0** are proved (elementary, every step numerically
+cross-validated); §4's kernel law is now derived up to one measured
+constant; the matching lower bound in §5 remains a program.*
+
+## 0. THEOREM (upper bound on λ_min — proved)
+
+**Theorem 1.** Let K = ⌊N/2⌋ ≥ 3 and let H_m denote the m-th harmonic
+number. Then
+
+    λ_min(G_N) ≤ (H_{K−1} + 1) / (10·K(K−1)).
+
+In particular λ_min(G_N) = O(N⁻² log N), hence κ(G_N) ≥ c·N²/log N.
+
+*Proof.* Take the test vector x with coefficients x_{K−1} = −1/2,
+x_{2K−2} = 1, x_K = +1/2, x_{2K} = −1 (i.e. Σx_k e_k = f_{K−1} − f_K,
+a difference of two adjacent doubling chains; the four indices are
+distinct and ≤ N). Then ‖x‖² = 5/2, and by the Rayleigh principle
+λ_min ≤ ‖f_{K−1} − f_K‖²/(5/2).
+
+By the square-wave identity (§1), f_k = (1 − ε_k)/4 with
+ε_k(u) = (−1)^{⌊u/k⌋} (u = 1/t coordinates, measure u⁻²du). Hence
+
+    ‖f_{K−1} − f_K‖² = (1/16)∫(ε_K − ε_{K−1})² u⁻²du
+                     = (1/4)∫_D u⁻²du =: P/8,
+
+where D = {u : ⌊u/(K−1)⌋ − ⌊u/K⌋ is odd} and P := 2∫_D u⁻²du.
+
+**Lemma (disagreement intervals).** For 0 < u < U* := K(K−1),
+⌊u/(K−1)⌋ − ⌊u/K⌋ = #{ℓ ≥ 1 : (K−1)ℓ ≤ u < Kℓ} ∈ {0, 1}, equal to 1
+exactly on the disjoint union ⋃_{ℓ=1}^{K−1} [(K−1)ℓ, Kℓ). (Disjointness:
+the next interval starts at (K−1)(ℓ+1) = (K−1)ℓ + K − 1 ≥ Kℓ iff
+ℓ ≤ K−1.) ∎
+
+Therefore
+
+    P = 2 Σ_{ℓ=1}^{K−1} [1/((K−1)ℓ) − 1/(Kℓ)] + P_tail
+      = 2H_{K−1}/(K(K−1)) + P_tail,    0 ≤ P_tail ≤ 2/U*,
+
+since each bracket equals 1/(K(K−1)ℓ), and the tail is bounded by the
+full measure ∫_{U*}^∞ 2u⁻²du. Assembling:
+λ_min ≤ P/20 ≤ (2H_{K−1} + 2)/(20·K(K−1)). ∎
+
+*Numerical validation of every step (N = 2500, K = 1250):* exact interval
+enumeration gives P = 1.05635×10⁻⁵; the Gram data gives
+8‖f_{K−1} − f_K‖² = 1.05763×10⁻⁵ (0.12%, within the enumeration's tail
+allowance); the harmonic term is 9.8738×10⁻⁶ and the actual tail
+6.90×10⁻⁷ sits inside its bound 1.281×10⁻⁶ (54% saturated). The theorem
+bound evaluates to 5.58×10⁻⁷ against the true λ_min = 2.477×10⁻⁷ —
+valid, and within a factor 2.3.
+
+This is the first theorem of the Nyman–Beurling phase of this project:
+the NB dilation basis degenerates at least at rate N⁻²log N, witnessed
+explicitly by a four-term integer combination of dilations.
 
 ## 1. The square-wave identity (proved)
 
@@ -69,20 +120,29 @@ optimal α is an **alternating-sign smooth envelope with Σα = 0** (measured
 Since λ_min ≤ (4/5)λ_min(M_w) is rigorous (restriction of the Rayleigh
 quotient), any upper bound on the chain form transfers to G_N.
 
-## 4. The kernel law (numerical fit, three-decimal quality)
+## 4. The kernel law (derived, June 9 update)
 
-Empirically, with K = N/2 and j, k in the window:
+The exact decomposition (immediate from f = (1−ε)/4 and ‖f_k‖² = C₂/k):
 
-    M_{jk} = C₂/max(j,k) − φ(|j−k|)/K²,
-    φ(d) = d·(a − b·log d),    a = 1.073 ± 0.002,  b = 0.1430 ± 0.0005.
+    M_{jk} = (log 2/8)(1/j + 1/k) − P_{jk}/16,
 
-Fit residuals < 0.001 uniformly over d = 1…159 (e.g. predicted φ(d)/d at
-d = 40: 0.545, measured 0.544; at d = 159: 0.348 both). The d·log d form
-is exactly what a parity-decorrelation computation predicts: the parities
-⌊u/j⌋, ⌊u/k⌋ stay aligned up to u ~ K²/d and decorrelate beyond,
-producing a −(d/K²)·log-type deficit. The constants a, b should be
-derivable from that computation (open item; b is numerically close to 1/7
-but we make no claim).
+with P_{jk} = 2∫_{D_{jk}} u⁻²du the parity-disagreement integral —
+diagonal P_{kk} = 0 reproducing M_{kk} = C₂/k exactly. Exact enumeration
+of D at K = 1250 gives, for d = k − j,
+
+    P_{jk}·K²/(2d) = log(K/d) + γ + c(d),
+    c(d) measured: 0.545 (d=1) → 0.661 (d=32), drifting toward log 2.
+
+So the kernel's log-slope is **exactly 1/8** (= 2/16), not the 0.143 of
+the Session-3 window fit — that fit mixed pairs at different scales while
+normalizing all by the same K², inflating both constants by ~(K/max)²
+heterogeneity. (A good cautionary example of fitted-constant
+contamination; the derivation supersedes the fit.) The additive constant
+c(d) interpolates between a sawtooth-dominated small-d value (0.545 at
+d = 1, where the exact harmonic formula of §0 pins the full answer) and,
+plausibly, the smooth-drift value log 2 = 0.693 at d ≫ 1 (the tail
+computation Σ_r[1/(2r+1) − 1/(2r+2)] = log 2). Deriving c(d) exactly is
+open but mechanical.
 
 ## 5. Proof program for λ_min ≍ N⁻² (· slowly varying)
 
@@ -101,12 +161,13 @@ rank-one-like part dominates):
    w-dependence plausibly produces the observed log-drift of λ_min·N²:
    1.37 → 1.55 over N = 500…2500).
 
-Each step is elementary analysis; what is missing for a theorem is the
-error-term bookkeeping in the kernel asymptotics (step 4 → rigorous) and
-the uniform lower bound in step 3. **Upper bound status:** exhibiting any
-fixed zero-sum alternating α (e.g. the measured envelope) in (2) with the
-kernel law gives λ_min(G_N) = O(N⁻² log N) modulo only the kernel
-asymptotics — this is the nearest-term rigorous target.
+Each step is elementary analysis. **The upper bound is now Theorem 1
+(§0)** — it required only the d = 1 disagreement integral, evaluated
+exactly as a harmonic sum, no kernel asymptotics needed. What remains for
+λ_min ≍ N⁻²·(slowly varying) is the matching **lower bound**: steps 1–3
+above with honest error terms (the conditionally-positive-definite kernel
+argument), plus extending the kernel control from the chain subspace to
+all of G_N (the measured factor-1.2 gap).
 
 **Consequence if completed:** κ(G_N) ≍ N² (up to slowly varying factors) —
 a deterministic, arithmetic conditioning law for the Nyman–Beurling basis,
