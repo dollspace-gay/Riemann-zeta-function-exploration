@@ -178,3 +178,29 @@ change).
 6. **r > 0 mechanism** (§4): test the heuristic by computing the D-Rayleigh
    quotient profile across the full spectrum of G (not just the extremes) and
    correlating with eigenvector localization length.
+
+---
+
+## Addendum (same session): fixed-P sweep (next step 2 of the ranked list)
+
+`compute/rh_fixedP.py`, P fixed at 160,000 primes, N = 1000→8000:
+
+| N | λ_min | κ | W₃/λ_min | W₃₂/λ_min |
+|------|---------|--------|------|------|
+| 1000 | 0.0838 | 29.6 | 1.29 | 1.04 |
+| 2000 | 0.0767 | 34.4 | 1.19 | 1.10 |
+| 4000 | 0.0610 | 46.9 | 1.46 | 1.21 |
+| 8000 | 0.0302 | 102.6 | 2.27 | 1.64 |
+
+Fixed-P exponents: λ_min ~ N^−0.474, κ ~ N^+0.582 (growing-P: −0.53/+0.64).
+
+**Verdicts.** (1) The scaling law survives at fixed P — not a prime-count
+artifact. (2) The delocalized component of the null direction is real but
+governed by primes-per-zero: at N=1000, the W₃₂ plateau is 1.04 with 160
+primes/zero vs 1.21 with 20 primes/zero. More primes per zero localize the
+null direction. Open follow-up: does W_k/λ_min → 1 as P/N → ∞ at fixed N?
+(N=8000 row identical to the windows run by construction: 20·8000 = 160k.)
+
+Also completed this session: the interlacing pair bound is machine-verified
+in Lean 4 (`gram_eigenvalue_le_pair_bound`, zero sorries, zero custom
+axioms) — ranked next-step 1 from this morning's list, done.
