@@ -250,3 +250,24 @@ chains_theory.md §5) and closing the factor-1.2 chain-subspace gap.
 `overnight_10k.py`: Gram to N = 10⁴ (~2 h), full d_N curve, Theorem-1
 check at scale, zero hunt v3 with 800 geometric blocks. Results next
 session.
+
+### Overnight N = 10⁴ results (completed same day, 166 min)
+
+1. **Rate law to 10⁴:** d²logN = 0.04492, 0.04553, 0.04556, 0.04513 at
+   N = 4000…10000 — holding within 2–3% of C, now with a small persistent
+   *negative* deviation, consistent with a second-order term −c₂/log²N
+   (c₂ ≈ 0.01). The approach to the Burnol constant is from below in this
+   range.
+2. **Theorem 1 at scale:** bound/actual = 2.25, 2.29, 2.33 at
+   N = 2500, 5000, 10000 — the theorem captures the exact order. The
+   measured law is λ_min·N² ≈ 0.50 + 0.134·log N (the three points are
+   linear in log N to 1%), against the theorem's 0.4·log(N/2) + O(1):
+   asymptotically sharp within a factor ≈ 3.
+3. **Zero hunt v3: definitively negative at this scale.** With 4× the
+   range and 800 blocks, top periodogram peaks sit at low frequencies
+   (7.3, 4.8, 9.8, 11.5); nothing at any zeta zero above ~5×10⁻⁵. Three
+   statistics across two ranges now agree: the fine structure of d_N at
+   N ≤ 10⁴ is arithmetic noise, not zero oscillation. Parked — resuming
+   requires a theoretical amplitude estimate (if the zero terms decay
+   like N^{−1/2}, they are an order of magnitude below our noise floor,
+   and no feasible N reaches them without better averaging).
