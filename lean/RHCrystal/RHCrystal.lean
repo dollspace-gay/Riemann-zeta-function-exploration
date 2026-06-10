@@ -13,11 +13,15 @@
   ✓ Pair bound: ∃ k, 2λ_k ≤ A_ii + A_jj − 2A_ij
   ✓ Gram interlacing bound (paper v4 §3.3):
       ∃ k, λ_k(G) ≤ Σ_p w(p,σ)·(1 − cos((γ_i−γ_j)·log p))
+  ✓ Nyman-Beurling disagreement-integral bound (NymanBeurling.lean,
+      analytic core of nyman-beurling Theorem 1):
+      ∫_D u⁻² ≤ (H_J + 1)/(J(J+1)) for the parity-disagreement set D
 
   ZERO SORRIES. ZERO NEW AXIOMS.
 -/
 
 import Mathlib.Tactic
+import NymanBeurling
 import Mathlib.Data.List.Basic
 import Mathlib.Analysis.Matrix.Spectrum
 import Mathlib.LinearAlgebra.Matrix.Hermitian

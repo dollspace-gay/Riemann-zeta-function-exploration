@@ -271,3 +271,28 @@ session.
    requires a theoretical amplitude estimate (if the zero terms decay
    like N^{−1/2}, they are an order of magnitude below our noise floor,
    and no feasible N reaches them without better averaging).
+
+---
+
+## Session 5 — June 9, 2026: Theorem 1's analytic core machine-verified
+
+`lean/RHCrystal/NymanBeurling.lean` (new module). Formalized in Lean 4
+with zero sorries and only the three standard axioms (`#print axioms`
+confirmed):
+
+- `interval_of_odd` — the disagreement-interval lemma: if the adjacent
+  counters ⌊u/J⌋, ⌊u/(J+1)⌋ disagree in parity at u ∈ (0, J(J+1)), then
+  u ∈ [Jℓ, (J+1)ℓ) for some 1 ≤ ℓ ≤ J.
+- `disagreement_integral_le` — the full analytic core of Theorem 1:
+  ∫_D u⁻² ≤ (H_J + 1)/(J(J+1)) for the parity-disagreement set D, via
+  exact FTC evaluation on each interval, the harmonic sum, measurability
+  of D (floor functions), and the rpow tail integral.
+
+What remains on paper (textbook steps, not formalized): the L²
+bilinearity bookkeeping ‖f_{K−1} − f_K‖² = P/8 and the Rayleigh
+principle — the latter is itself already formalized for matrices in
+RHCrystal.lean (`exists_eigenvalue_mul_le_rayleigh`); connecting it
+requires formalizing the e_k as L² elements, a larger project.
+
+The repo now has four machine-verified results: the weight symmetry, the
+interlacing pair bound, and the NB disagreement bound (plus cosh ≥ 1).
