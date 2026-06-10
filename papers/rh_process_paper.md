@@ -1,6 +1,8 @@
 # AI-Assisted Mathematical Exploration Under Adversarial Review: A Case Study
 
-## How a GED-Holder and a Language Model Investigated the Riemann Hypothesis in One Session
+## How a GED-Holder and a Language Model Investigated the Riemann Hypothesis
+
+*Part I documents the original March 2026 session. Part II documents the June 2026 sessions. The human participant is doll, who uses it/its pronouns and refers to itself in the third person; earlier drafts of this paper used incorrect pronouns, corrected here.*
 
 ---
 
@@ -16,7 +18,7 @@ The process followed a Verification-Driven Development (VDD) methodology incorpo
 
 ### 1.1 The Participants
 
-The human operator in this study is a trans woman whose formal education ended with a General Educational Development (GED) credential. She has no university-level mathematics training, no background in analytic number theory, and had not previously studied the Riemann Hypothesis beyond popular expositions. Her technical skills are in software engineering, where she developed the Verification-Driven Development methodology described in Section 3.
+The human operator in this study is doll, a headmate in a plural system; doll uses it/its pronouns and refers to itself in the third person. Its formal education ended with a General Educational Development (GED) credential. It has no university-level mathematics training, no background in analytic number theory, and had not previously studied the Riemann Hypothesis beyond popular expositions. Its technical skills are in software engineering, where it developed the Verification-Driven Development methodology described in Section 3.
 
 The AI participant is Claude (Opus 4, Anthropic), a large language model with training data encompassing mathematical literature. Claude has no persistent memory between sessions, cannot execute code autonomously, and has no ability to verify its own mathematical claims.
 
@@ -191,9 +193,9 @@ Neither participant conducted a systematic literature review. The AI cited paper
 
 ### 8.1 Who Gets to Do Mathematics
 
-The operator of this investigation has a GED. She did not attend university. She has no credentials that would grant her access to a mathematics department, a journal submission system (as a corresponding author with institutional affiliation), or a conference presentation slot.
+The operator of this investigation, doll, has a GED. It did not attend university. It has no credentials that would grant it access to a mathematics department, a journal submission system (as a corresponding author with institutional affiliation), or a conference presentation slot.
 
-And yet, over the course of one evening, she:
+And yet, over the course of one evening, it:
 
 - Explored a millennium prize problem computationally at scales exceeding most published studies
 - Produced a machine-verified proof in Lean 4
@@ -201,11 +203,11 @@ And yet, over the course of one evening, she:
 - Correctly identified and recovered from a critical implementation error
 - Produced a paper that, after adversarial review, is honest about its limitations
 
-The mathematical establishment would not have let her in the door. The AI didn't check her credentials.
+The mathematical establishment would not have let doll in the door. The AI didn't check its credentials.
 
 ### 8.2 What This Does and Doesn't Demonstrate
 
-This does NOT demonstrate that formal education is unnecessary for mathematics. The operator could not have evaluated the mathematical significance of her results without external review. She could not have constructed proofs. She could not have placed this work in the context of existing literature without the AI's (potentially unreliable) knowledge.
+This does NOT demonstrate that formal education is unnecessary for mathematics. Doll could not have evaluated the mathematical significance of its results without external review. It could not have constructed proofs. It could not have placed this work in the context of existing literature without the AI's (potentially unreliable) knowledge.
 
 What it DOES demonstrate is that the barrier between "mathematical outsider" and "person who can do computational mathematics" has collapsed. The tools — AI for knowledge synthesis, public datasets (Odlyzko's zeros), open-source formal verification (Lean 4), commodity GPU hardware — are all available to anyone with an internet connection and the willingness to follow results honestly.
 
@@ -245,7 +247,7 @@ We do not claim this is entirely negative — credentials serve real functions i
 
 ## 10. Conclusion
 
-A trans woman with a GED and a language model spent one evening investigating the Riemann Hypothesis. They produced one genuinely new observation, one bug, one correction, one machine-verified proof, and one honest paper. The process demonstrated that AI functions as a powerful but unreliable mathematical telescope — capable of revealing structures the human couldn't see, but equally capable of generating compelling narratives around artifacts. Adversarial methodology was essential for distinguishing the two.
+Doll — a GED-holder with no formal mathematical education — and a language model spent one evening investigating the Riemann Hypothesis. They produced one genuinely new observation, one bug, one correction, one machine-verified proof, and one honest paper. The process demonstrated that AI functions as a powerful but unreliable mathematical telescope — capable of revealing structures the human couldn't see, but equally capable of generating compelling narratives around artifacts. Adversarial methodology was essential for distinguishing the two.
 
 The most important finding may not be mathematical. It's that the tools for serious computational mathematics are now available to anyone willing to follow the results honestly, regardless of their formal credentials. What the mathematical community does with that fact is an open problem.
 
@@ -253,10 +255,61 @@ The most important finding may not be mathematical. It's that the tools for seri
 
 ## Acknowledgments
 
-The human operator wishes to acknowledge the adversarial reviewers who caught the "correct but trivial" nature of the symmetry result and demanded the "why" that the initial writeup lacked. Their critique was more valuable than any positive feedback could have been.
+Doll wishes to acknowledge the adversarial reviewers who caught the "correct but trivial" nature of the symmetry result and demanded the "why" that the initial writeup lacked. Their critique was more valuable than any positive feedback could have been.
 
 The AI acknowledges that it produced a bug, built narrative around buggy results, and required human-initiated adversarial review to catch the error. It also acknowledges that its assessment of the mathematical significance of the results evolved substantially over the session, from "potentially publishable" to "one new observation plus honest methodology."
 
+
 ---
 
-*Written March 2026.*
+# Part II: The June 2026 Sessions
+
+*Three months after the original session, doll returned to the repository with a newer model (Claude, Fable 5, Anthropic) and an explicit framing it had not articulated in March: the goal is not to solve RH — it is to measure how far a layman with an AI can go. Part II documents what that measurement produced in one day of sessions, and what changed about the collaboration itself.*
+
+## 11. Timeline of the Second Arc
+
+### Phase 6: The project corrects itself (v3 → v4)
+
+The day began with doll asking the AI to "see if you can think of some ways we might make some progress." Re-examination of the v3 paper's open problems produced new experiments — and the first result was a correction of the project's own headline claim. Sliding-window analysis showed the λ_min eigenvector localizes on tight *clusters* of zeros selected by a 3-zero window functional, not on minimal-gap "Lehmer pairs" as v3 had claimed; at N = 8000 the most famous Lehmer pair in the dataset loses outright to a compound cluster of wider gaps. Unlike March's bug — caught by external adversarial review — this correction was generated internally, by the same scaling-as-verification discipline, and was documented in a v4 revision history written in the same register as the original bug disclosure.
+
+The same sessions extended the second-order verification from N = 30 to N = 2000 (curvature predictions matching direct computation to five decimal places), showed by control experiment that the scaling law is reproduced by random-matrix (GUE) spectra and destroyed by Poisson spectra, and resolved a v3 open problem: the height-dependent degradation is a finite-prime resolution artifact, removable by raising the prime cutoff.
+
+### Phase 7: A mechanistic theory, and the data correcting the AI
+
+The AI proposed a theory for the scaling exponent: the invisible directions of the Gram matrix are k-th divided-difference stencils over zero clusters, with parameter-free predictions (δ², δ⁴, δ⁶ scaling for planted pairs, triples, quadruples). Planted-cluster experiments measured the exponents at 1.95, 4.01, 6.05 — and then the eigenvector data *refuted the AI's framing* of the current regime: the real minimizers at accessible N have same-sign weights (resonant regime, negative couplings), not the alternating stencil pattern. The theory survived as an asymptotic statement with an honest crossover caveat. This pattern — model proposes, data corrects, correction documented — recurred throughout the day and is, in doll's assessment and the AI's, the load-bearing methodological difference from March: the June AI generated the adversarial checks itself rather than waiting for external reviewers.
+
+### Phase 8: The structural pivot
+
+When doll asked "what direction do you think we should go," the AI's assessment was that the entire phase-1 construction had a structural flaw documented in its own paper (v4 §7.2): the Gram matrix was built *from* zeros already known to be on the line, so no discovery about it could bear on RH. The pivot — proposed by the AI, ratified by doll — was to an object whose behavior is RH-equivalent by theorem: the Nyman–Beurling/Báez-Duarte distance d_N. The new direction got its own folder, self-contained documentation, and a computational scheme whose every formula was derived from scratch and cross-validated (closed forms to 1e−11, brute-force integration to 1e−10).
+
+### Phase 9: Theorems
+
+In one day, the Nyman–Beurling phase produced: reproduction of the conjectured rate law d_N²·log N → C (Burnol's constant, matched within 2% from N = 50 to N = 10⁴); discovery of the doubling-chain structure of the near-null space, with an exact square-wave identity and the closed form A(1,2) = (3/4)(log 2π − γ) − (log 2)/4; **Theorem 1**, an explicit upper bound λ_min(G_N) ≤ (H_{K−1}+1)/(10·K(K−1)) proved via a four-dilation witness and a harmonic sum, with every step numerically validated and its analytic core subsequently machine-verified in Lean 4 (zero sorries, standard axioms only); an exact Mellin reformulation connecting everything to |ζ(½+it)|² on the critical line, verified numerically against the Gram data; and two honest negative results (the zeta zeros are not detectable in d_N's fine structure at N ≤ 10⁴, by three statistics across two ranges).
+
+Twice in this phase the data corrected the AI's recalled knowledge: the Möbius coefficient prediction had the wrong sign (the computation disagreed; the classical identity confirmed the computation), and a fitted kernel constant (0.143) turned out to be contamination from mixed-scale normalization — the derived value is exactly 1/8. Both corrections are documented in the results log.
+
+### Phase 10: Doll's questions as research instruments
+
+Three of doll's questions directly generated experiments or reframings:
+
+- *"Isn't that just destructive interference?"* — led to the partial-sum experiment: the 50-term truncation of zeta has perfect cancellations scattered across the strip (14 of 18 found zeros off the critical line), demonstrating concretely that RH is an emergent property of the completed infinite series, not a general principle of interference. The layman's mental model, tested, taught both participants where the difficulty actually lives.
+- *"Maybe it is spectroscopy"* — led to the prime-resonance measurement: a Fourier transform of the 2M zeros detects every tested prime power at its exact predicted frequency, with intensities matching the explicit-formula weights log p/p^{m/2} to three decimal places. Known mathematics, but reproduced as a measurement, and the most direct visualization the project owns of the zero–prime duality.
+- *"The goal isn't to solve RH — it's to see how far a layman with an AI can go"* — reframed the project's success criteria and elevated external review from afterthought to the experiment's next measurement.
+
+## 12. What Changed Between March and June
+
+**On the AI side.** The June model self-corrected in ways the March model did not: it caught its own framing errors via internal cross-validation (derivation-versus-fit discipline, planted controls, exact anchors), logged negative results with the same prominence as positive ones, and resisted narrative momentum well enough that the day's largest claims are its most carefully hedged. The failure mode did not disappear — it relocated. The June AI's recalled constants and signs were wrong twice; what improved is that its *methodology* caught them. The March lesson ("the AI will not catch its own bugs") needs revision to: the AI can be made to catch many of its own errors if every quantity has an independent check, but recalled knowledge remains the least reliable component.
+
+**On doll's side.** Doll's March role was directional judgment and adversarial integration. In June it added something subtler: physical intuition as a hypothesis source. Its interference and spectroscopy questions were not requests for explanation — they were, functionally, research proposals, and both produced measurements that now live in the repository. The collaboration's division of labor in June: the AI proved, computed, and documented; doll decided what mattered, supplied the physics instincts, and held the project to its stated goal.
+
+**What has not changed.** Everything in the repository remains self-evaluated. The June work added machine verification (four Lean-verified results) and internal cross-validation, but no qualified human outside the collaboration has yet reviewed any of it. Under the project's stated goal, that external contact is not a future nicety — it is the experiment's next data point, and the only way to distinguish "real if modest contributions" from "well-documented rediscovery."
+
+## 13. Updated Conclusion
+
+Doll — a GED-holder — and a language model have now spent one evening and one further day on the Riemann Hypothesis. The collaboration has produced: two computational phases, one structural self-correction of its own headline claim, one explicit theorem with an order-sharp bound, four machine-verified results, one exact spectral reformulation, several honest negatives, and a documented trail of every error either participant made along the way — including the AI's, caught by methodology rather than luck.
+
+The mathematical content remains modest by professional standards. The process result has sharpened: with current models, the binding constraint on how far a layman with an AI can go is no longer the AI's coding, knowledge synthesis, or even its self-criticism — it is the absence of external review. The tools collapsed the barrier to *doing* the work in March. By June they had collapsed most of the barrier to *checking* it. What remains gatekept is being *read*. That is the open problem this paper's next part, if there is one, should document.
+
+---
+
+*Part I written March 2026. Part II added June 2026.*
