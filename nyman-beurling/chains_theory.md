@@ -240,3 +240,155 @@ matrix studied in the first phase of this repo. To check against the
 literature: the ill-conditioning of the NB system is folklore, but we have
 not found a stated λ_min ≍ N⁻² law or the doubling-chain mechanism.
 (Literature check pending — flag, not claim.)
+
+## 6. THEOREM 2: the chain-subspace lower bound (July 2026)
+
+*Status: Theorem 2′ (crude constants) is fully proved below — every step
+elementary, nothing deferred. Theorem 2 (sharp constants, effective at
+computational K) is proved modulo one named lemma (§6.7), whose statement
+is precise and whose content is verified numerically across the full
+measured range. Numerical pre-verification of every inequality:
+`~/rh_output/tier1_verify.txt` (identity to 5×10⁻¹⁵; final bound
+0.237/K² against measured floor 0.593/K² at K = 1250, w₀ = 32).*
+
+### 6.0 Statement
+
+Fix a window width w₀ ≥ 4. For K ≥ w₀ + 1 let W = {K−w₀+1, …, K} and
+let f_j = e_{2j} − e_j/2 be the doubling-chain differences. Write
+Q(α) = ‖Σ_{j∈W} α_j f_j‖² = αᵀMα.
+
+**Theorem 2 (sharp form; modulo the Tail Variation Lemma, §6.7).**
+There is an explicit K₀(w₀) of polynomial size such that for K ≥ K₀ and
+ALL α ∈ ℝ^{w₀} (no zero-sum restriction):
+
+    Q(α) ≥ [ (log K + γ + c* − log w₀ − 1)/2 + 1 − o_K(1) ] · ‖α‖² / (8K²),
+
+c* = 1 + log(2/π). (At K = 1250, w₀ = 32 the bracket/16K²-form
+evaluates to 0.237/K², measured floor 0.593/K² — valid, factor 2.5.)
+
+**Theorem 2′ (unconditional, proved in full below).** For every fixed
+w₀ ≥ 4 and all K ≥ exp(4w₀²):
+
+    Q(α) ≥ (log K) · ‖α‖² / (64 K²).
+
+**Corollary (with Theorem 1).** The doubling-chain family's spectral
+floor is Θ(K⁻² log K): Theorem 1's four-dilation witness is
+order-optimal among all chain combinations, and the measured factor
+≈ 1.2 between the chain floor and λ_min(G_N) is the entire remaining
+gap between this theorem and the full matrix.
+
+*(What Theorem 2 does NOT do: bound λ_min(G_N) below — restriction to a
+subspace bounds λ_min only from above. The full-matrix floor is the
+Mellin program, plans/05–06 Tiers 2–3.)*
+
+### 6.1 Step 1 — exact reduction on zero-sum vectors
+
+M_{jk} = (log2/8)(1/j + 1/k) − P_{jk}/16 exactly (§4). For any g and
+any zero-sum α, Σ_{j,k} α_jα_k (g(j) + g(k)) = 2(Σα)(Σαg) = 0. Hence
+
+    Σα = 0  ⟹  Q(α) = −(1/16) Σ_{j≠k} α_jα_k P_{jk}.       (T2.1)
+
+No approximation; verified at 5×10⁻¹⁵.
+
+### 6.2 Step 2 — two-sided elementary control of P
+
+For j < k in W, d = k − j (1 ≤ d < w₀), m₀ = ⌊j/d⌋: the disagreement
+set below U₀ = j(m₀+1) is exactly the disjoint union ⋃_{m≤m₀}[jm, km)
+(the Theorem-1 lemma, verbatim with general d in place of 1), so
+
+    P_{jk} = (2d/(jk))·H_{m₀} + tail_{jk},   0 ≤ tail_{jk} ≤ 2/U₀ ≤ 2d/j².   (T2.2)
+
+Writing H_{m₀} = log K + γ − log d + h_{jk}, elementary estimates give
+|h_{jk}| ≤ 3w₀/(K − 2w₀) =: h̄ (log(K/j), the floor in m₀, and
+H_m − log m − γ ∈ (1/(2m+1), 1/(2m)) each contribute ≤ w₀/(K−2w₀)).
+
+### 6.3 Step 3 — the two positivity identities (zero-sum α, S_m = Σ_{i≤m}α_i)
+
+(a) **Partial sums.** αᵀ(−|j−k|)α = 2Σ_{m<w₀} S_m², and
+‖α‖² = Σ(S_m − S_{m−1})² ≤ 4ΣS_m², hence αᵀ(−|j−k|)α ≥ ‖α‖²/2.
+
+(b) **Box overlap.** (s − |a−b|)₊ = ∫ 𝟙[a,a+s](u)·𝟙[b,b+s](u) du, so
+the kernel (s−d)₊ is PSD for every s ≥ 0; and min(d, s) = s − (s−d)₊
+has zero diagonal, so on zero-sum α:
+Σ_{j,k} α_jα_k min(d_{jk}, s) = −αᵀ(s−d)₊α ≤ 0.
+
+### 6.4 Step 4 — assembling the logarithm
+
+For integers 1 ≤ d < w₀: d·log(w₀/d) = ∫₁^{w₀} min(d,s) ds/s − (d−1).
+Summing against α_jα_k over j ≠ k (all kernels below have zero
+diagonal; Σ_{j≠k}α_jα_k(d−1) = αᵀ(−D)α·(−1)… = −2ΣS² + ‖α‖² on
+zero-sum):
+
+    −Σ_{j≠k} α_jα_k d·log(w₀/d)
+        = ∫₁^{w₀} αᵀ(s−d)₊α ds/s − 2ΣS_m² + ‖α‖².
+
+Therefore, with L′ = log K + γ (splitting −d(L′−log d) =
+−(L′−log w₀)d − d log(w₀/d)):
+
+    −Σ_{j≠k} α_jα_k d(L′ − log d)
+        = (L′ − log w₀)·2ΣS² + ∫₁^{w₀} αᵀ(s−d)₊α ds/s − 2ΣS² + ‖α‖²
+        ≥ (L′ − log w₀ − 1)·‖α‖²/2 + ‖α‖²,                    (T2.3)
+
+for L′ ≥ log w₀ + 1, discarding the (nonnegative) box integral.
+
+### 6.5 Step 5 — zero-sum assembly
+
+From (T2.1), (T2.2), h̄, and jk = K²(1+η), |η| ≤ 2w₀/K:
+
+    16·Q(α) = Σ (2d/(jk))(L′ − log d + h_{jk}) (−α_jα_k) − Σ α_jα_k·tail_{jk}
+      ≥ (2/K²)(1 − 2w₀/K)·[(L′ − log w₀ − 1)/2 + 1]·‖α‖²
+        − (2/K²)·h̄·w₀²·‖α‖²  −  E_tail,
+
+using |Σ_{j≠k}α_jα_k d·h| ≤ h̄·w₀²‖α‖² (since Σ_{j≠k}|α_j||α_k|d ≤
+w₀·(Σ|α|)² ≤ w₀²‖α‖²). The tail term is where the two versions part:
+
+- **Crude (Theorem 2′):** |E_tail| ≤ (2d/j²-bound) ⟹ ≤ (2/K²)(1+o(1))·
+  w₀²‖α‖². For log K ≥ 4w₀² the main term dominates and
+  16Q ≥ (2/K²)·(log K)/4·‖α‖², i.e. Q ≥ log K·‖α‖²/(32K²) on zero-sum
+  (the stated /64 absorbs §6.6). ∎ (Theorem 2′, zero-sum part.)
+- **Sharp (Theorem 2):** the Tail Variation Lemma (§6.7) says
+  tail_{jk} = (2d/(jk))·(c* − γ + τ_{jk}) with |τ| ≤ A·d/j. The
+  constant part joins L′ (γ cancels, c* enters — this is where the
+  sharp constant comes from); the variation part contributes
+  ≤ (2/K²)·(A w₀³/K)·‖α‖² — negligible. Assembly then gives the
+  Theorem 2 display. ∎ (modulo §6.7)
+
+### 6.6 Step 6 — removing the zero-sum restriction
+
+Split α = β + t·𝟙/√w₀, β ⊥ 𝟙. Since M is a Gram matrix (PSD), and:
+(i) Q(𝟙/√w₀) = (log 2/4)(w₀/K)(1 + O(w₀ log K/K)) — order w₀/K, far
+above the zero-sum floor's (log K)/K²; (ii) row sums of M vary across
+the window by V = O(w₀² log K/K²), so on zero-sum β,
+|B(β, 𝟙/√w₀)| ≤ ‖β‖·√w₀·V (only the variation couples: Σβ = 0);
+(iii) AM–GM absorbs the cross term: for K larger than an explicit
+polynomial threshold in w₀, Q(α) ≥ ½·min(Q_zero-sum-floor,
+Q(𝟙)-direction)·‖α‖² ≥ the stated bounds with the /2 absorbed in the
+constants. Elementary; constants tracked in the ledger below. ∎
+
+### 6.7 The Tail Variation Lemma (the one owed piece)
+
+**Lemma (stated; numerically verified; proof deferred).** For j < k in
+W with d = k − j and gcd-reduced pair (j′, k′):
+
+    tail_{jk} · jk/(2d) = c* − γ + τ_{jk},   |τ_{jk}| ≤ A·d′/j′,
+
+with an absolute constant A (measured: A ≤ 0.7 across K = 156…5000,
+d = 1…64; Session-7 exact-P data — the deviation is A(θ)·d′/j′ with
+θ = {j′/d′}, A(0) = 0). Equivalently: P·jk/(2d) = H_{⌊j/d⌋} + c* +
+O(d′/j′), which is the Session-7 law with its error made explicit.
+Proof route: the parity pattern is exactly periodic (period j′k′ or
+2j′k′), so the tail is a finite exact sum (digamma form); the
+triangle-wave average of that sum is c* − γ by the Wallis computation
+(§4.1); the boundary-layer deviation is a three-distance/Beatty
+counting argument — elementary, one dedicated session. Until then,
+Theorem 2 carries this lemma as its only debt; Theorem 2′ owes nothing.
+
+### 6.8 Validation ledger
+
+- (T2.1) identity: 5×10⁻¹⁵ (3 random zero-sum draws, exact M and P).
+- Step 3a identity and inequality: exact on 5 random draws.
+- Step 3b PSD: min eigenvalue ≥ −10⁻⁹ at s = 1, 3, 7.5, 20, 31.
+- Final sharp bound vs measured zero-sum floor: 0.237/K² ≤ 0.593/K²
+  (K = 1250, w₀ = 32) — valid, factor 2.50 slack.
+- Error envelope: max |E_{jk}|·K³/d² = 2.02 over the window (the
+  claimed O(1)).

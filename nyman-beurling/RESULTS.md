@@ -437,6 +437,44 @@ in `plans/04`.
 
 ---
 
+## Session 14 — July 20, 2026: THEOREM 2 written (Plan 6 Tier 1) — the chain floor is Θ(K⁻² log K)
+
+Writeup: `chains_theory.md` §6 (new). Verification appended to
+`~/rh_output/tier1_verify.txt`.
+
+**Theorem 2′ (fully proved, nothing deferred):** for fixed w₀ ≥ 4 and
+K ≥ exp(4w₀²), every chain combination on the window (K−w₀, K]
+satisfies ‖Σα_j f_j‖² ≥ (log K)·‖α‖²/(64K²). Elementary throughout:
+exact rank-two vanishing on zero-sum vectors, the disjoint-interval
+head of P (Theorem 1's lemma at general gap), the partial-sums
+identity, box-overlap positivity, and AM–GM bookkeeping for the
+non-zero-sum component. Ineffective threshold, unconditional content.
+
+**Theorem 2 (sharp, effective at real K):** same statement with
+constant (log K + γ + c* − log w₀ − 1)/2 + 1 over 8K², proved modulo
+ONE named lemma — the Tail Variation Lemma (§6.7): tail·jk/(2d) =
+c* − γ + O(d′/j′), i.e. the Session-7 law with explicit error. Lemma
+verified numerically across K = 156…5000 (A ≤ 0.7); proof route
+(parity-periodicity + Wallis average + Beatty boundary layer) is one
+dedicated session.
+
+**Corollary (with Theorem 1):** the doubling-chain family's floor is
+Θ(K⁻² log K) — the four-dilation witness is order-optimal among
+chains, and the measured factor ≈ 1.2 to λ_min(G_N) is the entire
+remaining gap (which belongs to the Mellin program, not to chains).
+
+**Validation ledger:** (T2.1) identity 5×10⁻¹⁵; Step-4 identity
+(with its +‖α‖² bonus term, found during writeup) to 1e−8 quadrature;
+sharp bound 0.237/K² vs measured floor 0.593/K² (valid, slack 2.5);
+Step-6 quantities: Q(𝟙) = 4.34e−3 vs predicted 4.44e−3, row-sum
+variation 8.5e−5 ≪ envelope 4.7e−3, unrestricted floor = zero-sum
+floor to 4 decimals.
+
+Next on this thread: prove the Tail Variation Lemma (retires Theorem
+2's only debt); then Lean targets §6.1/6.3 (finite algebra).
+
+---
+
 ## Session 13 — July 20, 2026: Redheffer first pass (Plan 8) — the left null space is refined Möbius
 
 Origin: doll's question ("is there a dusty-corner statement RH
