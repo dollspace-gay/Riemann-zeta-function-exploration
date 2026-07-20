@@ -437,6 +437,27 @@ in `plans/04`.
 
 ---
 
+## Session 20 — July 20, 2026: the K-floor reduced to two inequalities ("the word")
+
+`kfloor.md` (new). The Tier-2 kernel problem attacked head-on.
+**Proved (exact):** K = L̃G + 2(G∘log gcd) − (DG+GD) — the separable
+log(de) Hadamard factor is an anticommutator; G∘log gcd is PSD via
+log(d,e) = Σ_q log p·u_qu_qᵀ; the G-Cauchy–Schwarz reduction and the
+tilt split ⟨Dx,Dx⟩_G ≤ 2log²N·g + 2s. One dead end recorded (the
+one-move Schur transfer matrix is NOT PSD, λ_min ≈ −675).
+**Measured (clean):** λ_min(G)·log²N → 0.836; sup(s/g)/log²N → ½
+(0.513 → 0.504, four sizes); λ_max(G)/log²N → 0.47. The K-minimizer
+IS G's bottom eigenvector (overlap² 0.999).
+**Conditional theorem (assembly complete):** two finite inequalities —
+(A) λ_min(G) ≥ c_G/log²N, (B) s ≤ (½+ε)log²N·g — imply
+λ_min(K) ≥ c/log N at δ > 1.47 and hence, with the sourced BCR budget,
+**λ_min(A_N) ≫ N^{−3.5}/log²N unconditionally**. Attack routes for
+both inputs identified (GCD-matrix/Wintner literature for A — check
+before proving; continuous log-Volterra model for B, whose ½ the
+measured constant already matches).
+
+---
+
 ## Session 19 — July 20, 2026: THEOREM 1 MACHINE-VERIFIED END TO END
 
 `lean/RHCrystal/NymanBeurlingMain.lean` (new): `nb_gram_eigenvalue_le`
