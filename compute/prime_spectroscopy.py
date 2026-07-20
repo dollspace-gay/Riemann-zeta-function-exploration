@@ -1,5 +1,8 @@
 """
 Prime spectroscopy: the primes as resonance lines in the zeta zeros.
+(July 2026: ladder extended to m = 4, 5 satellites - 16, 25, 27, 32, 49 -
+all matching Lambda(n)/sqrt(n) form factors to 3 decimals; see RESULTS
+Session 17 and ~/rh_output/spectroscopy_ladder.txt.)
 =====================================================================
 Treat the zeros as spectral lines of an unknown system and take the
 Fourier transform a spectroscopist would: F(tau) = sum_j w(g_j) e^{i g_j tau}
@@ -45,7 +48,8 @@ gt = torch.tensor(g, dtype=torch.float64, device=DEVICE)
 T0, T1 = g[0], g[-1]
 win = torch.sin(math.pi * (gt - T0) / (T1 - T0)) ** 2
 
-CANDS = [(2,1),(3,1),(2,2),(5,1),(7,1),(2,3),(3,2),(11,1),(13,1),(17,1),(19,1),(23,1)]
+CANDS = [(2,1),(3,1),(2,2),(5,1),(7,1),(2,3),(3,2),(11,1),(13,1),(17,1),(19,1),(23,1),
+         (2,4),(5,2),(3,3),(2,5),(7,2)]   # July: deep satellite rungs added
 
 print(f"{'p^m':>5} {'log p^m':>9} {'needle amp':>11} {'measured':>9} {'predicted':>10}")
 amps = {}

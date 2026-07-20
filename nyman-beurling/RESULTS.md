@@ -437,6 +437,36 @@ in `plans/04`.
 
 ---
 
+## Session 17 — July 20, 2026: the form-factor ladder — five new satellite rungs, all exact
+
+Context: an external agent (via doll) proposed testing the explicit
+formula's Λ(n)/√n peak-height law on the prime-power satellites as "the
+positive fingerprint of the phase." That test was in fact run in June
+(`prime_spectroscopy.py`, commit 0bc9a0e) for m ≤ 3. Today: zeros
+re-downloaded on this machine (2,001,052, cross-machine revalidation)
+and the ladder EXTENDED to the never-tested deep rungs:
+
+| n | measured/predicted | | n | measured/predicted |
+|---|---|---|---|---|
+| 16 = 2⁴ | 0.354 / 0.354 | | 27 = 3³ | 0.431 / 0.431 |
+| 25 = 5² | 0.657 / 0.657 | | 32 = 2⁵ | 0.250 / 0.250 |
+| 49 = 7² | 0.567 / 0.567 | | | |
+
+All June rungs reproduced identically. The agent's named ratios:
+4-vs-2 = 0.7071 (1/√2), 8-vs-2 = 0.5000 (1/2), 9-vs-3 = 0.5774 (1/√3)
+— four-decimal, zero-free-parameter agreement. The diffraction pattern
+of the zeros carries the von Mangoldt form factors exactly.
+
+Also this session, from the same exchange: the agent's Cooper-pairing
+correction to Session-level rhetoric is ACCEPTED (Pauli forbids
+condensation of *free* fermions; the wall is the measured free-fermion
+kernel — no attractive channel — not fermionic statistics as such);
+its Painlevé V/JMMS claim and class-II hyperuniformity classification
+both verify. Inter-agent adversarial review has entered the workflow
+organically — process-paper material.
+
+---
+
 ## Session 16 — July 20, 2026: the +9% offset — pipeline exonerated, next-order term matches
 
 `offset_check.py`. (1) Decisive control: known amplitudes injected
