@@ -1,3 +1,12 @@
+> **STATUS: REFUTED (July 20, 2026).** Lemma (A) as stated below is
+> FALSE: an external agent working from this brief produced the
+> primorial-divisor-cube construction, giving lam_min(G_N) <=
+> exp(-(2+o(1))sqrt(log N)/loglog N) = o((log N)^{-A}) for every A.
+> Verified independently to 1e-16 and extended (K-floor collapse;
+> boxes beat cubes) in `kfloor.md` Session 27. The brief is retained
+> unedited below as the record of what was handed out. The successor
+> problem is Lemma (A''): log lam_min(G_N) ≍ -sqrt(log N)/loglog N.
+
 # Lemma (A): brief for an external agent
 
 *Self-contained problem statement from the Riemann-zeta-function-exploration

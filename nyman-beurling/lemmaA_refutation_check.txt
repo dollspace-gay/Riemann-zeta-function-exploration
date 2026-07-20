@@ -1,0 +1,45 @@
+STEP 1: their table, via OUR gcd_form (independent implementation)
+  N=10^3: P=210  quotient=0.0425659623  Euler=0.0425659623  diff=6.94e-18
+  N=10^4: P=2310  quotient=0.0297318418  Euler=0.0297318418  diff=0.00e+00
+  N=10^5: P=30030  quotient=0.0214857126  Euler=0.0214857126  diff=3.47e-18
+  N=10^6: P=510510  quotient=0.0162746618  Euler=0.0162746618  diff=0.00e+00
+
+STEP 2: tensor claim -- exact eigensolve of the divisor-cube submatrix
+  P=210: lam_min(cube)=0.042565962345  Euler=0.042565962345  diff=1.3e-16  eigvec==mu: True
+  P=2310: lam_min(cube)=0.029731841805  Euler=0.029731841805  diff=2.4e-16  eigvec==mu: True
+
+STEP 3: their asymptotic crossover claim (148 primes, ending 857)
+  140 primes (last 809): log10 P= 332.579  R=1.6380103e-06  R*log^2 P=0.960587
+  145 primes (last 829): log10 P= 347.153  R=1.3716183e-06  R*log^2 P=0.876410
+  147 primes (last 853): log10 P= 353.008  R=1.2789228e-06  R*log^2 P=0.844977
+  148 primes (last 857): log10 P= 355.941  R=1.2352356e-06  R*log^2 P=0.829731
+  149 primes (last 859): log10 P= 358.875  R=1.1930899e-06  R*log^2 P=0.814688
+  150 primes (last 863): log10 P= 361.811  R=1.1524767e-06  R*log^2 P=0.799884
+  155 primes (last 907): log10 P= 376.551  R=9.7154986e-07  R*log^2 P=0.730370
+  first drop below 0.836: 148 primes (last prime 857), N ~ 10^355.9
+  200 primes: R*log^2 P = 0.3322   (collapse continues)
+  500 primes: R*log^2 P = 0.0047   (collapse continues)
+  1000 primes: R*log^2 P = 0.0000   (collapse continues)
+  2000 primes: R*log^2 P = 0.0000   (collapse continues)
+
+STEP 4: consequence for OUR K-floor  [K = (d,e)/sqrt(de)*(log(T(d,e)^2/2pi de)+c0), c0=2g+log4-1]
+  closed form on the cube: Rayleigh_K = R(P)*[Ltilde + sum_p logp*r_p/(1-r_p)],  r_p=p^{-1/2}
+  P=   210: direct=0.95654984  closed=0.95654984  diff=2.3e-15   -> lam_min(K)*logT <= 16.367  (measured floor was 11.0)
+  P=  2310: direct=0.92705439  closed=0.92705439  diff=8.9e-16   -> lam_min(K)*logT <= 22.976  (measured floor was 11.0)
+  P= 30030: direct=0.86743791  closed=0.86743791  diff=1.7e-15   -> lam_min(K)*logT <= 28.618  (measured floor was 11.0)
+  50 primes: lam_min(K)*logT <= 55.817
+  100 primes: lam_min(K)*logT <= 21.549
+  148 primes: lam_min(K)*logT <= 8.690
+  200 primes: lam_min(K)*logT <= 3.466
+  300 primes: lam_min(K)*logT <= 0.708
+  500 primes: lam_min(K)*logT <= 0.048
+  K-floor '11.0' violated from 136 primes (last 769), N ~ 10^321.0: the c/logT K-floor is ALSO false
+STEP 5: cube vs deeper boxes near N = 10^6 (exact tensor values)
+  cube 2.3.5.7.11.13.17 (P=510510)             Q= 510510  Rayleigh=0.01627466
+  box  2^2.3.5.7.11.13 (Q=360360)              Q=  60060  Rayleigh=0.01608154
+  box  2^3.3^2.5.7.11.13 (Q=720720)            Q= 360360  Rayleigh=0.01141921
+  box  2^4.3^2.5^2.7.11 (Q=277200)             Q= 277200  Rayleigh=0.01250624
+  box  2^3.3^2.5.7.11.13 x17 (Q~               Q= 360360  Rayleigh=0.01141921
+  OPTIMAL box under 10^6: 2^2.3^2.5^2.7.11.13  Q=900900  Rayleigh=0.01054706
+  vs cube value 0.01627466  ->  boxes BEAT the cube
+  direct eigensolve of the optimal-box submatrix (216x216): lam_min=0.01054706 (tensor predicted 0.01054706)

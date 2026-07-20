@@ -358,3 +358,97 @@ Calibration: (*) and its resonance mechanism — proved (elementary).
 Items 1–6 — measured. The reading of (A) — structural interpretation,
 demonstrated numerically, not a proof. Lemma (A) remains open; what
 changed is that we now know what it is ABOUT.
+
+## Session 27: LEMMA (A) IS FALSE — the primorial refutation (inter-agent, verified) and what falls with it
+
+Doll handed `lemmaA_brief.md` to an external agent (ChatGPT). It
+returned a DISPROOF. We have verified every digit independently
+(`lemmaA_refutation_check.txt`) and extended it. This session
+supersedes the extrapolated claims of Sessions 22–26; the measurements
+of those sessions stand.
+
+### The construction (THEIRS; proved; verified here to 1e-16)
+
+Let P = Π_{p∈𝒫} p ≤ N be squarefree, and x_n = μ(n) if n | P, else 0.
+By identity (*), the class sums factorize prime by prime, giving EXACTLY
+
+    xᵀG_N x / ‖x‖²  =  Π_{p|P} (1 − p^{−1/2}).
+
+Equivalently: on the divisor cube of P, G restricts to the tensor
+product ⊗_{p|P} [[1, p^{−1/2}],[p^{−1/2}, 1]], whose bottom
+eigenvector is exactly μ. Verified three ways: our gcd_form at
+N = 10³…10⁶ (diff ≤ 7e-18), direct cube-submatrix eigensolves
+(diff ≤ 2e-16, eigenvector = μ exactly), Euler product.
+
+Taking P = the largest primorial ≤ N (so y ~ log N by PNT) and
+Σ_{p≤y} p^{−1/2} = (2+o(1))√y/log y:
+
+    λ_min(G_N) ≤ exp(−(2+o(1))·√(log N)/log log N)  =  o((log N)^{−A}) ∀A.
+
+**Lemma (A) is false.** The measured 0.836/log²N behaviour is
+PRE-ASYMPTOTIC: the crossover (verified) is at 148 primes, last prime
+857, N ~ 10^355.9, where R·log²P = 0.829731 first drops below 0.836 —
+beyond every computation ever performed. Four decades of clean
+eigensolves fit a law that is false.
+
+### Consequence 1 (OURS; closed form verified 1e-15): the K-floor falls too
+
+On the same cube, the Tier-2 kernel K = (d,e)/√(de)·(log(T(d,e)²/2πde)+c₀)
+evaluates in closed form:
+
+    Rayleigh_K(cube P) = R(P) · [ L̃ + Σ_{p|P} log p · p^{−1/2}/(1−p^{−1/2}) ],
+
+R(P) = Π(1−p^{−1/2}), L̃ = log T − log 2π + c₀. Verified against the
+direct K-matrix at P = 210, 2310, 30030 (diff ≤ 2e-15). With
+T = N^{3.2} the bracket is O(log N), so λ_min(K)·log T → 0: it
+crosses below the measured "11.0" at 136 primes (N ~ 10^321) and
+collapses. **The Tier-2 conjecture (⋆), λ_min(K) ≥ c/log T, is FALSE
+as stated.** (The reduction logic (A)+(B) ⟹ (⋆) was valid; its
+premise and its conclusion both fail asymptotically.)
+
+### Consequence 2 (OURS; measured + tensor-exact): boxes beat cubes
+
+Per-prime, G's exponent-coordinate blocks are Kac–Murdock–Szegő
+matrices G^(p)_{ab} = p^{−|a−b|/2} (a,b = prime exponents): G is the
+KMS tensor product ⊗_p KMS(p^{−1/2}) restricted to the simplex
+Σ_p a_p log p ≤ log N. Divisor BOXES (deeper small primes) beat the
+cube at equal budget: at N = 10⁶ the optimal box 2²3²5²·7·11·13 gives
+Rayleigh 0.01054706 (direct 216×216 eigensolve = tensor prediction to
+all digits) vs the cube's 0.01627466. So the constant 2 in the
+exponent is not optimal; per-prime saturation at (1−r)/(1+r) bounds
+the achievable improvement.
+
+### The revised problem: Lemma (A″) (conjectured)
+
+    log λ_min(G_N) ≍ −√(log N)/log log N,
+
+upper side PROVED with constant 2+o(1) (theirs), improvable by boxes
+(constant open, ≤ saturation bound); lower side OPEN — best known
+remains our elementary exp(−C log N/log log N). The gap is now
+√log N vs log N in the exponent: the problem is sharper and purely
+arithmetic (KMS-tensor-on-a-simplex), with the extremal support now
+known in shape.
+
+### Status ledger (what dies, what survives)
+
+DIES: Lemma (A); conjecture (⋆) (c/log T K-floor); the "N^{−2}·polylog
+via (A)" upgrade path; Session 26's ASYMPTOTIC interpretation (the
+floor is not zero-governed in the limit); OUTREACH Tracks 1–2 as
+drafted (never sent — the review-first rule did its job).
+
+SURVIVES: every measurement (Sessions 13–26; they describe the
+regime N ≲ 10^320, which contains all computable N); the symbol
+identity and the zero-comb (real structure of the accessible-regime
+ground state — the pre-asymptotic minimizer IS zero-resonant; the
+asymptotic minimizer is the arithmetic box vector; two mechanisms,
+one crossover); Lemma (B) (a proof); Lemma A′ (a proof); Theorems
+1–2 + TVL; the Lean formalization; the unconditional
+λ_min(A_N) ≥ N^{−4−ε} (built on A′, never on (A)). Revised Tier-2
+hope: an (A″)-grade lower bound would give λ_min(A_N) ≥ N^{−2−o(1)}
+— the polylog is gone, the exponent survives.
+
+Method note for the process paper: the refutation came one session
+after we handed a calibrated brief to a second AI agent — adversarial
+inter-agent verification caught what four decades of numerics could
+not. This is the strongest validation of the working method the
+project has produced.

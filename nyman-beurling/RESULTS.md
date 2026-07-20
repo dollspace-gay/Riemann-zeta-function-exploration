@@ -437,6 +437,27 @@ in `plans/04`.
 
 ---
 
+## Session 27 — July 20, 2026: LEMMA (A) IS FALSE (inter-agent refutation, verified, extended)
+
+The external agent doll handed the brief to came back with a disproof:
+mu on the divisor cube of a primorial P has EXACT Rayleigh quotient
+prod_{p|P}(1 - p^{-1/2}) (the cube is a tensor product; mu is its
+bottom eigenvector), giving lam_min(G_N) <= exp(-(2+o(1))sqrt(logN)/
+loglogN) = o(1/polylog). Verified here to 1e-16 three ways; crossover
+at 148 primes / N ~ 10^356 — the 0.836/log^2 N "law" was
+pre-asymptotic, false beyond all computable N. Our extensions: closed
+form on the K-kernel (verified 1e-15) shows the Tier-2 K-floor
+c/logT is FALSE too (collapse from N ~ 10^321); divisor BOXES beat
+cubes (0.01055 vs 0.01627 at 10^6, tensor-exact); G is the KMS tensor
+product ⊗_p KMS(p^{-1/2}) on a log-simplex. Revised conjecture (A''):
+log lam_min ≍ -sqrt(logN)/loglogN. Survives: all measurements, the
+symbol/comb structure (pre-asymptotic regime), Lemmas A'/B, Theorems
+1-2+TVL, Lean, the unconditional N^{-4-e}. Dies: (A), (⋆), the
+polylog Tier-2 target, the outreach drafts as written (never sent).
+`kfloor.md` Session-27; `lemmaA_refutation_check.txt`.
+
+---
+
 ## Session 26 — July 20, 2026: the gcd matrix knows the zeros (symbol-zero test)
 
 The Session-25 hypothesis tested and CONFIRMED in structure. Exact
