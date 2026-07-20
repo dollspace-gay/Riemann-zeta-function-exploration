@@ -437,6 +437,32 @@ in `plans/04`.
 
 ---
 
+## Session 11 — July 20, 2026: the amplitude law DERIVED, parameter-free (Plan 2 Step 2)
+
+Writeup: `amplitude_theory.md`. Check: `~/rh_output/amplitude_theory_check.txt`.
+
+    A_j(N) = 4·log(2π) · N^{−1/2} / (|ρ_j|²·|ζ′(ρ_j)|)
+
+derived via Mellin + tapered-Möbius contour: the zeros' Fejér bumps
+give Burnol's C/log N as the leading term (self-anchor ✓); the
+oscillation comes from a contour shift whose dominant capture is the
+s = 1 pole — at distance ½ from the critical line, hence N^{−1/2};
+its residue carries (ζ′/ζ)(0) = log 2π (verified 2e−16) and the
+1/(|ρ_j|²ζ′(ρ_j)) weights. All three measured targets hit with no
+fitted constants: envelope ½ (measured 0.524); intensity law
+1/(|ρ|²|ζ′|) (screen winner, log-rms 0.089); absolute γ₁ amplitude
+matched at 3–12% across four N-octaves (ratios 1.06/1.12/1.05/0.97).
+Bonus: predicted second-order beat lines γ_j − γ_k; the stray 10⁴-run
+peak at ≈ 10.9–11.2 sits on γ₃ − γ₁ = 10.876 at 2.2× floor.
+
+Honesty: explicit-formula rigor (RH + simple zeros, formal ρ-sum
+manipulations), not theorem grade; the ×4 bookkeeping was confirmed by
+data before being fully trusted (flagged); phase check open. Sharp
+falsifiable prediction: γ₄, γ₅ become detectable at N ~ 10⁵–10⁶ with
+amplitudes given in advance by the formula.
+
+---
+
 ## Session 10 — July 20, 2026: N = 10⁴ on GPU — detection sharpens, envelope ~ N^−1/2
 
 Code: GPU build (`nb_gram.py`, RTX 3090, 30.4M coprime pairs, 105 min)
