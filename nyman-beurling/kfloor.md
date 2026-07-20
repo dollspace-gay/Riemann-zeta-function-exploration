@@ -235,3 +235,44 @@ requires the analytic (HLS/Hardy-space) machinery at s = ½ + σ,
 σ ≍ 1/log N — a genuine research project, now precisely posed, with
 the measured constant 0.836 as its target. This is THE open problem
 of the program, and it is now also the subject of the outreach ask.
+
+## Session 25: inter-agent input — the exactly-solvable model (via doll's ChatGPT thread)
+
+Doll brought a ChatGPT conversation ("Dilation Systems and Hardy
+Spaces"; extracted to `~/rh_data/chatgpt_convo.txt`) containing an
+exact solution of the MODEL problem: the Gram matrix of the two-term
+system φ_n = e_n − e_{qn} with ORTHONORMAL (e_n). Verified here to
+machine precision (`model_verify.txt`, three (q,N) cases):
+
+    the Gram splits into q-adic chains; each chain is the discrete
+    Laplacian T_L; λ_min(G_N^{model}) = 4sin²(π/(2(L_N+1))) EXACTLY,
+    L_N = 1 + ⌊log_q N⌋; hence ~ π²log²q/log²N.
+
+**What it gives us.** (a) A rigorous, exactly-solvable instance of the
+1/log²N floor mechanism: chains of length ~log N → Laplacian blocks →
+π²/L². This is our doubling-chain structure in an idealized
+orthonormal setting — the two projects converged on the same object
+independently. (b) The Hardy-space lens made concrete: the model's
+floor is set by the finite-section resolution of the ZEROS of its
+multiplier symbol D(s) = 1 − q^{−s}. (c) A new reference to source:
+Antezana–Carando–Scotti (dilation synthesis = Dirichlet
+multiplication). (d) An independent literature scan (its search
+queries logged) agreeing with ours: no sharp finite-section theorem
+for the multiplicative-Toeplitz case — its own hedge, quoted: the
+multiplier theory "does not appear to supply a decay rate by itself."
+
+**What it does NOT give.** Lemma (A). Our G is the Gram of
+NON-orthogonal dilations in the density pairing — every pair coupled
+through the full gcd structure, not just q-chains. The model is the
+diagonal caricature.
+
+**The hypothesis it suggests (flagged, untested).** In the model, the
+floor constant is π²log²q because the symbol's zeros sit on a lattice
+of spacing 2π/log q and the finite section resolves them at scale
+1/L. For our G at s = ½ the natural symbol is ζ-related — so the
+gcd-floor constant 0.836 may be a ZETA-ZERO quantity (finite-section
+resolution of ζ's zeros near the ½-line at scale 1/log N). If true,
+Lemma (A) sharp is once again a statement about the zeros — the ½
+relocating one more time. Test to design: compute the LS/HLS symbol
+for the truncated s = ½ system and compare its zero geometry to the
+measured 0.836. Next session's opening move.
