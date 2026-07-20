@@ -12,4 +12,4 @@ require mathlib from git
 @[default_target]
 lean_lib «RHCrystal» where
   srcDir := "RHCrystal"
-  roots := #[`RHCrystal, `NymanBeurling]
+  roots := #[`RHCrystal, `NymanBeurling, `NymanBeurlingL2]
