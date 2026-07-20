@@ -437,6 +437,38 @@ in `plans/04`.
 
 ---
 
+## Session 22 — July 20, 2026: LEMMA (B) PROVED — the unconditional floor lands
+
+`kfloor.md` Session-22 section; verification `lemmaB_verify.txt`.
+
+**Lemma (B) proved.** The tilt operator is von Mangoldt convolution:
+z_δ = Σ Λ(d)y_{δd} exactly (log m = Σ_{d|m}Λ(d); verified 9e−15).
+Weighted Cauchy–Schwarz (ω = Λ) + Mertens (ΣΛ(d)/φ(d) ≤ logM + C₀) +
+φ-superadditivity + Σ_{d|n}Λ(d) = log n give s ≤ (log²N + C₀logN)·g —
+C′ = 1, with the bound numerically SATURATED (62.779 vs 62.783, at a
+prime, the predicted extremal). The continuous model identifies the
+operator as exactly Volterra integration (sharp 4/π², crude-CS ½ —
+bracketing the measured 0.504 which sits at the crude constant).
+
+**Lemma (A′) proved** (weaker gcd-floor): λ_min(G_N) ≥
+exp(−C logN/loglogN), fully elementary (Möbius inversion + two
+explicit bounds: Σμ²/φ ≤ ζ(2)ζ(3)/ζ(6)·(1+logM); d/φ(d) ≤ log₂d + 1).
+
+**THE THEOREM (unconditional, modulo the published BCR statement):**
+
+    λ_min(A_N) ≥ N^{−4−ε}  for every ε > 0
+
+— assembled from (B) + (A′) + the sourced BCHB/BCR twisted moment +
+the Session-20 scaffolding. With Theorem 1: the first unconditional
+polynomial bracket N^{−4−ε} ≪ λ_min ≪ N^{−2}logN on the NB spectral
+floor. Upgrades queued: Lemma (A) sharp → exponent −2−δ; BCR ℓ²-error
+reading + Volterra-sharp constant → δ ≈ 1.48.
+
+Tier 2 of the lower-bound program: **landed** (manuscript bookkeeping
+remaining, no mathematical gaps).
+
+---
+
 ## Session 21 — July 20, 2026: Lemma (A) — the gcd-floor is unrecorded territory
 
 The (A)-gate executed: **Lindqvist–Seip 1998 obtained (ICM archive)

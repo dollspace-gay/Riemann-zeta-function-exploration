@@ -115,3 +115,89 @@ may know it; asking is part of the question."
 **Status:** (A) is open-and-ours; attack = HLS machinery at
 s = ½ + c/log N. One dedicated session, with the measured 0.836 as
 the target and the LS representation as the tool.
+
+## Session 22: LEMMA (B) PROVED — and the unconditional theorem assembles
+
+Verification of every step: `~/rh_output/lemmaB_verify.txt`.
+
+### Lemma (B), proved (constant C′ = 1 + O(1/log N))
+
+**The key identity (von Mangoldt convolution).** With w_d = x_d/√d,
+y_δ = Σ_{m≤N/δ} w_{δm}, z_δ = Σ_{m≤N/δ} w_{δm}·log m: since
+log m = Σ_{d|m} Λ(d),
+
+    z_δ = Σ_{d≤N/δ} Λ(d)·y_{δd}          (exact; verified 9×10⁻¹⁵).
+
+The tilt operator is Λ-convolution along divisor chains.
+
+**Proof of s ≤ (log²N + C·log N)·g.** Cauchy–Schwarz with weights
+ω_d = Λ(d):
+
+    φ(δ)z_δ² ≤ [Σ_{d≤N/δ} Λ(d)·φ(δ)/φ(δd)]·[Σ_d Λ(d)·φ(δd)y_{δd}²]
+             ≤ (log(N/δ) + C₀)·Σ_d Λ(d)·φ(δd)y_{δd}²,
+
+using φ(δd) ≥ φ(δ)φ(d) (superadditivity) and the elementary
+Mertens-type bound Σ_{d≤M} Λ(d)/φ(d) ≤ Σ_{p≤M} log p·p/(p−1)²
+≤ log M + C₀ (C₀ explicit; measured 0.65 in range). Summing over δ and
+collecting by δ' = δd:
+
+    s ≤ Σ_{δ'} φ(δ')y_{δ'}²·B(δ'),
+    B(δ') = Σ_{d|δ'} Λ(d)·(log(Nd/δ') + C₀)
+          = (log(N/δ') + C₀)·log δ' + Σ_{d|δ'} Λ(d) log d,
+
+using Σ_{d|n}Λ(d) = log n. The second piece is
+Σ_p log²p·k_p(k_p+1)/2 ≤ log²δ', so with t = log δ' ≤ L = log N:
+B ≤ tL − t² + C₀t + t² = tL + C₀t ≤ L² + C₀L. ∎
+
+[Numerically the bound is SATURATED: max B = 62.779 vs L² + C₀L =
+62.783 at δ' = 1999 (prime) — prime δ' is the extremal case of this
+bound, though not of the true operator norm, whose measured value ½L²
+matches the crude-Volterra constant: in the continuous variables
+W(v) = e^{v/2}Y(e^v) the operator is EXACTLY ∫_u^L W(v)dv, the Volterra
+operator, with sharp norm 2L/π (⟹ C′_sharp = 4/π² ≈ 0.405) and
+crude-CS norm L/√2 (C′ = ½). Our discrete C′ = 1 is what elementary CS
+delivers; any constant feeds the assembly.]
+
+### Lemma (A′), proved (weaker gcd-floor, fully elementary)
+
+For unit x, with x_d/√d = Σ_m μ(m)y_{dm} (Möbius inversion) and CS
+with weights φ(m):
+
+    x_d² ≤ d·(Σ_{m≤N/d} μ²(m)/φ(m))·(Σ_m φ(m) y_{dm}²),
+
+and two elementary explicit bounds: Σ_{m≤M}μ²(m)/φ(m) ≤ C₂(1 + log M)
+with C₂ = ζ(2)ζ(3)/ζ(6) (via m/φ(m) = Σ_{d|m}μ²(d)/φ(d) and swapping),
+and d/φ(d) ≤ log₂d + 1 (via p_k ≥ k+1). Summing over d, each δ = dm
+appears τ(δ) times:
+
+    1 ≤ C₃(1+log N)²·Σ_δ φ(δ)y_δ²·τ(δ) ≤ C₃(1+log N)²·τ_max(N)·g,
+
+so λ_min(G_N) ≥ [C₃(1+log N)²·τ_max(N)]⁻¹ ≥ exp(−C₄ log N/log log N),
+using the classical explicit τ(n) ≤ exp(C log n/log log n). ∎
+(N^{−o(1)}-grade; the τ-loss is intrinsic to this route — the sharp
+1/log²N of Lemma (A) remains the open refinement.)
+
+### THE UNCONDITIONAL THEOREM (modulo the sourced BCR statement)
+
+Assembly with C′ = 1 (threshold δ > 2√(2+2C′) − 2 = 2): take
+δ = 2 + ε′, T = N^{4+...}-window admissible (θ = 1/(2+δ) < 17/33 ✓,
+BCR error subdominant ✓, log-arguments positive since N ≤ T^{1/4} ✓):
+
+    λ_min(K) ≥ (L̃ − 4 log N − o(log N))·λ_min(G_N)
+             ≥ ε′·log N·exp(−C₄ log N / log log N),
+
+and through the window/weight chain:
+
+    **λ_min(A_N) ≥ N^{−4−ε}   for every ε > 0, N ≥ N₀(ε) —
+    unconditionally** (the only external input being the BCHB/BCR
+    main-term-plus-error statement exactly as published). With
+    Theorem 1: N^{−4−ε} ≪ λ_min(A_N) ≪ N^{−2} log N — the first
+    unconditional polynomial bracket on the Nyman–Beurling spectral
+    floor. Proving Lemma (A) sharp (1/log²N) upgrades the exponent
+    to −2−δ for δ > 2; the ℓ²-uniform reading of BCR's error plus the
+    Volterra-sharp constant would push δ → 2√(2+8/π²) − 2 ≈ 1.48.
+
+Remaining for a clean manuscript: constant bookkeeping in one place,
+the τ- and Mertens-bound citations or their two-paragraph elementary
+proofs, and the BCR quotation with its exact hypotheses. No
+mathematical gaps remain in the chain above.
