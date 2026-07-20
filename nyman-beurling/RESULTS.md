@@ -437,6 +437,49 @@ in `plans/04`.
 
 ---
 
+## Session 9 — July 20, 2026: spectroscopy instrument tests (Plan 7)
+
+Code: `spectroscopy.py`; raw output `~/rh_output/spectroscopy.txt`.
+Doll's question — "does the spectroscopy view give insights toward
+solving RH?" — has its proof-relevant answer in Plans 5/6 (positivity =
+no perfect absorption); this session captured the two instrument-grade
+insights as experiments.
+
+**A. Envelope classification (what RH-failure would look like).** A
+zero at ½ + δ + iγ would show as a line whose envelope decays *slower*
+by N^δ. Synthetic control: five RH-consistent lines (envelope −0.64,
+matched to the measured γ₁ decay and noise floor) plus one planted
+off-line pair at γ = 18, δ = 0.10. A global alternating profile fit
+(per-line envelope exponents, full-range resolution — windowed fits
+provably cannot separate lines 2–4 apart on this range) recovers every
+RH exponent within ±0.06 and the planted exponent exactly (−0.540),
+classifying it at 3.2σ. Resolution sweep: δ = 0.10 is the 3σ limit at
+this range/noise; δ ≤ 0.05 invisible. This quantifies "the
+spectrometer's β-resolution grows only logarithmically with effort" —
+why computation diagnoses but cannot prove RH. Synthetic-only; tests
+the instrument, not ζ.
+
+**B. Inverse line intensities (the curve knows ζ′).** |ζ′(ρ_j)|
+computed directly (mpmath, dps 30): 0.7932, 1.1368, 1.3717. Screening
+four intensity laws against the measured A₁:A₂:A₃ = 1 : 0.309 : 0.221:
+
+| law | predicted ratios | log-rms |
+|-----|------------------|---------|
+| 1/\|ρ\|² | 1 : 0.452 : 0.320 | 0.375 |
+| 1/(\|ρ\|\|ζ′\|) | 1 : 0.469 : 0.327 | 0.405 |
+| 1/(\|ρ\|\|ζ′\|)² | 1 : 0.220 : 0.107 | 0.567 |
+| **1/(\|ρ\|²\|ζ′\|)** | **1 : 0.316 : 0.185** | **0.127** |
+
+Best screen: A_j ∝ 1/(|ρ_j|²|ζ′(ρ_j)|) — three points against four
+laws is screening, not confirmation; it is now the concrete target the
+Plan 2 Step 2 derivation must hit. Inversion demo: |ζ′(ρ₁)| estimated
+from the measured A₂/A₁ under that law = 0.94 vs true 0.79 (19%) — a
+constant of deep arithmetic read off an approximation-theory curve.
+Both parts rerun at N = 10⁴ when the GPU data lands (tighter δ-limit,
+possibly γ₄, γ₅ as new data points).
+
+---
+
 ## Session 6 — June 9, 2026: the Mellin identity verified; the spectral story
 
 `mellin_check.py`; ζ-grid (55k points to T = 2000) cached in
