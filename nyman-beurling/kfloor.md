@@ -77,3 +77,41 @@ treatment.)
 clean finite inequalities remain. Not a theorem yet; the honest
 distance to one is (A) + (B), both of which look like single-session
 targets with the attack routes above.
+
+## Addendum (Session 21): Lemma (A) — literature cleared, structure established
+
+**Sources obtained and read in full:** Lindqvist–Seip, *Note on some
+greatest common divisor matrices*, Acta Arith. 84 (1998) 149–154
+(fetched from the ICM archive). Their matrix M_s =
+((m,n)^{2s}/(mn)^s) at s = ½ IS our G. Their Theorem: sharp bounds
+ζ(2s)/ζ(s)² ≤ λ_N ≤ Λ_N ≤ ζ(s)²/ζ(2s) for s > 1 (via the
+Hedenmalm–Lindqvist–Seip Riesz-basis theory, Duke 1997 — the founding
+paper of the Hardy space of Dirichlet series); for ½ < s ≤ 1 only the
+qualitative liminf λ_N = 0; **s = ½ explicitly excluded** ("our
+characterization breaks down… due to divergence"). Also probed:
+Mattila–Haukkanen (arXiv:1309.0320), Altınışık–Büyükköse
+(arXiv:1408.3113), Aistleitner–Berkes–Seip (spectral norms of GCD
+matrices — λ_max/Gál sums ONLY, zero smallest-eigenvalue content).
+
+**Calibrated verdict:** the rate λ_min(G_N) ≍ 1/log²N at s = ½ (our
+measured constant 0.836) is NOT in any source found. Same claim level
+as the June chains check: "not found in a targeted search; the experts
+may know it; asking is part of the question."
+
+**Structure established for the proof (this session, exact):**
+- LS representation: the G-form is the L²(0,π)-norm of Σ c_m u(mx),
+  u(x) = Σ_k sin(kx)/k^s — at s = ½ the generator diverges, and the
+  finite-N truncation regenerates it with a k-cutoff whose
+  gcd-computation produces log(Kd/max(m,n))-type factors: the 1/log²
+  law is the variance of that log over the lattice. This is the
+  continuous mechanism to formalize.
+- Regularization bridge: with ρ the CND Hamming metric (§ identities),
+  Schoenberg gives e^{−σρ} PSD, and M_{½+σ} = G ∘ e^{−σρ} exactly —
+  connecting G to the LS-covered range s > ½ at σ ≍ 1/log N.
+- Rigorous fallback available now: the Möbius–Cauchy–Schwarz chain
+  gives λ_min(G_N) ≥ N^{−o(1)} (explicit; τ-loss intrinsic to that
+  route).
+
+**Status:** (A) is open-and-ours; attack = HLS machinery at
+s = ½ + c/log N. One dedicated session, with the measured 0.836 as
+the target and the LS representation as the tool.

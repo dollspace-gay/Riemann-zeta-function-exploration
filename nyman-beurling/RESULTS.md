@@ -437,6 +437,26 @@ in `plans/04`.
 
 ---
 
+## Session 21 — July 20, 2026: Lemma (A) — the gcd-floor is unrecorded territory
+
+The (A)-gate executed: **Lindqvist–Seip 1998 obtained (ICM archive)
+and read in full** — their M_s at s = ½ is exactly our G; their sharp
+ζ-constant theorem covers s > 1 only, ½ < s ≤ 1 gets qualitative decay,
+and s = ½ is explicitly excluded from their representation. The modern
+Gál-sum line (Aistleitner–Berkes–Seip et al.) is λ_max-only. Verdict,
+calibrated as in June: **λ_min(G_N) ≍ 1/log²N at s = ½ (measured
+constant → 0.836) is not in any source found** — a new law about a
+classical object (Smith 1875 → LS 1998 lineage). Bonus structure
+proved: M_{½+σ} = G∘e^{−σρ} with e^{−σρ} PSD by Schoenberg (ρ is a CND
+Hamming metric) — the bridge from G to the LS-covered range; and the
+LS norm-representation identifies WHERE 1/log² comes from (variance of
+the truncation log over the lattice). Delightful closing of a circle:
+(A) lives in the Hedenmalm–Lindqvist–Seip Hardy space of Dirichlet
+series — the same mathematical universe as the Nyman–Beurling
+criterion itself. `kfloor.md` addendum has the full record.
+
+---
+
 ## Session 20 — July 20, 2026: the K-floor reduced to two inequalities ("the word")
 
 `kfloor.md` (new). The Tier-2 kernel problem attacked head-on.
