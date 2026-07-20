@@ -162,3 +162,49 @@ obtain BCHB 1985 (and successors) and verify kernel + uniformity;
 the K-floor law itself (our measurement) then needs a proof — likely
 via the gcd-Gram factorization (h,k) = Σ_{d|h,d|k} φ(d), which makes
 K a positive combination of rank-structured pieces with log weights.
+
+## M2 third revision: BCHB SOURCED — both checks pass
+
+Source obtained (arXiv:1411.7764, Bettin–Chandee–Radziwiłł, published
+Crelle 729 (2017); quoting and improving BCHB, Crelle 357 (1985)):
+
+**BCHB (their eq. 1.2), θ < ½, sharp cutoff [T, 2T]:**
+    ∫|ζ(½+it)|²|A(½+it)|²dt
+      = T·Σ_{d,e≤T^θ} (a_d a_e/[d,e])·(log(T(d,e)²/(2πde)) + 2γ + log 4 − 1) + o(T).
+
+**BCR Theorem 1, θ < 17/33, smooth φ:** same main term (t inside the
+log, integrated against φ(t/T)) with EXPLICIT error
+O(T^{3/20+ε}N^{33/20} + T^{1/3+ε}), N = T^θ, for a_n ≪ n^ε.
+
+**Check 1 (kernel) — PASSES.** With a_h = x_h√h and 1/[d,e] = (d,e)/de,
+the main-term kernel is exactly (d,e)/√(de)·(log(T(d,e)²/2πde) + c₀) —
+the measured kernel, with c₀ = 2γ + log 4 − 1 (the recalled version had
+dropped log 4). Floor re-measured with the sourced constant at the
+admissible window T = N^{3.2}:
+
+    λ_min(K)·log T = 10.94, 11.03, 11.06, 11.03   (N = 250…2000)
+
+— constant ≈ 11.0. The c/log T law stands with the exact kernel.
+
+**Check 2 (error/uniformity) — PASSES, two readings.** BCR's error is
+explicit in (T, N) for the class a_n ≪ n^ε. Our vectors have
+a_h = x_h√h, sup ≤ N^{1/2}: crude sup-norm rescaling multiplies the
+error by N, giving admissibility for δ > 1.117 (main N^{2+δ}/log vs
+error N^{2.95+0.15δ+ε}); at δ = 1.2, θ = 1/3.2 < 17/33 ✓ and all log
+arguments positive ✓. In ℓ² mass our vectors sit INSIDE the class
+scale (Σ|a_h|² ≤ N vs class ~N^{1+ε}), so if BCR's error is uniform in
+ℓ²-normalized classes (a Section-3 read of their proof), every δ > 0
+is admissible.
+
+**Tier 2, reduced to one problem.** Everything is now sourced and
+verified except a PROOF of the measured floor law:
+
+    (⋆)  λ_min( K_N(T) ) ≥ c / log T,
+         K = (d,e)/√(de)·(log(T(d,e)²/2πde) + c₀),  d, e ≤ N ≤ T^{1/3},
+
+an explicit finite arithmetic-kernel problem (gcd-Gram factorization
+(d,e) = Σ_{δ|d,δ|e} φ(δ) makes K a positive combination of
+rank-structured pieces; the Möbius-inverse z-map has polylog-bounded
+inverse). (⋆) ⟹ **λ_min(A_N) ≫ N^{−3.2}/log N unconditionally** (crude
+reading), or N^{−2−δ}/log N ∀δ > 0 (ℓ²-uniform reading) — the latter
+within log² of Theorem 1's upper bound. (⋆) is the whole game now.
