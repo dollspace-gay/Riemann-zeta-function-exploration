@@ -437,6 +437,37 @@ in `plans/04`.
 
 ---
 
+## Session 23 — July 20, 2026: the upgrades + the outreach rewrite
+
+**BCR ℓ²-reading (upgrade 2):** their Theorem-1 off-diagonal machinery
+runs through Proposition 1 (trilinear Kloosterman, stated in dyadic
+ℓ²-norms); our class a_h = x_h√h has block norms ≤ √(2M) — the same
+scale as a_n ≪ n^ε. The sup-norm rescaling penalty was phantom; every
+θ < 17/33 admissible at proof-architecture level (calibrated: our
+inspection, not their stated theorem). The exponent ladder is now set
+by the tilt constant alone: C′ = 1 (proved) → N^{−4−ε}; C′ = ½ →
+N^{−3.47}; C′ = 4/π² (sharp Volterra) → N^{−3.36}.
+
+**Sharp Lemma (A) (upgrade 1):** honest negative, precisely stated —
+per-divisor CS provably pays τ (the collection multiplicity IS τ; CS
+kills the Möbius signs that cancel it), and LS's own remark rules out
+"arithmetic proofs" of sharp constants. The 1/log²N floor needs HLS
+at s = ½ + c/logN. Now the subject of the outreach ask.
+
+**Redheffer finale (background job landed):** Σlogσ = log|M| to
+1.2e−7 at n = 16384 (bulks ±5200 → 3.47); and the u_min deviation
+field is supported ENTIRELY on primorial-scaffold numbers (every
+top-10 component = 2²·3·5·7·p: 7980, 7140, 4620, 420, 5460…) — the
+June NB deviation-field phenomenon (smooth squarefree, primorial
+2310) replicated in a second RH-adjacent matrix. The refined-Möbius
+correction structure is cross-matrix universal.
+
+**OUTREACH.md rewritten** (three tracks: focused MO question on the
+gcd-floor; expert email draft to Seip; the deferred arXiv arc), in
+doll's voice, claim calibration embedded, awaiting doll's review.
+
+---
+
 ## Session 22 — July 20, 2026: LEMMA (B) PROVED — the unconditional floor lands
 
 `kfloor.md` Session-22 section; verification `lemmaB_verify.txt`.

@@ -201,3 +201,37 @@ Remaining for a clean manuscript: constant bookkeeping in one place,
 the τ- and Mertens-bound citations or their two-paragraph elementary
 proofs, and the BCR quotation with its exact hypotheses. No
 mathematical gaps remain in the chain above.
+
+## Session 23: the two upgrades
+
+**Upgrade 2 (BCR error, ℓ²-reading) — RESOLVED at proof-architecture
+level.** BCR's Theorem 1 handles its off-diagonal terms via their
+Proposition 1 (the Bettin–Chandee trilinear Kloosterman bound), which
+is stated in ℓ² norms ‖α‖‖β‖‖ν‖ of dyadic coefficient blocks. Our
+class a_h = x_h√h (unit x) has dyadic-block norms
+‖a‖_{[M,2M)} ≤ √(2M) — the same scale as the a_n ≪ n^ε class the
+theorem is stated for. Hence the sup-norm rescaling penalty (the
+δ > 1.117 constraint) is phantom: Theorem 1's error architecture
+admits our coefficients at every θ < 17/33. CALIBRATION: this is our
+inspection of their proof, not a stated theorem — a referee-grade
+version re-derives their Section 3 assembly for the wider class
+(their Prop 2 (Deshouillers–Iwaniec, sup-normalized) enters only
+their Theorem 3, not Theorem 1). Consequence: the exponent ladder is
+now set entirely by our tilt constant C′:
+
+    C′ = 1 (proved, Session 22)      → δ > 2     → λ_min ≫ N^{−4−ε}
+    C′ = ½ (crude Volterra; discrete proof open) → δ > 1.465 → N^{−3.47}
+    C′ = 4/π² (sharp Volterra)       → δ > 1.354 → N^{−3.36}
+
+**Upgrade 1 (sharp Lemma (A)) — honest negative, sharply stated.**
+Every route of the form "per-divisor Cauchy–Schwarz, collect by
+δ' = dm" provably pays the τ(δ')-factor: the collection multiplicity
+IS τ, and the Möbius signs that would cancel it are destroyed by CS.
+(The (B)-proof escaped because Λ is supported on prime-power chains —
+Ω(δ')-sparse — while μ² is τ-dense.) Lindqvist–Seip say it themselves
+about their own sharp constants: "it does not seem to be likely that
+one could construct an 'arithmetic proof'." The sharp 1/log²N floor
+requires the analytic (HLS/Hardy-space) machinery at s = ½ + σ,
+σ ≍ 1/log N — a genuine research project, now precisely posed, with
+the measured constant 0.836 as its target. This is THE open problem
+of the program, and it is now also the subject of the outreach ask.

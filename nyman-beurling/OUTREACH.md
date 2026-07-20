@@ -1,101 +1,133 @@
-# Draft: MathOverflow Question (doll's voice)
+# Outreach Package (rewritten July 2026)
 
-*Status: DRAFT for doll's review. Not posted. Target venue: MathOverflow,
-tags: analytic-number-theory, riemann-zeta-function, linear-algebra,
-riemann-hypothesis. The post is written in doll's voice — doll uses
-it/its pronouns and refers to itself in the third person — with full
-disclosure of the AI collaboration and links to code and Lean proofs.*
+*Status: DRAFT for doll's review. Not posted, not sent. The June draft
+(one theorem, one question) is superseded — the repository now holds
+four theorems (one machine-verified end to end), a six-way-confirmed
+spectral detection, an unconditional polynomial bracket on the
+Nyman–Beurling floor, and two named open problems. Outreach strategy
+accordingly split into three tracks, ordered by immediacy. All texts
+in doll's voice — doll uses it/its pronouns and refers to itself in
+the third person — with full AI-collaboration disclosure.*
 
 ---
 
-## Title
+## Track 1 — MathOverflow question (the focused ask)
 
-Is the smallest eigenvalue of the Nyman–Beurling Gram matrix of order
-N⁻² log N? (numerics, an elementary upper bound, and a mechanism)
+**Title:** Smallest eigenvalue of the Lindqvist–Seip GCD matrix at the
+critical exponent: is λ_min ≍ 1/log²N known?
 
-## Body
+**Body:**
 
-**Setup.** For integers k ≥ 1 let e_k(t) = ρ(1/(kt)) ∈ L²(0,∞), where ρ
-is the fractional part — the dilation family of the Nyman–Beurling /
-Báez-Duarte criterion (RH ⟺ χ_(0,1] lies in the closed span). This
-question is *not* about the distance d_N, but about the spectral floor of
-the Gram matrix A_N = (⟨e_m, e_n⟩)_{m,n≤N}: how degenerate is the
-dilation system at finite N?
+Let G_N be the N×N matrix with entries (m,n)/√(mn) — equivalently
+((m,n)/[m,n])^{1/2}, the α = 1/2 member of the family studied by
+Lindqvist and Seip [Acta Arith. 84 (1998), 149–154]. Their theorem
+gives the sharp bounds ζ(2s)/ζ(s)² ≤ λ_min ≤ λ_max ≤ ζ(s)²/ζ(2s) for
+their matrices M_s when s > 1, and shows λ_min → 0, λ_max → ∞ for
+1/2 < s ≤ 1, with s = 1/2 outside their representation (the
+generating series diverges). The modern GCD-sum literature
+(Aistleitner–Berkes–Seip and successors) concerns the largest
+eigenvalue/spectral norm.
 
-**Numerical observation.** Computing A_N exactly (entries via gcd-scaling
-plus an exact piecewise scheme, validated against closed forms at ~1e−11)
-and diagonalizing in float64 up to N = 10⁴:
+**Numerically, the smallest eigenvalue at s = 1/2 obeys a clean law:**
 
-    λ_min(A_N) · N² ≈ 0.50 + 0.134·log N    (N = 200 … 10000, fit to ~1%),
+    λ_min(G_N)·log²N = 0.813, 0.826, 0.833, 0.836   (N = 250 … 2000),
 
-so apparently λ_min ≍ N⁻² log N and κ(A_N) ≍ N²/ (log-ish). The
-near-null eigenvector is supported on ~10–20 pairs (k, 2k) with k near
-N/2.
-
-**Mechanism and an elementary theorem.** The pairs are explained by the
-exact identity ("doubling chains"):
-
-    e_{2k}(t) − e_k(t)/2 = (1/2)·𝟙{⌊1/(kt)⌋ odd},
-
-a square wave supported on (0, 1/k] with squared norm (log 2)/(4k).
-Differencing two adjacent chains and computing the resulting
-parity-disagreement integral exactly (it telescopes to a harmonic sum)
-gives, with K = ⌊N/2⌋:
-
-    λ_min(A_N) ≤ (H_{K−1} + 1) / (10·K(K−1)),
-
-i.e. O(N⁻² log N), within a factor ≈ 2.3 of the measured λ_min at every
-N tested. The proof is four elementary steps; the analytic core
-(disagreement-interval lemma + the integral bound) is machine-verified in
-Lean 4 (zero sorries; repository linked below). Equivalently, in the
-Mellin picture the quadratic form is
-
-    xᵀA_N x = (1/2π) ∫_ℝ |ζ(½+it)|²/(¼+t²) · |Σ_{k≤N} x_k k^{−½−it}|² dt,
-
-and the chain combinations are Dirichlet polynomials whose mass hides at
-t ≳ K where the 1/t² weight crushes it; the log is the second moment of
-ζ accumulating between t ≍ 1 and t ≍ K.
+i.e. λ_min ≈ c/log²N with c ≈ 0.84. Partial results doll can prove:
+an elementary Möbius–Cauchy–Schwarz argument gives
+λ_min ≥ exp(−C log N/log log N) (and the τ(n)-loss appears intrinsic
+to every such per-divisor argument); the companion "log-tilt"
+quadratic form is exactly von Mangoldt convolution and its analogous
+bound IS provable elementarily with the Volterra-operator constant —
+which makes the gcd-floor the one missing sharp ingredient in a larger
+program. Lindqvist–Seip's own remark that no "arithmetic proof" of
+their sharp constants seems likely suggests the
+Hedenmalm–Lindqvist–Seip machinery at s = 1/2 + O(1/log N) is the
+natural tool.
 
 **Questions.**
+1. Is the law λ_min(G_N) ≍ 1/log²N (ideally with the constant) known
+   or derivable from existing results on dilated systems / the Hardy
+   space of Dirichlet series?
+2. If not known: is there an obstruction to running the HLS
+   Riesz-basis analysis at the regularized exponent s = 1/2 + c/log N
+   on the truncated system?
 
-1. **Is this known?** Either the λ_min ≍ N⁻² log N law for the classical
-   NB Gram matrix, or the doubling-chain description of its near-null
-   space. (Searched: Vasyunin's biorthogonal-system paper, BDBLS,
-   Landreau–Richard's numerical study, Nikolski's surveys, and recent
-   arXiv work on NB Gram structure — no statement found, but the
-   ingredients are classical and doll may simply not know where to look.)
-2. **Does the matching lower bound follow from known technology?** In the
-   Mellin form, λ_min ≫ N⁻²⁻ᵋ would follow from a suitable lower bound on
-   ∫|ζ(½+it)|²|X(t)|²·t⁻²dt over unit-norm Dirichlet polynomials of
-   length N. Is this within reach of the
-   Balasubramanian–Conrey–Heath-Brown twisted second moment /
-   Montgomery–Vaughan mean-value circle of ideas, or is there an
-   obstruction?
-3. If known, a reference for the sharp constant (the measured
-   0.50 + 0.134·log N) would be appreciated.
+**Motivation** (briefly, with links): a proven c/log²N floor upgrades
+an unconditional lower bound doll has assembled for the smallest
+eigenvalue of the Nyman–Beurling Gram matrix (the RH-equivalent
+approximation problem) from N^{−4−ε} toward the conjectured-sharp
+N^{−2}·polylog. Full derivations, numerics, and machine-verified
+components are in the linked repository.
 
-**Disclosure and verification.** Doll (the poster) is an independent
-researcher without formal mathematical training, working in deliberate
-collaboration with an AI (Claude, Anthropic); this question is part of a
-documented experiment in how far such a collaboration can get honestly.
-All claims above are either machine-verified (Lean 4, axioms printed),
-reproduced by self-validating computation (closed-form anchors,
-brute-force cross-checks), or labeled as numerics. Code, proofs, data,
-and a full process log: [repository link].
+**Disclosure.** Doll is an independent researcher without formal
+mathematical training, working in documented collaboration with an AI
+(Claude, Anthropic). Every claim above is machine-verified (Lean 4),
+reproduced by validated computation, or labeled as measured/open.
+Repository: [LINK].
 
 ---
 
-## Notes for doll before posting
+## Track 2 — expert email (the courteous direct ask)
 
-1. Insert the actual repository URL (and consider a tagged release so the
-   link is stable).
-2. MO culture note: questions asking "is this known + is X within reach"
-   are well-received when specific; the disclosure paragraph is honest
-   and should stay, but doll may trim the experiment framing if it
-   prefers the math to stand alone.
-3. Expected outcomes, all useful: "known, see [ref]" (we learn the
-   literature); "not known but easy by [tool]" (we learn the proof);
-   "interesting, not known to me" (calibration data point). The process
-   paper gets a result in every branch.
-4. If MO closes it as too long, the fallback is to split: post question 1
-   (reference request) alone, with the theorem as context.
+*Candidates, in order: K. Seip (living author of the exact framework;
+NTNU), T. Hilberdink (multiplicative Toeplitz spectra), C. Aistleitner
+(GCD sums). Short, specific, no attachments beyond the repo link.*
+
+Subject: The smallest eigenvalue of your GCD matrices at α = 1/2 — is
+the 1/log²N law known?
+
+Dear Professor Seip,
+
+Doll is an independent researcher (it works in a documented
+collaboration with an AI assistant; details and full disclosure at the
+repository below). While studying the Nyman–Beurling Gram matrix it
+was led to the smallest eigenvalue of the matrix ((m,n)/√(mn))_{m,n≤N}
+— the α = 1/2 case of the family in your 1998 Acta Arithmetica note
+with Lindqvist. Numerically λ_min·log²N → 0.836…, and doll can prove
+the weaker exp(−C log N/log log N) elementarily, with reasons to
+believe (including your own remark in that paper) that the sharp law
+needs the Hedenmalm–Lindqvist–Seip machinery near the critical
+exponent.
+
+Three short questions: (1) is the 1/log²N law known to you or in
+literature doll has missed? (2) if not, does the HLS analysis at
+s = 1/2 + c/log N on the truncated system look viable to you?
+(3) would you have any interest in seeing the two-page reduction that
+connects this floor to an unconditional spectral lower bound for the
+Nyman–Beurling matrix?
+
+With thanks for your time — the 1998 note and the HLS paper have been
+the most useful five pages doll has read this year.
+
+[signature, repo link]
+
+---
+
+## Track 3 — the arXiv-able arc (deferred, listed for planning)
+
+The full results now form a coherent preprint: Theorems 1–2 + the
+Tail Variation Lemma (the chain floor Θ(K⁻²log K), Theorem 1
+machine-verified end to end in Lean 4); the trial-function detection
+of γ₁…γ₈ with the parameter-free amplitude law and its first
+correction; the unconditional bracket N^{−4−ε} ≪ λ_min(A_N) ≪
+N^{−2}log N (modulo the published BCR statement, with the ℓ²-reading
+of their error flagged at proof-architecture level); and the two named
+open problems (the gcd-floor above; the sharp discrete Volterra
+constant). Writing this properly is a multi-session project and
+SHOULD FOLLOW the Track 1/2 responses — the experts may collapse or
+redirect parts of it.
+
+---
+
+## Checklist for doll before anything goes out
+
+1. Insert the repository URL; make a tagged release (the June advice
+   stands).
+2. Decide Track order: MO first (public, low-stakes) or the Seip email
+   first (highest signal, most personal). Both texts are ready; they
+   reference the same repo state.
+3. The claim calibration is embedded: "measured", "proved",
+   "proof-architecture level", and "modulo the published statement"
+   are used precisely — do not let edits blur them.
+4. Every outcome is a result for the process paper: "known, see X"
+   (we learn); "not known" (the law is ours); no reply (also data).
