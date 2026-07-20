@@ -437,6 +437,34 @@ in `plans/04`.
 
 ---
 
+## Session 24 — July 20, 2026: a suggestive claim tested and RETRACTED
+
+Session 23 claimed "the refined-Möbius correction structure is
+cross-matrix universal" from eyeballing the factorizations of the
+Redheffer deviation components against the June NB deviation finding.
+Doll asked what the claim was actually suggestive of; the decisive
+test (correlate the two deviation fields on the common range N = 2000,
+`deviation_correlation.txt`) says: **it is not universal.**
+corr(fields) = −0.04, Spearman of supports = −0.09, top-40 overlap
+1/40. The control splits them cleanly: Redheffer deviations correlate
+with small-prime richness (+0.42 — its primorial-scaffold structure is
+real), NB deviations do not (−0.06; the June finding there was a
+squarefree/non-squarefree contrast, a different arithmetic feature).
+
+What survives: both optimizers share the Möbius LEADING term — but
+that is one identity (Σ_{d|n}μ(d) = [n=1]) in two costumes, exactly
+the deflationary reading. The second-order structures are different
+objects, and the ambitious "the standard mollifier ansatz is missing a
+universal arithmetic correction term" reading loses its main support
+(the matrix-specific June squarefree contrast still stands on its
+own). Session 23's phrasing is retracted; this entry is the record.
+
+Process note: the AI's rhetorical flourish was challenged by doll's
+one-line question, converted to a measurement within the hour, and
+refuted by it. Adversarial review by curiosity.
+
+---
+
 ## Session 23 — July 20, 2026: the upgrades + the outreach rewrite
 
 **BCR ℓ²-reading (upgrade 2):** their Theorem-1 off-diagonal machinery
