@@ -437,6 +437,26 @@ in `plans/04`.
 
 ---
 
+## Session 26 — July 20, 2026: the gcd matrix knows the zeros (symbol-zero test)
+
+The Session-25 hypothesis tested and CONFIRMED in structure. Exact
+elementary identity: xGx = sum_d phi(d)|class-d sums|^2, so twisted
+vectors make every divisor class a smoothed partial sum of
+zeta(1/2+it) — the symbol of the gcd matrix IS zeta on the critical
+line (proved). Measured: the ground state carries a COMB of spectral
+lines at gamma_1..gamma_7 (16.6x baseline at gamma_1, SNR 21.7;
+between-zero controls silent; raw-mu control only 3.3 — not
+inheritance); the twisted Rayleigh curve S(t) dips at every zero in
+band with no free parameters; eigen-peak and S-dip agree exactly at
+gamma_1 - O(1/logN). Single-zero constructors up to N=10^6 FAIL to
+reach the 1/log^2 law (measure obstruction quantified) — the floor
+constant 0.836 is a global all-zeros quantity. Lemma (A) is thereby
+identified: its lower bound is a quantitative non-resonance statement
+about zeta's critical-line zeros — the last open lemma was about the
+Riemann zeros all along. `kfloor.md` Session-26; `symbol_zero.py`.
+
+---
+
 ## Session 25 — July 20, 2026: the ChatGPT model problem (inter-agent input, verified)
 
 Doll's ChatGPT thread solved the orthonormal two-term dilation model

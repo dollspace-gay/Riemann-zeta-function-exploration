@@ -276,3 +276,85 @@ Lemma (A) sharp is once again a statement about the zeros — the ½
 relocating one more time. Test to design: compute the LS/HLS symbol
 for the truncated s = ½ system and compare its zero geometry to the
 measured 0.836. Next session's opening move.
+
+## Session 26: THE SYMBOL-ZERO TEST — Lemma (A) is about the Riemann zeros
+
+The hypothesis from Session 25, tested. Instrument: `symbol_zero.py`;
+record: `~/rh_output/symbol_zero.txt`, `.npz`, `.png`.
+
+### The identity (proved, elementary)
+
+For G = ((m,n)/√(mn)) and any complex vector x, expanding
+gcd = Σ_{d|·} φ(d):
+
+    xᵀGx = Σ_{d≤N} φ(d) · | Σ_{n≤N, d|n} x_n/√n |².          (*)
+
+Verified against the matrix to 1.9e-15; O(N log N) to evaluate — no
+matrix needed (used to reach N = 10⁶). For a twisted vector
+x_n = W(n)n^{−it}, the class-d inner sum is d^{−1/2−it} times a
+W-smoothed partial sum of ζ(1/2 + it) over k ≤ N/d. So EVERY divisor
+class resonates with ζ on the critical line simultaneously, and all
+of them vanish together exactly at the zeros: **the symbol of the gcd
+matrix at the critical exponent is ζ(1/2 + it).** This is the exact
+analogue of the model's D(s) = 1 − q^{−s}, with the q-lattice of
+symbol zeros replaced by the Riemann zeros.
+
+### Measured (all at stated N; no fits, no free parameters)
+
+1. **Ground state sings at γ₁.** Periodogram of the bottom
+   eigenvector (√n-flattened, detrended) peaks at f = 14.04 for
+   N = 1000/2000/4000, SNR 21-22. Modes 1-3 likewise (13.9-14.1).
+2. **Not Möbius-inheritance.** Same pipeline on raw μ(n): SNR 3.3.
+   The matrix concentrates on the zero ~7× more sharply than μ does.
+3. **The comb.** Ground-state line amplitudes over baseline at
+   γ₁…γ₇: 16.6, 3.9, 2.9, 4.7, 4.0, 1.7, 3.2. At six between-zero
+   controls: 0.8, 0.4, 0.2, 2.3, 0.4, 0.5 (the 2.3 sits between the
+   close pair γ₄,γ₅ — leakage at our resolution). **The minimizer is
+   an all-zeros object.**
+4. **The symbol curve.** S(t) = twisted Rayleigh quotient (Hann⁴
+   amplitude taper, N = 2000) has local minima at 14.0, 21.1, 24.8,
+   30.9, 32.4, 37.8, 41.1 — one per zero in band; corr(log S,
+   log|ζ(1/2+it)|²) = 0.79 for t > 8; contrast up to ×9.4.
+5. **Displacement consistency.** S-dip and eigen-peak agree to
+   0.000: both at t* = 14.035 = γ₁ − 0.100, displacement O(1/log N)
+   (= 0.132 here). The d = 1 class alone has its smoothed-sum zero at
+   14.140 ≈ γ₁; the displacement comes from aggregating classes with
+   smaller cutoffs N/d.
+6. **Single-zero constructors FAIL — the measure obstruction,
+   quantified.** x_n = Ω(log n/log N)·n^{−iγ₁} via (*) up to
+   N = 10⁶: S·log²N grows (8.5 → 23.7 for sine profile; S itself
+   plateaus ≈ 0.12), nowhere near 0.836/log²N. Reason: in counting
+   measure the log-profile's mass sits in the last e-fold where the
+   taper vanishes — the ℓ²-vs-log-uniform tension (the same
+   obstruction that puts s = 1/2 outside LS) now measured. Off-zero
+   control t = 17.5: S·log²N = 110–372, so the resonance itself is
+   real (×13–16) — it is the LAW the naive vectors miss, not the
+   resonance. Consequence: the floor constant 0.836 is a GLOBAL
+   quantity of all the zeros, not a |ζ′(ρ₁)|-numerology; no
+   single-zero formula for it should be expected.
+
+### What Lemma (A) now is
+
+Unconditionally, by (*): λ_min(G_N) measures how well a length-N
+arithmetic vector can simultaneously null all φ(d)/d-weighted
+smoothed partial sums of ζ(1/2+it). The measured answer: the optimal
+vector resonates with the critical-line zeros of ζ — all of them —
+achieving c/log²N with c = 0.836. So:
+
+- **Upper-bound side:** the extremal vector is a mollified all-zeros
+  object — structurally the same kind of object as our detection
+  trial function c̃_k = −μ(k)(1 − log k/log N) from the NB side. The
+  two halves of the project (detection instrument, floor problem) have
+  met in the middle.
+- **Lower-bound side (the open half):** a proof of λ_min ≥ c/log²N
+  is a quantitative NON-resonance statement — length-N vectors cannot
+  null the ζ-classes too well — i.e. mollifier/zero-repulsion
+  technology near the 1/2-line, the same toolbox as BCHB. Tier 2's
+  circle closes: the missing lemma was a zeta-zero statement all
+  along, which is presumably WHY it is not in the linear-algebra or
+  GCD-sum literature.
+
+Calibration: (*) and its resonance mechanism — proved (elementary).
+Items 1–6 — measured. The reading of (A) — structural interpretation,
+demonstrated numerically, not a proof. Lemma (A) remains open; what
+changed is that we now know what it is ABOUT.

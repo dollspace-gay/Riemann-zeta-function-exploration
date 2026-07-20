@@ -1,0 +1,128 @@
+========================================================================
+|zeta'(rho_1)| = 0.793160   |zeta'(rho_1)|^2 = 0.629103
+
+T1: bottom-eigenvector peak location vs N (prediction: -> gamma_1 = 14.1347)
+  N= 1000  lam_min=0.017460  lam*log^2N=0.8331  peak f= 14.0367  (gamma_1-0.0980)  SNR=21.1
+  N= 2000  lam_min=0.014471  lam*log^2N=0.8360  peak f= 14.0350  (gamma_1-0.0998)  SNR=21.6
+  N= 4000  lam_min=0.012047  lam*log^2N=0.8287  peak f= 14.0427  (gamma_1-0.0920)  SNR=21.7
+          mode 1: lam=0.017307  peak f= 14.1010  SNR=13.5
+          mode 2: lam=0.019350  peak f= 13.8850  SNR=10.2
+          mode 3: lam=0.020937  peak f= 14.1025  SNR=16.2
+
+T2: Mobius control (mu(n), same pipeline, N=4000) -- how much of T1 is mu?
+  mu control: peak f= 14.1428  SNR=3.3   amp@gamma_1=0.078  amp@17.5=0.013
+
+T3: symbol curve S(t), N=2000, Hann^2 taper (prediction: dips at every gamma_j)
+  scale A = 0.455: S(t) ~= A*|zeta(1/2+it)|^2;  corr(log S, log|zeta|^2) [t>8] = 0.794
+  S(t) local minima: 3.7, 4.1, 14.0, 21.1, 24.8, 30.9, 32.4, 37.8, 41.1
+  zeta zeros:        14.1, 21.0, 25.0, 30.4, 32.9, 37.6, 40.9
+    S( 14.13) =    0.1823   vs S( 17.1) =    1.7205   contrast x9.4
+    S( 21.02) =    0.2770   vs S( 24.0) =    0.5038   contrast x1.8
+    S( 25.01) =    0.3606   vs S( 28.0) =    2.1842   contrast x6.1
+    S( 30.42) =    0.3084   vs S( 33.4) =    0.5263   contrast x1.7
+    S( 32.94) =    0.3160   vs S( 35.9) =    1.9259   contrast x6.1
+    S( 37.59) =    0.5308   vs S( 40.6) =    0.3437   contrast x0.6
+    S( 40.92) =    0.2875   vs S( 41.9) =    0.3598   contrast x1.3
+
+T4: log-taper constructor via identity (*) -- upper bound, matrix-free
+    x_n = Omega(log n/log N) * n^(-i t);  S*log^2 N vs measured c = 0.836
+  identity check N=2000: |form-matrix|/|matrix| = 1.92e-15
+  N=10^3.3: sin :   8.504  lin :   6.663  sinmu: 194.600  | min_t   8.436 at t=14.03  | t=17.5 ctrl     110.5   [0s]
+  N=10^4.0: sin :  11.591  lin :   9.705  sinmu: 297.284  | min_t  11.505 at t=14.08  | t=17.5 ctrl     163.6   [0s]
+  N=10^5.0: sin :  17.039  lin :  15.126  sinmu: 480.480  | min_t  16.924 at t=14.08  | t=17.5 ctrl     257.3   [1s]
+  N=10^6.0: sin :  23.697  lin :  21.777  sinmu: 705.552  | min_t  23.546 at t=14.08  | t=17.5 ctrl     371.9   [14s]
+  measured floor: lam_min*log^2N = 0.836 (N=2000), 0.8287 (N=4000)
+Traceback (most recent call last):
+  File "/home/doll/Riemann-zeta-function-exploration/nyman-beurling/symbol_zero.py", line 224, in <module>
+    fig.tight_layout()
+    ~~~~~~~~~~~~~~~~^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/figure.py", line 3665, in tight_layout
+    engine.execute(self)
+    ~~~~~~~~~~~~~~^^^^^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/layout_engine.py", line 188, in execute
+    kwargs = get_tight_layout_figure(
+        fig, fig.axes, get_subplotspec_list(fig.axes), renderer,
+        pad=info['pad'], h_pad=info['h_pad'], w_pad=info['w_pad'],
+        rect=info['rect'])
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/_tight_layout.py", line 266, in get_tight_layout_figure
+    kwargs = _auto_adjust_subplotpars(fig, renderer,
+                                      shape=(max_nrows, max_ncols),
+    ...<2 lines>...
+                                      ax_bbox_list=ax_bbox_list,
+                                      pad=pad, h_pad=h_pad, w_pad=w_pad)
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/_tight_layout.py", line 82, in _auto_adjust_subplotpars
+    bb += [martist._get_tightbbox_for_layout_only(ax, renderer)]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/artist.py", line 1485, in _get_tightbbox_for_layout_only
+    return obj.get_tightbbox(*args, **{**kwargs, "for_layout_only": True})
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/axes/_base.py", line 4783, in get_tightbbox
+    bbox = a.get_tightbbox(renderer)
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/legend.py", line 1091, in get_tightbbox
+    return self._legend_box.get_window_extent(renderer)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/offsetbox.py", line 367, in get_window_extent
+    bbox = self.get_bbox(renderer)
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/offsetbox.py", line 360, in get_bbox
+    bbox, offsets = self._get_bbox_and_child_offsets(renderer)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/offsetbox.py", line 460, in _get_bbox_and_child_offsets
+    bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+              ~~~~~~~~~~^^^^^^^^^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/offsetbox.py", line 360, in get_bbox
+    bbox, offsets = self._get_bbox_and_child_offsets(renderer)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/offsetbox.py", line 493, in _get_bbox_and_child_offsets
+    bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+              ~~~~~~~~~~^^^^^^^^^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/offsetbox.py", line 360, in get_bbox
+    bbox, offsets = self._get_bbox_and_child_offsets(renderer)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/offsetbox.py", line 460, in _get_bbox_and_child_offsets
+    bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+              ~~~~~~~~~~^^^^^^^^^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/offsetbox.py", line 360, in get_bbox
+    bbox, offsets = self._get_bbox_and_child_offsets(renderer)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/offsetbox.py", line 493, in _get_bbox_and_child_offsets
+    bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+              ~~~~~~~~~~^^^^^^^^^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/offsetbox.py", line 802, in get_bbox
+    bbox, info, _ = self._text._get_layout(renderer)
+                    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/text.py", line 479, in _get_layout
+    w, h, d = _get_text_metrics_with_cache(
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        renderer, clean_line, self._fontproperties,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        ismath=ismath, dpi=self.get_figure(root=True).dpi)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/text.py", line 59, in _get_text_metrics_with_cache
+    return get_text_metrics(text, fontprop.copy(), ismath, dpi)
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/text.py", line 125, in _text_metrics
+    return local_renderer.get_text_width_height_descent(text, fontprop, ismath)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/backends/backend_agg.py", line 259, in get_text_width_height_descent
+    parse = self.mathtext_parser.parse(s, self.dpi, prop)
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/mathtext.py", line 86, in parse
+    return self._parse_cached(s, dpi, prop, antialiased, load_glyph_flags)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/mathtext.py", line 100, in _parse_cached
+    box = self._parser.parse(s, fontset, fontsize, dpi)
+  File "/home/doll/.local/lib/python3.13/site-packages/matplotlib/_mathtext.py", line 2306, in parse
+    raise ValueError("\n" + err.explain(0)) from None
+ValueError: 
+A\,|\zeta(\frac12+it)|^2
+               ^
+ParseSyntaxException: Expected \frac{num}{den}, found '12'  (at char 15), (line:1, col:16)
+FOLLOW-UP 1: ground-state line spectrum (N=2000, amp/median-baseline)
+  at zeros:    g1= 16.6  g2=  3.9  g3=  2.9  g4=  4.7  g5=  4.0  g6=  1.7  g7=  3.2
+  at midpoints:       0.8         0.4         0.2         2.3         0.4         0.5
+
+FOLLOW-UP 2: where exactly is the first resonance?
+  S(t) dip:            t* = 14.035
+  d=1 smoothed-sum zero: t* = 14.140
+  eigenvector peak:    t* = 14.035 (T1)   gamma_1 = 14.1347
+  displacement gamma_1 - t*: 0.100 ~ O(1/log N) = 0.132
+
+figure rebuilt
