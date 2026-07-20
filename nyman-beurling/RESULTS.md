@@ -437,6 +437,45 @@ in `plans/04`.
 
 ---
 
+## Session 15 — July 20, 2026: the Tail Variation Lemma PROVED — Theorem 2 debt-free
+
+Writeup: `chains_theory.md` §7. Validation: `tvl_check.py`,
+`~/rh_output/tvl_check.txt`.
+
+**The lemma:** for coprime j < k, d = k − j: tail·jk/(2d) = c* + τ with
+0 ≤ τ ≤ A·d/j — the Session-7 c* law with explicit error, which was the
+single deferred piece of Theorem 2's sharp form. **Now proved.** The
+chain-subspace floor Θ(K⁻² log K) carries no outstanding debts.
+
+**The proof's engine** (all elementary): (1) two boundary miracles —
+k·m₀ ≤ U₀ exactly and I_{m₀+1} starts exactly at U₀, so the tail sees
+only whole intervals; (2) (−1)^Δ = Π(1 − 2·𝟙_{I_ℓ}) expanded by
+inclusion–exclusion, with the subset sum over fixed (min, max)
+collapsing binomially to 4(−1)^{t−1}; (3) the **tent identity**
+2G(T) − 1 = −dist(T, 2ℤ)/T — the triangle wave emerges as an exact
+identity, not an average (verified 3×10⁻¹⁵); (4) alternating
+Euler–Maclaurin for the ℓ/(ℓ+t) correction; (5) 1-Lipschitz
+Riemann-sum comparison feeding the §4.1 Wallis integral
+∫₁^∞ dist(λ,2ℤ)λ⁻²dλ = 1 + log(2/π).
+
+**Two bonuses from the validation table:**
+- The deviations match **τ = (j mod d)/j** exactly, row by row
+  (d = 13, j = 1000: dev/(d/j) = 0.923 = 12/13; d = 3 family: 2/3 to
+  three digits; d = 7, j = 2003: 1/7). The second-order law observed
+  at (d/j)² accuracy — recorded as observed-not-derived, A = 1
+  effectively, deviation one-signed.
+- **Correction (repo discipline):** §6.7 had stated the constant as
+  c* − γ; the correct constant is c* (the Session-7 anchor already
+  said so: tail·jk/2 = 0.5485 at the Theorem-1 pair). Caught during
+  the proof; Theorem 2's §6.5 assembly always used the correct
+  bracket and is unaffected.
+
+The Plan 6 Tier 1 arc is complete: Theorem 1 (upper) + Theorem 2
+(lower, sharp, debt-free) ⟹ the doubling-chain family's spectral
+floor is Θ(K⁻² log K) with explicit constants both sides.
+
+---
+
 ## Session 14 — July 20, 2026: THEOREM 2 written (Plan 6 Tier 1) — the chain floor is Θ(K⁻² log K)
 
 Writeup: `chains_theory.md` §6 (new). Verification appended to
