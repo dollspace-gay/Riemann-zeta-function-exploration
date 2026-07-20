@@ -437,6 +437,49 @@ in `plans/04`.
 
 ---
 
+## Session 13 — July 20, 2026: Redheffer first pass (Plan 8) — the left null space is refined Möbius
+
+Origin: doll's question ("is there a dusty-corner statement RH
+determines, that points back at RH?") → Plan 8. Gate (literature check)
+passed with one flag: σ_min/near-null analysis of A_n not found;
+Hilberdink's two singular-value papers unread, flagged as the
+possible-overlap source. Log: `~/rh_output/redheffer_A.txt`.
+
+**Anchors.** Exact integer determinants match M(n) at n = 5…60; the
+identity **μᵀA_n = (M(n), 0, …, 0)** verified exactly (it *is* Möbius
+inversion in matrix form) — giving σ_min ≤ |M(n)|/‖μ‖ for free.
+
+**Corrected recall, measured structure.** The recalled multiplicity law
+n − ⌊log₂n⌋ − 1 for eigenvalue 1 is evidently the *algebraic* count
+(float eigensolvers scatter it — the matrix is heavily defective);
+the **geometric multiplicity is exactly n/2 − 1** (rank(A−I) in exact
+arithmetic mod p, n = 64/128/256). Dominant eigenvalue pair
+≈ ±√n + (log n)/2 (n = 1024: +35.4, −28.3 vs √n = 32), consistent with
+Barrett–Jarvis/Vaughan. Two instrument bugs caught and fixed in-log
+(defective-spectrum tolerance, a sort_complex slip).
+
+**The new measurements (n = 256…4096).**
+- σ_max/√n drifts 1.413 → 1.377; κ ≈ 10⁴ at n = 4096 — the Redheffer
+  matrix is only mildly ill-conditioned (contrast NB Gram κ ~ N²).
+- **σ_min ≈ 0.004–0.008, roughly flat in n** (fit n^−0.08,
+  non-monotone) — no prior σ_min analysis found (flag above).
+- **The left near-null vector is refined Möbius**: corr(u_min, μ) =
+  +0.999 and PR(u_min) = 2490.2 = exactly the squarefree count below
+  4096. But σ_min sits a growing factor BELOW the raw Möbius bound
+  |M(n)|/‖μ‖ (ratio 0.053 → 0.013 over n = 256 → 4096): the deviations
+  from μ do real, increasing work — the same phenomenon as the NB
+  deviation field (Session 2), now on the Redheffer side.
+- v_min (right) is a different object: mass on small k (6, 14, 37, …),
+  no μ correlation — left/right asymmetry to characterize.
+
+**Open (next session):** verify the algebraic-multiplicity law from
+sources; larger n via sparse/iterative σ_min; the u_min − μ̂ deviation
+field's arithmetic (smooth numbers again?); whether σ_min's flatness
+survives and what, if anything, it says about the det-vs-spectrum
+cancellation (Plan 8 Part B).
+
+---
+
 ## Session 12 — July 20, 2026: OUT-OF-SAMPLE PASS — the law holds to N = 10⁶, eight zeros visible
 
 Code: `bigN_trial.py` (predictions committed BEFORE the run),

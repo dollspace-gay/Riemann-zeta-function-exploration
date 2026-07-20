@@ -14,6 +14,9 @@ negatives with the same prominence as positives.
 | 3 | [Residual profile + Vasyunin](03-residual-profile-and-vasyunin.md) | computation + validation | low | r_N(t) profile with energy-closure gate | **Both parts done.** Mass spread at u ~ N^0.44, not u ~ N; closure 2–7e−4. Vasyunin sourced verbatim, verified 3 ways; both literature flags resolved. |
 | 4 | [Lean Theorem 1 end-to-end](04-lean-theorem1-end-to-end.md) | formalization | medium | Mathlib scouting pass + M1 (e_k ∈ L²) | **M1 done.** `NymanBeurlingL2.lean` compiles, zero sorries, in build roots. Scouting: substitution via JacobianOneDim; log-2 series via integral route. Next: M2 (square-wave identity in L²). |
 | 5 | [Mellin lower bound](05-mellin-lower-bound.md) | research math | high | coefficient uncertainty lemma + numerics (M1) | **M0 + M1 done.** Lemma proved (τ-weighted, ε-free) in `mellin_lower_bound.md`; saturation vs true eigenvectors only 29–64×. Next: M2 assembly with sourced AFE/MV statements. |
+| 6 | [Lower-bound proof](06-lower-bound-proof.md) | theorem target | tiered | Tier 1 numerics gate | **Gate passed** (identity 5e−15, bound 0.237 vs floor 0.593); Theorem 2 ready to write. |
+| 7 | [Spectroscopy insights](07-spectroscopy-insights.md) | instrument | low | classifier + ζ′ screen | **Done.** δ=0.1 classifier at 3.2σ; law A ∝ 1/(\|ρ\|²\|ζ′\|) screened, then DERIVED and confirmed out-of-sample to 10⁶ (Sessions 11–12). |
+| 8 | [Redheffer](08-redheffer.md) | exploration | gated | literature gate + Part A | **Gate passed (Hilberdink flagged).** Part A done: left null space = refined Möbius; σ_min flat ≈ 0.005; geometric mult = n/2 − 1 measured. |
 
 ## Suggested order
 

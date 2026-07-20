@@ -75,3 +75,38 @@ Sources consulted (June 9, 2026): arXiv 2510.18132, 2405.06349,
 2209.10990, 2006.02953, 1805.06733, math/0607733, 1705.09921; Landreau–
 Richard Exp. Math. 11 (2002) (abstract only); EUDML/Numdam records for
 Vasyunin-related and Nikolski works.
+
+---
+
+# Literature Check — Redheffer Direction (July 2026, Plan 8 gate)
+
+## Established (sources identified)
+
+- The criterion det(A_n) = M(n), RH ⟺ det = O(n^{1/2+ε}): Redheffer
+  1977; standard.
+- Eigenvalue theory: Barrett–Forcade–Pollington LAA 107 (1988)
+  (spectral radius); Barrett–Jarvis LAA 162–164 (1992) (characteristic
+  polynomial, the two large eigenvalues, bounds on the small cloud);
+  Vaughan, "On the eigenvalues of Redheffer's matrix" I (1993) & II
+  (1996). Our measured dominant pair ≈ ±√n + (log n)/2 is consistent
+  with this classical picture.
+- Largest singular value/vector: arXiv:2502.09489 (2025) proves the
+  top singular vector is asymptotically close (α ≈ 0.9979) to
+  (σ(k)/k); cites ONLY Cheon–Kim and Hilberdink [two papers:
+  multiplicative Toeplitz / singular values] as prior singular-value
+  work, and explicitly does not treat smallest singular values or
+  near-null vectors.
+
+## Not found (calibrated as in the June check)
+
+1. Any analysis of σ_min(A_n) or the near-null vector structure of the
+   classical Redheffer matrix. **Flag:** Hilberdink's two papers
+   (paywalled/fetch-blocked; not read in full) are the most likely
+   place for partial overlap — same status as Landreau–Richard in the
+   June check: flagged, not cleared.
+2. The observation that the left near-null singular vector is refined
+   Möbius (corr 0.999, PR = squarefree count), or the use of
+   μᵀA = (M(n), 0, …, 0) as a quasi-null relation with the bound
+   σ_min ≤ |M(n)|/‖μ‖ and the measured growing gap below it. (The
+   matrix identity itself is surely classical — it IS Möbius
+   inversion; the spectral reading of it may not be.)
