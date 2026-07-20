@@ -11,90 +11,90 @@ the third person — with full AI-collaboration disclosure.*
 
 ---
 
-## Track 1 — MathOverflow question (the focused ask)
+## Track 1 — MathOverflow question (REWRITTEN after the Session-27 refutation)
 
-**Title:** Smallest eigenvalue of the Lindqvist–Seip GCD matrix at the
-critical exponent: is λ_min ≍ 1/log²N known?
+**Title:** Smallest eigenvalue of the GCD matrix (m,n)/√(mn): is the
+rate exp(−Θ(√log N / log log N)) known?
 
 **Body:**
 
-Let G_N be the N×N matrix with entries (m,n)/√(mn) — equivalently
-((m,n)/[m,n])^{1/2}, the α = 1/2 member of the family studied by
-Lindqvist and Seip [Acta Arith. 84 (1998), 149–154]. Their theorem
-gives the sharp bounds ζ(2s)/ζ(s)² ≤ λ_min ≤ λ_max ≤ ζ(s)²/ζ(2s) for
-their matrices M_s when s > 1, and shows λ_min → 0, λ_max → ∞ for
-1/2 < s ≤ 1, with s = 1/2 outside their representation (the
-generating series diverges). The modern GCD-sum literature
-(Aistleitner–Berkes–Seip and successors) concerns the largest
-eigenvalue/spectral norm.
+Let G_N have entries (m,n)/√(mn) — the s = 1/2 member of the
+Lindqvist–Seip family [Acta Arith. 84 (1998)], outside their
+representation. The modern GCD-sum literature concerns λ_max; the
+question here is λ_min.
 
-**Numerically, the smallest eigenvalue at s = 1/2 obeys a clean law:**
+**What we can prove (elementary, verifiable in minutes).** For any
+squarefree P ≤ N, the vector x_n = μ(n)·[n|P] gives EXACTLY
 
-    λ_min(G_N)·log²N = 0.813, 0.826, 0.833, 0.836   (N = 250 … 2000),
+    xᵀG_N x/‖x‖² = Π_{p|P} (1 − p^{−1/2})
 
-i.e. λ_min ≈ c/log²N with c ≈ 0.84. Partial results doll can prove:
-an elementary Möbius–Cauchy–Schwarz argument gives
-λ_min ≥ exp(−C log N/log log N) (and the τ(n)-loss appears intrinsic
-to every such per-divisor argument); the companion "log-tilt"
-quadratic form is exactly von Mangoldt convolution and its analogous
-bound IS provable elementarily with the Volterra-operator constant —
-which makes the gcd-floor the one missing sharp ingredient in a larger
-program. Lindqvist–Seip's own remark that no "arithmetic proof" of
-their sharp constants seems likely suggests the
-Hedenmalm–Lindqvist–Seip machinery at s = 1/2 + O(1/log N) is the
-natural tool.
+(on the divisor cube of P, G_N restricts to ⊗_p [[1,p^{−1/2}],[p^{−1/2},1]]
+and μ is the bottom tensor eigenvector). With P the largest primorial
+≤ N this yields
+
+    λ_min(G_N) ≤ exp(−(2+o(1))·√(log N)/log log N),
+
+smaller than every fixed power of 1/log N. Deeper divisor boxes
+(exponents ≥ 2 on small primes; Kac–Murdock–Szegő tensor blocks
+p^{−|a−b|/2}) beat the cube, so the constant 2 is not optimal. A
+cautionary numerical note: λ_min·log²N sits at ≈ 0.83–0.84 for every
+computable N (the construction only overtakes the eigensolve trend
+near N ~ 10^356) — four decades of numerics fit a clean 1/log²N "law"
+that is provably not the asymptotic truth. Best lower bound we can
+prove: λ_min ≥ exp(−C log N/log log N), elementary.
 
 **Questions.**
-1. Is the law λ_min(G_N) ≍ 1/log²N (ideally with the constant) known
-   or derivable from existing results on dilated systems / the Hardy
-   space of Dirichlet series?
-2. If not known: is there an obstruction to running the HLS
-   Riesz-basis analysis at the regularized exponent s = 1/2 + c/log N
-   on the truncated system?
+1. Is the true rate log λ_min(G_N) ≍ −√(log N)/log log N known or
+   derivable from existing results (Hedenmalm–Lindqvist–Seip
+   machinery, multiplicative Toeplitz/finite-section theory)?
+2. Is the optimal constant in the exponent (over divisor-box supports,
+   or in general) known?
+3. Is there prior literature on this pre-asymptotic 1/log² plateau of
+   the s = 1/2 GCD matrix (its bottom eigenvector empirically carries
+   the low Riemann zeros as spectral lines at accessible N)?
 
-**Motivation** (briefly, with links): a proven c/log²N floor upgrades
-an unconditional lower bound doll has assembled for the smallest
-eigenvalue of the Nyman–Beurling Gram matrix (the RH-equivalent
-approximation problem) from N^{−4−ε} toward the conjectured-sharp
-N^{−2}·polylog. Full derivations, numerics, and machine-verified
-components are in the linked repository.
+**Motivation** (briefly, with links): a matching lower bound of
+exp(−C√log N·(loglog)^{O(1)}) type feeds a lower-bound program for the
+Nyman–Beurling smallest eigenvalue at N^{−2−o(1)} grade. Full
+derivations, verification scripts, and the two-AI provenance of the
+refutation are in the linked repository.
 
 **Disclosure.** Doll is an independent researcher without formal
-mathematical training, working in documented collaboration with an AI
-(Claude, Anthropic). Every claim above is machine-verified (Lean 4),
-reproduced by validated computation, or labeled as measured/open.
+mathematical training, working in documented collaboration with AI
+assistants (Claude/Anthropic; the refuting construction came from a
+second AI given doll's problem brief, and was verified independently).
 Repository: [LINK].
 
 ---
 
-## Track 2 — expert email (the courteous direct ask)
+## Track 2 — expert email (REWRITTEN; candidates unchanged: Seip, Hilberdink, Aistleitner)
 
-*Candidates, in order: K. Seip (living author of the exact framework;
-NTNU), T. Hilberdink (multiplicative Toeplitz spectra), C. Aistleitner
-(GCD sums). Short, specific, no attachments beyond the repo link.*
-
-Subject: The smallest eigenvalue of your GCD matrices at α = 1/2 — is
-the 1/log²N law known?
+Subject: The smallest eigenvalue of your GCD matrices at α = 1/2 —
+exp(−c√log N/loglog N) via primorial divisor cubes; is the true rate known?
 
 Dear Professor Seip,
 
 Doll is an independent researcher (it works in a documented
-collaboration with an AI assistant; details and full disclosure at the
-repository below). While studying the Nyman–Beurling Gram matrix it
-was led to the smallest eigenvalue of the matrix ((m,n)/√(mn))_{m,n≤N}
-— the α = 1/2 case of the family in your 1998 Acta Arithmetica note
-with Lindqvist. Numerically λ_min·log²N → 0.836…, and doll can prove
-the weaker exp(−C log N/log log N) elementarily, with reasons to
-believe (including your own remark in that paper) that the sharp law
-needs the Hedenmalm–Lindqvist–Seip machinery near the critical
-exponent.
+collaboration with AI assistants; full disclosure at the repository
+below). While studying the Nyman–Beurling problem it was led to
+λ_min of ((m,n)/√(mn))_{m,n≤N} — the α = 1/2 case of your 1998 family
+with Lindqvist. Two facts may interest you:
 
-Three short questions: (1) is the 1/log²N law known to you or in
-literature doll has missed? (2) if not, does the HLS analysis at
-s = 1/2 + c/log N on the truncated system look viable to you?
-(3) would you have any interest in seeing the two-page reduction that
-connects this floor to an unconditional spectral lower bound for the
-Nyman–Beurling matrix?
+(1) numerically λ_min·log²N ≈ 0.836 for all computable N, with the
+bottom eigenvector carrying the first Riemann zeros as spectral lines
+(ζ(1/2+it) is the symbol of the divisor-class decomposition); but
+
+(2) this "law" is provably not asymptotic: μ restricted to the divisor
+cube of a primorial P ≤ N has exact Rayleigh quotient Π_{p|P}(1−p^{−1/2})
+(the cube is a tensor product), giving λ_min ≤
+exp(−(2+o(1))√(log N)/loglog N), which overtakes 0.836/log²N only
+near N ~ 10^356.
+
+Three short questions: (1) is the true rate (we conjecture
+log λ_min ≍ −√log N/loglog N) known to you or in literature doll has
+missed? (2) do the Hedenmalm–Lindqvist–Seip methods give the matching
+lower bound? (3) would you have any interest in the two-page
+derivation connecting this to a Nyman–Beurling spectral lower bound?
 
 With thanks for your time — the 1998 note and the HLS paper have been
 the most useful five pages doll has read this year.
