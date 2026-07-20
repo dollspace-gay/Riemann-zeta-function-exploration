@@ -120,3 +120,97 @@ end
 end NymanBeurling
 
 #print axioms NymanBeurling.eDil_memLp_two
+
+/-! ## Milestone 2: the square-wave identity (chains_theory.md §1, m = 2)
+
+`fract(y/2) = fract(y)/2 + (⌊y⌋ % 2)/2` for ALL real y, hence the
+chain difference f_k = e_{2k} − e_k/2 is the square wave
+`(⌊1/(k·t)⌋ % 2)/2`, supported on (0, 1/k], taking values in {0, ½}. -/
+
+namespace NymanBeurling
+
+noncomputable section
+
+/-- **Halving identity for the fractional part** (fully general). -/
+theorem fract_half (y : ℝ) :
+    Int.fract (y / 2) = Int.fract y / 2 + ((⌊y⌋ % 2 : ℤ) : ℝ) / 2 := by
+  have hfl : ((⌊y⌋ : ℤ) : ℝ) + Int.fract y = y := Int.floor_add_fract y
+  rcases Int.even_or_odd ⌊y⌋ with ⟨q, hq⟩ | ⟨q, hq⟩
+  · -- ⌊y⌋ = 2q: y/2 = q + fract y / 2, fractional part is fract y / 2
+    have hqq : ((⌊y⌋ : ℤ) : ℝ) = (q : ℝ) + q := by rw [hq]; push_cast; ring
+    have hy : y / 2 = (q : ℝ) + Int.fract y / 2 := by linarith
+    have hmod : ⌊y⌋ % 2 = 0 := by omega
+    rw [hy, Int.fract_intCast_add, hmod]
+    have h0 : (0:ℝ) ≤ Int.fract y / 2 := by
+      linarith [Int.fract_nonneg y]
+    have h1 : Int.fract y / 2 < 1 := by
+      linarith [Int.fract_lt_one y]
+    rw [Int.fract_eq_self.mpr ⟨h0, h1⟩]
+    push_cast; ring
+  · -- ⌊y⌋ = 2q + 1: y/2 = q + (1 + fract y)/2, fractional part in [½, 1)
+    have hqq : ((⌊y⌋ : ℤ) : ℝ) = 2 * (q : ℝ) + 1 := by rw [hq]; push_cast; ring
+    have hy : y / 2 = (q : ℝ) + (1 + Int.fract y) / 2 := by linarith
+    have hmod : ⌊y⌋ % 2 = 1 := by omega
+    rw [hy, Int.fract_intCast_add, hmod]
+    have h0 : (0:ℝ) ≤ (1 + Int.fract y) / 2 := by
+      linarith [Int.fract_nonneg y]
+    have h1 : (1 + Int.fract y) / 2 < 1 := by
+      linarith [Int.fract_lt_one y]
+    rw [Int.fract_eq_self.mpr ⟨h0, h1⟩]
+    push_cast; ring
+
+/-- The doubling-chain difference f_k = e_{2k} − e_k/2. -/
+def chainDiff (k : ℕ) : ℝ → ℝ := fun t => eDil (2 * k) t - eDil k t / 2
+
+/-- **MILESTONE 2 (square-wave identity).** The chain difference is the
+square wave `(⌊1/(k·t)⌋ % 2)/2` — for every k and every t. -/
+theorem chainDiff_eq_squareWave (k : ℕ) (t : ℝ) :
+    chainDiff k t = ((⌊1 / ((k : ℝ) * t)⌋ % 2 : ℤ) : ℝ) / 2 := by
+  unfold chainDiff eDil
+  have harg2 : (1 : ℝ) / (((2 * k : ℕ) : ℝ) * t) = (1 / ((k : ℝ) * t)) / 2 := by
+    push_cast; rw [div_div]; congr 1; ring
+  rw [harg2, fract_half]
+  ring
+
+/-- The square wave takes only the values 0 and ½. -/
+theorem chainDiff_values (k : ℕ) (t : ℝ) :
+    chainDiff k t = 0 ∨ chainDiff k t = 1 / 2 := by
+  rw [chainDiff_eq_squareWave]
+  rcases Int.emod_two_eq_zero_or_one ⌊1 / ((k : ℝ) * t)⌋ with h | h <;>
+    [left; right] <;> rw [h] <;> norm_num
+
+/-- **Support**: for k ≥ 1 and t > 1/k the chain difference vanishes
+(the counter ⌊1/(k·t)⌋ is 0 there). -/
+theorem chainDiff_eq_zero (k : ℕ) (hk : 1 ≤ k) {t : ℝ}
+    (ht : 1 / (k : ℝ) < t) : chainDiff k t = 0 := by
+  have hk0 : (0 : ℝ) < k := by exact_mod_cast hk
+  have ht0 : 0 < t := lt_trans (by positivity) ht
+  rw [chainDiff_eq_squareWave]
+  have h1 : 1 / ((k : ℝ) * t) < 1 := by
+    rw [div_lt_one (by positivity)]
+    calc (1 : ℝ) = k * (1 / k) := by field_simp
+    _ < k * t := mul_lt_mul_of_pos_left ht hk0
+  have h0 : (0 : ℝ) ≤ 1 / ((k : ℝ) * t) := by positivity
+  have : ⌊1 / ((k : ℝ) * t)⌋ = 0 := Int.floor_eq_zero_iff.mpr ⟨h0, h1⟩
+  rw [this]
+  norm_num
+
+/-- The chain difference is square-integrable (from Milestone 1). -/
+theorem chainDiff_memLp_two (k : ℕ) (hk : 1 ≤ k) :
+    MemLp (chainDiff k) 2 (volume.restrict (Ioi (0:ℝ))) := by
+  have h2k : 1 ≤ 2 * k := by omega
+  have heq : chainDiff k
+      = eDil (2 * k) - (fun t => (2:ℝ)⁻¹ * eDil k t) := by
+    funext t
+    simp only [chainDiff, Pi.sub_apply]
+    ring
+  rw [heq]
+  exact (eDil_memLp_two (2 * k) h2k).sub ((eDil_memLp_two k hk).const_mul _)
+
+end
+
+end NymanBeurling
+
+#print axioms NymanBeurling.fract_half
+#print axioms NymanBeurling.chainDiff_eq_squareWave
+#print axioms NymanBeurling.chainDiff_memLp_two

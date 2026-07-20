@@ -147,3 +147,41 @@ if __name__ == "__main__":
         np.savez(os.path.join(OUT, "bigN_curve.npz"),
                  Ngrid=grid, D2=np.array(vals), tails=np.array(tails))
         print(f"DONE in {time.time()-t0:.0f}s -> bigN_curve.npz", flush=True)
+
+def Dtrial_blocked(N, mu_all, U_mult=96, BS=250_000_000):
+    """Memory-blocked version of Dtrial_exact for N ~ 10^7 (U up to ~1e9;
+    the divisor sieve, cumulative sum, and piece integrals stream through
+    blocks with a running carry). Identical mathematics."""
+    ks = np.arange(1, N + 1, dtype=np.float64)
+    c = -mu_all[:N] * (1.0 - np.log(ks) / math.log(N))
+    S = float(np.sum(c / ks))
+    U = U_mult * N
+    T_carry = 0.0
+    head = 0.0
+    last_dec = 0.0; prev_dec = 0.0
+    for blo in range(1, U, BS):
+        bhi = min(blo + BS, U)
+        Lb = bhi - blo
+        inc = np.zeros(Lb)
+        for k in range(1, N + 1):
+            ck = c[k - 1]
+            if ck != 0.0:
+                start = ((blo + k - 1) // k) * k
+                if start < bhi:
+                    inc[start - blo::k] += ck
+        T = np.cumsum(inc)
+        T += T_carry
+        T_carry = float(T[-1])
+        n = np.arange(blo, bhi, dtype=np.float64)
+        a = 1.0 + T
+        piece = (a * a * (1.0 / n - 1.0 / (n + 1.0))
+                 - 2.0 * a * S * np.log((n + 1.0) / n)
+                 + S * S)
+        head += float(np.sum(piece))
+        m1 = n >= U / 10.0
+        m2 = (n >= U / 100.0) & (n < U / 10.0)
+        last_dec += float(np.sum(piece[m1]))
+        prev_dec += float(np.sum(piece[m2]))
+    ratio = last_dec / prev_dec if prev_dec > 0 else 0.5
+    tail = last_dec * ratio / max(1.0 - ratio, 1e-9)
+    return S * S + head + tail, tail

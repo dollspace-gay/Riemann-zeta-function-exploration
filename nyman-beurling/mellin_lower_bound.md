@@ -96,3 +96,48 @@ twisted-second-moment technology (check current admissible length/height
 trade-offs in the literature — do not recall them), or off-diagonal MV
 cancellation for norm-constrained coefficients. If none close, the
 sharpest statement of the obstruction is itself the deliverable.
+
+## M2 revision (July 2026, Thread-1 session): one route dead, the target sharpened
+
+Numerics this session (`~/rh_output/thread1_harvest.txt`, true
+λ_min eigenvector of A_2000):
+
+1. **The harvest mechanism is real and measured.** At the special
+   indices m = qr (q prime > N) the coefficients of ζ·X are exactly
+   s_r, and the harvested mass Σ c_m²/m responds to the window
+   exponent T = N^{2+δ} exactly as the geometry predicts: the
+   adversary's s_r mass sits at r ≈ N/2…N, so at δ = 0 the prime
+   window (N, M/r] pinches shut there (measured harvest: 0.01× the
+   lemma floor) and reopens for δ bounded away from 0 (measured:
+   0.67×, 1.72×, 2.59× at δ = ¼, ½, ¾). **δ > 0 is forced.** (One
+   instrument bug — unclamped empty windows — caught and fixed in-log.)
+2. **The truncated-sum route is DEAD, with the arithmetic recorded.**
+   Using the length-T truncated Dirichlet sum for ζ on [T, 2T] makes
+   ζ·X a polynomial of length NT; the Montgomery–Vaughan error term
+   Σ b_m² over m ≤ NT is then ~ NT·polylog, exceeding the main term
+   T·(harvest) ~ T·N^{−1−ε} by ~N². No choice of δ repairs this.
+   The sketch's "care point 2" was real and fatal for this variant.
+3. **Two live routes remain:**
+   - (a) the genuine √T-length approximate functional equation:
+     product length N√T ≤ εT ⟺ T ≥ N²/ε² ✓, harvest window still
+     open ✓ — but the χ-factor's conjugate sum contributes at the
+     same order as the main sum, and controlling the cross term is
+     the classical hard part of every second-moment argument. Not
+     attempted today.
+   - (b) **the BCHB reduction (new, preferred).** At T = N^{2+δ} the
+     polynomial length is N = T^{1/(2+δ)} < T^{1/2} — inside the
+     Balasubramanian–Conrey–Heath-Brown twisted-second-moment range.
+     Taking BCHB as the sourced input, Tier 2 reduces to a
+     self-contained finite problem: **lower-bound the explicit BCHB
+     quadratic form Q(x) = Σ_{h,k≤N} x_h x_k·(h,k)²/(hk)·(log-weights)
+     over unit x.** The kernel is PSD (gcd Gram factorization
+     (h,k) = Σ_{d|h,d|k} φ(d)); a Möbius-inverse route to its floor
+     is sketched (z_d = Σ_{d|h} x_h d/h has polylog-bounded inverse),
+     but Gershgorin fails at a log log factor — the floor is delicate
+     at polylog level and is now THE open kernel of Tier 2.
+
+**Status: M2 not closed; upgraded from sketch to a sharply posed
+problem (the BCHB floor) with every reduction numerically anchored and
+one dead end documented.** Risk assessment unchanged from the plan:
+this was the high-risk thread, and the honest outcome of the session
+is a better problem, not a theorem.

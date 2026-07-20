@@ -437,6 +437,68 @@ in `plans/04`.
 
 ---
 
+## Session 18 — July 20, 2026: the five-thread run (goal session)
+
+One session across all five open threads. Logs: `thread2_killtests.txt`,
+`thread3_phase.txt`, `thread3_10e7.txt`, `thread1_harvest.txt`,
+`redheffer_B.txt` (+ background 16384 pending) in `~/rh_output`.
+
+**Thread 2 — both kill-tests passed.** (a) Tier-3 Route B survives:
+chain-subspace overlap of the true null vector is 92.2% (N = 2000) →
+91.9% (N = 10⁴) — localization persists at 5× scale; s_r top-12 share
+70% → 66%. (b) First real-data envelope scan (the pair-creation
+detector on the actual curve): every resolvable line has negative
+envelope exponent — γ₁ at exactly −0.50 (theory: −½), γ₂ −0.58,
+γ₃ −0.50 — no brightening line. The vacuum is clean at N ≤ 10⁶.
+
+**Thread 3 — the amplitude law's last checks.** (a) PHASES: the
+predicted combination φ_j + arg ζ′(ρ_j) + 2 arg(ρ_j − 1) is constant
+across all five measurable lines (0.006, 0.032, 0.126, 0.095, −0.057
+mod 2π; spread 0.12 rad) — and the common constant is ≈ 0. Frequency,
+envelope, intensity, normalization, first correction, and now phase:
+every prediction of the law is verified. (b) j-dependence: the theory
+predicts NONE at order 1/L (the j-piece is O(1/γ²) in amplitude);
+measured per-zero scatter has χ² = 8.6 on 6 dof vs pipeline noise —
+consistent. (c) N = 10⁷: blocked-sieve run (26 points, 20 min; seam vs
+the 10⁶ leg 2×10⁻⁷). γ₁ SNR 21.6 over a 2×10⁵ range. The 1/log N
+discriminator now shows structure: upper-thirds offsets decline
+1.139 → 1.089 vs predicted 1.104 → 1.069 (slope matches within noise);
+the lowest third (L̄ ≈ 5) sits off the first-order line — second-order
+territory. γ₆ remains honestly undetected (SNR 0.9).
+
+**Thread 1 — Tier 2 sharpened, one route dead.** The harvest at the
+special indices m = qr measured with the true adversarial eigenvector:
+the prime window pinches at T = N² (0.01× lemma floor) and reopens for
+δ ≥ ¼ (0.67/1.72/2.59× at δ = ¼/½/¾) — T = N^{2+δ} is forced by data.
+The truncated-sum variant of M2 is DEAD (MV error ~N² above main;
+arithmetic recorded). Live: the √T-AFE route (χ-sum cross term = the
+classical hard part) and the new preferred **BCHB reduction** — at
+T = N^{2+δ} the polynomial is inside the twisted-second-moment range,
+reducing Tier 2 to lower-bounding the explicit BCHB gcd-kernel form.
+Details in `mellin_lower_bound.md` M2-revision. No theorem today; a
+better problem.
+
+**Thread 4 — Lean M2 complete.** `fract_half` (the halving identity
+for fractional parts, fully general — no positivity hypotheses
+needed), `chainDiff_eq_squareWave`, `chainDiff_values`,
+`chainDiff_eq_zero` (support), `chainDiff_memLp_two` — zero sorries,
+standard axioms, full build green (3499 jobs). The square-wave
+identity that powers Theorems 1 and 2 is now machine-verified.
+
+**Thread 5 — Redheffer Part B.** (a) The multiplicity mystery is
+closed by source + our measurement: algebraic mult of eigenvalue 1 is
+n − ⌊log₂n⌋ − 1, geometric is ⌊n/2⌋ − 1 — exactly our measured
+31/63/127 — and the dominant-pair asymptotic ±√n + log√n + γ − 3/2
+matches our +35.4/−28.3 at n = 1024. (b) The Mertens cancellation
+anatomy, measured: Σ log σ_i = log|M(n)| verified to 10⁻⁸ at
+n ≤ 8192, with the two bulks S₊ = +2604.0, S₋ = −2600.9 (n = 8192)
+cancelling to 3.09 — Mertens is a one-part-in-a-thousand bulk-vs-bulk
+cancellation across the whole σ-spectrum, not a few-mode effect.
+(c) σ_min stays flat (0.0028–0.0049) to n = 8192. (n = 16384 SVD
+running; appended when done.)
+
+---
+
 ## Session 17 — July 20, 2026: the form-factor ladder — five new satellite rungs, all exact
 
 Context: an external agent (via doll) proposed testing the explicit
