@@ -11,8 +11,16 @@ outside contact.
 - **Vasyunin's closed-form Gram entries** (St. Petersburg Math. J. 7,
   1996): explicit formulas for ⟨e_m, e_n⟩ via cotangent sums. Our closed
   form A(1,2) = (3/4)(log 2π − γ) − (log 2)/4 should be presented as
-  *rederived* — presumably recoverable as a special case of Vasyunin's
-  formula (we derived it independently via the square-wave identity).
+  *rederived* — **VERIFIED (July 2026)** as a special case: the formula
+  (obtained verbatim from Darses–Hillion arXiv:2004.10086, p. 2, citing
+  [Vas95] and [BDBLS00, p. 141]) at (m,n) = (2,1) gives exactly our
+  closed form (cot(π/2) = 0 kills the sums). Implemented and
+  cross-checked against our exact scheme to 1e−12–1e−15 on 26 pairs
+  (`vasyunin_check.py`); the parity-disagreement integral P now has
+  three independent computations agreeing (enumeration, digamma-period,
+  Vasyunin combinations). Context worth knowing: Vasyunin sums connect
+  to the Bettin–Conrey cotangent-sum reciprocity (arXiv:1303.2050
+  circle), which is the deep structure behind these closed forms.
 - Qualitative ill-conditioning of the NB system: folklore; Landreau–
   Richard (Exp. Math. 11, 2002) note the computational cost/difficulty of
   the Gram determinants. (French text; we could not verify whether they
@@ -31,8 +39,14 @@ outside contact.
   the spectral floor, no chain structure (confirmed via abstract).
 - arXiv:2405.06349 (2024), "On certain Gram matrices and their associated
   series": derives Gram formulas in the NB setting, studies reciprocity of
-  series Σ R(nx); abstract makes no spectral claims. **Closest-sounding
-  title; full text not examined — possible overlap in formulas, flagged.**
+  series Σ R(nx); abstract makes no spectral claims. **RESOLVED (July
+  2026, full text examined):** Ehm's paper concerns the *Mellin-weighted*
+  kernels G^(q)_{u,v} (Báez-Duarte Dirichlet-polynomial side), not the
+  raw dilation Gram matrix; zero content on eigenvalues, condition
+  numbers, chains, parity integrals, or harmonic-number bounds (searched
+  full text). No overlap with our claims. Bonus: his Theorem 2.1 (q = 1
+  kernel, equivalent to BDBLS Prop. 90) is a published closed form
+  anchoring our Mellin identity — cite it in the lower-bound program.
 - Probabilistic NB generalizations (Darses–Hillion etc.): different
   questions.
 - Nikolski's Hardy-multidisc program: completeness/cyclicity of dilation

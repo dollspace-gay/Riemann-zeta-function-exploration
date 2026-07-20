@@ -137,12 +137,76 @@ So the kernel's log-slope is **exactly 1/8** (= 2/16), not the 0.143 of
 the Session-3 window fit — that fit mixed pairs at different scales while
 normalizing all by the same K², inflating both constants by ~(K/max)²
 heterogeneity. (A good cautionary example of fitted-constant
-contamination; the derivation supersedes the fit.) The additive constant
-c(d) interpolates between a sawtooth-dominated small-d value (0.545 at
-d = 1, where the exact harmonic formula of §0 pins the full answer) and,
-plausibly, the smooth-drift value log 2 = 0.693 at d ≫ 1 (the tail
-computation Σ_r[1/(2r+1) − 1/(2r+2)] = log 2). Deriving c(d) exactly is
-open but mechanical.
+contamination; the derivation supersedes the fit.)
+
+### 4.1 The kernel constant derived exactly (July 2026; supersedes the c(d) reading above)
+
+Code: `kernel_cd.py`; raw output `~/rh_output/kernel_cd.txt`.
+
+**Exact evaluation of P (new).** After gcd reduction (P(gj′, gk′) =
+P(j′,k′)/g, mirroring the A-scaling), the parity pattern of
+Δ(u) = ⌊u/j⌋ − ⌊u/k⌋ is *periodic*: Δ(u + jk) = Δ(u) + d, so the parity
+period is L = jk for d even and 2L for d odd. Splitting the shifted
+copies and summing termwise, with {[a_i, b_i)} the odd-parity segments
+of one period,
+
+    P = 2 Σ_i [ (1/a_i − 1/b_i) + (ψ(1 + b_i/Lp) − ψ(1 + a_i/Lp))/Lp ],
+
+ψ = digamma — machine precision at O(K) cost, no truncation. Validated
+against brute-force brackets, against Session 4's Gram-derived
+P(1249,1250) = 1.05763×10⁻⁵ (rel. diff 9×10⁻⁷), and against the cached
+chain-window eigenvalues of `chains.py` at four (K,w) anchors
+(rel. diff ≤ 7×10⁻⁵ — this validates the decomposition
+M_{jk} = (log2/8)(1/j + 1/k) − P_{jk}/16 end to end, with no reference
+to the numerically-integrated Gram matrix).
+
+**Exact special value.** P(1,2) = π/2: the disagreement set for (1,2)
+is ⋃_{r≥0}[4r+1, 4r+3), and P telescopes to the Leibniz series.
+
+**The constant, in closed form.** Δ has mean λ = u·d/(jk), and the local
+odd-parity fraction converges to the triangle wave f(λ) = dist(λ, 2ℤ).
+The disjoint-interval head is exactly a harmonic sum (§0's mechanism for
+every d), and the averaged tail evaluates in closed form:
+∫₁^∞ f(λ)λ⁻²dλ = 1 + log(2/π), the log arising from the Wallis product
+Π(1 − 1/4r²) = 2/π. Hence, for the reduced pair (j, k), gap d:
+
+    P_{jk} · jk/(2d) = H_{⌊j/d⌋} + c* + O(A(θ)·d/j),
+    c* = 1 + log(2/π) = 0.548417…,   θ = {j/d}, A(0) = 0.
+
+Confirmed numerically to 5–6 decimals across K = 156…5000, d = 1…64;
+the deviation decays like K⁻² at d = 1 (where θ = 0) and like d/j with a
+bounded θ-dependent coefficient otherwise. **The "c(d) drifting toward
+log 2" reading of the June measurement is superseded:** the drift was
+the K²-vs-jk normalization plus harmonic-vs-log discreteness; the
+intrinsic constant is universal and equals c*. (The June table is
+reproduced exactly by the exact P under the June normalization:
+0.5546 → 0.6611 over d = 1…32 at K = 1250, matching the measured
+0.545 → 0.661.)
+
+### 4.2 The §5 lemma pre-check: the zero-sum floor is flat in w (July 2026)
+
+With M built from the exact decomposition, the zero-sum-restricted floor
+F(w, K) = K²·min_{α⊥1} αᵀMα/‖α‖² over windows (K−w, K]:
+
+| w | K=250 | K=625 | K=1250 |
+|-----|-------|-------|--------|
+| 8 | 0.5103 | 0.5630 | 0.6054 |
+| 32 | 0.5062 | 0.5542 | 0.5928 |
+| 128 | 0.5001 | 0.5507 | 0.5903 |
+| 200 | 0.4756 | 0.5479 | 0.5885 |
+
+**Flat in w** — the w-independent lower-bound premise of §5's
+conditional-positivity lemma survives its cheapest falsification test.
+The unconstrained floor coincides with the zero-sum floor to 4 decimals
+(the optimizer is automatically zero-sum, as Session 3 observed). The
+slow growth of F with K (0.50 → 0.59 over 250 → 1250, ≈ linear in
+log K) is where the measured log-drift of λ_min·N² lives: in the
+kernel's K-dependence (the H_{⌊j/d⌋} structure), not in the window
+width. What remains for §5 is now sharply localized: prove
+αᵀΨα ≥ c‖α‖² for the explicit kernel ψ(d) = (2d/16)(H_{⌊j/d⌋} −
+H-window-reference + …) — the −|d| part has the elementary
+partial-sums proof (αᵀ(−|i−j|)α = 2ΣS_m² ≥ ‖α‖²/2 on zero-sum), and the
+d·log d part is the remaining delicate step.
 
 ## 5. Proof program for λ_min ≍ N⁻² (· slowly varying)
 
