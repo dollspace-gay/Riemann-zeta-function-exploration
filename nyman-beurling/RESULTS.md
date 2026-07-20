@@ -437,6 +437,23 @@ in `plans/04`.
 
 ---
 
+## Session 16 — July 20, 2026: the +9% offset — pipeline exonerated, next-order term matches
+
+`offset_check.py`. (1) Decisive control: known amplitudes injected
+through the identical pipeline return 0.997 ± 0.009 (γ₁) — no
+measurement bias; the offset is physics. (2) The next-order s = 1
+residue term gives A_j × [1 + c₁/log N], c₁ = (ζ″/ζ′)(0) − log 2π +
+1 − γ = +0.768 (computed, not recalled; ζ′(0) cross-checked to 9
+digits): predicted full-range offset 1.102 vs measured 1.110 on γ₁ —
+parameter-free to <1%. (3) The 1/log N scaling discriminator is
+within noise on half-ranges (predicted 1.12→1.07, measured
+1.109→1.104, ±5–6% per half) — size confirmed, scaling open;
+j-dependent same-order terms (ζ″(ρ_j)/ζ′(ρ_j)) queued as the likely
+source of the per-zero scatter. Details: `amplitude_theory.md`
+addendum.
+
+---
+
 ## Session 15 — July 20, 2026: the Tail Variation Lemma PROVED — Theorem 2 debt-free
 
 Writeup: `chains_theory.md` §7. Validation: `tvl_check.py`,

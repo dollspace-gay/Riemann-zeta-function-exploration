@@ -99,3 +99,39 @@ O(N^{−5/2}).
   critical line itself: the envelope exponent is literally the width of
   the critical strip crossing, which is a satisfying place for the
   spectroscopy story to land.
+
+## Addendum (July 2026, Session 16): the +9% offset
+
+All eight measured amplitudes sat at 1.05–1.15× the law. Three tests
+(`offset_check.py`, log `~/rh_output/offset_check.txt`):
+
+1. **Pipeline calibration (decisive).** Synthetic curves with KNOWN
+   injected amplitudes (the exact law), realistic drift, beat lines,
+   and measured-scale noise, run through the identical
+   rectify/drift/LSQ pipeline: recovered/true = 0.997 ± 0.009 on γ₁,
+   mean 0.986 over all lines and 6 seeds. The pipeline is unbiased —
+   **the offset is physics.**
+2. **The next-order term.** Keeping the subleading pieces of the s = 1
+   double-pole residue (the γ from ζ(s) = 1/(s−1) + γ + …, and the
+   derivative of the slowly-varying factor) multiplies A_j by
+   [1 + c₁/log N] with
+
+       c₁ = (ζ″/ζ′)(0) − log 2π + 1 − γ = +0.768249…
+
+   (all values computed with mpmath; ζ′(0) = −log(2π)/2 reproduced to
+   9 digits as a cross-check). Predicted full-range offset 1.102 vs
+   measured 1.110 on γ₁ — parameter-free agreement to under 1%.
+3. **The scaling discriminator (open).** c₁/log N predicts the offset
+   falling 1.12 → 1.07 between the low and high half-ranges; measured
+   γ₁: 1.109 → 1.104, flat — but per-half noise is ±5–6%, so both
+   behaviors fit. Confirming the 1/log N scaling needs more range or
+   deeper SNR. Also open: the same-order j-DEPENDENT corrections
+   (ζ″(ρ_j)/ζ′(ρ_j) terms at each zero), which plausibly explain the
+   ±5% scatter of per-zero ratios around the common offset.
+
+Status upgrade for the law:
+
+    A_j(N) = 4 log(2π)·N^{−1/2}/(|ρ_j|²|ζ′(ρ_j)|) · [1 + 0.768/log N + …]
+
+with the leading term derived + confirmed out-of-sample and the
+correction derived + size-confirmed (scaling unconfirmed).
