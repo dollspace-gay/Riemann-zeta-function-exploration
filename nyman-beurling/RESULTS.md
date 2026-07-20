@@ -437,6 +437,36 @@ in `plans/04`.
 
 ---
 
+## Session 19 — July 20, 2026: THEOREM 1 MACHINE-VERIFIED END TO END
+
+`lean/RHCrystal/NymanBeurlingMain.lean` (new): `nb_gram_eigenvalue_le`
+— for 2 ≤ J and 2(J+1) ≤ N, some eigenvalue of the N×N Nyman–Beurling
+Gram matrix is at most (H_J + 1)/(10·J·(J+1)) [= Theorem 1's
+(H_{K−1}+1)/(10·K(K−1)) with K = J+1]. **Zero sorries; axioms
+propext/Classical.choice/Quot.sound only; full build green (3500
+jobs).** The complete chain is formal: e_k ∈ L² (M1) → the square-wave
+identity (M2) → the witness integral as a set MEASURE (M3 — the key
+simplification: in t-coordinates the u⁻²du weight is plain Lebesgue
+measure, so the June disagreement bound transports by pure interval
+arithmetic, no change of variables) → the L² Gram matrix, the
+four-dilation witness (coefficient norm 5/2 computed formally), and
+the already-formalized Rayleigh principle (M4).
+
+To our knowledge this is the first genuinely new theorem produced by
+this collaboration whose entire proof — analytic core AND spectral
+assembly — is machine-verified. The June formalization covered the
+analytic core; today the remaining "textbook steps" (which the June
+log honestly listed as unformalized) were completed. Plan 4 is CLOSED.
+
+Also this session: γ₆ CLEAN attempt at 10⁷ — amplitude ratio 1.09
+(exactly the common offset) but SNR 2.6: still an honest no. The BCHB
+kernel floor measured: λ_min(K)·log T = 6.69→6.82 ≈ CONSTANT over
+N = 250…2000 — if the sourced BCHB statement cooperates, Tier 2 lands
+at N^{−2−δ}/log N, nearly optimal (mellin_lower_bound.md, second
+revision). Stale lean/README.md finally rewritten to match reality.
+
+---
+
 ## Session 18 — July 20, 2026: the five-thread run (goal session)
 
 One session across all five open threads. Logs: `thread2_killtests.txt`,

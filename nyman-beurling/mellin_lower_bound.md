@@ -141,3 +141,24 @@ problem (the BCHB floor) with every reduction numerically anchored and
 one dead end documented.** Risk assessment unchanged from the plan:
 this was the high-risk thread, and the honest outcome of the session
 is a better problem, not a theorem.
+
+## M2 second revision: the BCHB floor MEASURED — constant over log
+
+`~/rh_output/bchb_floor.txt`. With the recalled kernel shape
+K_{hk} = (h,k)/√(hk)·(log(T(h,k)²/2πhk) + 2γ − 1) at T = N^{2.5}:
+
+    λ_min(K)·log T = 6.69, 6.77, 6.82, 6.82   (N = 250…2000)
+
+— **the reduced problem's floor is c/log T with c ≈ 6.8, not a power
+of N.** If the actual BCHB main term has this kernel and its error is
+uniform over coefficients (both RECALLED — the entire weight of Tier 2
+now rests on sourcing the 1985 statement), the assembly yields
+
+    λ_min(A_N) ≳ c′·N^{−2−δ}/log N   for every δ > 0,
+
+which is within N^δ·log² of the truth — Tier 2 and Tier 3 would
+collapse into one near-optimal theorem. Next action (one session):
+obtain BCHB 1985 (and successors) and verify kernel + uniformity;
+the K-floor law itself (our measurement) then needs a proof — likely
+via the gcd-Gram factorization (h,k) = Σ_{d|h,d|k} φ(d), which makes
+K a positive combination of rank-structured pieces with log weights.

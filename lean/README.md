@@ -1,58 +1,62 @@
-# RH Crystal: Lean 4 Formalization
+# RH Crystal / Nyman–Beurling: Lean 4 Formalization
 
-Formal verification of the algebraic core of the Xi-weighted Gram matrix framework.
+Machine-verified results across both phases of the project. **Zero
+sorries in every module; every theorem's axiom audit prints exactly
+[propext, Classical.choice, Quot.sound].**
 
-## What's Proven
+## Modules and what's proven
 
-| Theorem | Status | Meaning |
-|---------|--------|---------|
-| `xi_weight_symm` | **PROVEN** | w(p,σ) = w(p,1-σ) |
-| `xi_weight_half` | **PROVEN** | w(p,1/2) = log(p)/√p |
-| `gram_entry_symm` | **PROVEN** | G_{ij}(σ) = G_{ij}(1-σ) |
-| `gram_matrix_symm` | **PROVEN** | G(σ) = G(1-σ) as matrices, hence κ(σ) = κ(1-σ) |
-| `xi_weight_min` | `sorry` | w(p,1/2) ≤ w(p,σ) — mechanically provable but tedious |
-| Condition number minimized at σ=1/2 | NOT ATTEMPTED | Requires spectral theory |
-| Condition number bounded | NOT ATTEMPTED | This is essentially RH |
+### `RHCrystal/RHCrystal.lean` (phase 1, March–June 2026)
+| Theorem | Meaning |
+|---------|---------|
+| `xi_weight_symm` | w(p,σ) = w(p,1−σ) |
+| `gram_matrix_symm` | G(σ) = G(1−σ), hence κ(σ) = κ(1−σ) |
+| `cosh_ge_one` | cosh x ≥ 1 |
+| `exists_eigenvalue_mul_le_rayleigh` | Rayleigh: ∃k, λ_k·(x⬝x) ≤ xᵀAx |
+| `exists_eigenvalue_le_pair_bound` | pair bound 2λ_k ≤ A_ii + A_jj − 2A_ij |
+| `gram_eigenvalue_le_pair_bound` | the paper-v4 §3.3 interlacing bound |
 
-## Axiom Audit
+### `RHCrystal/NymanBeurling.lean` (June 2026)
+| Theorem | Meaning |
+|---------|---------|
+| `interval_of_odd` | the disagreement-interval lemma |
+| `disagreement_integral_le` | ∫_D u⁻² ≤ (H_J+1)/(J(J+1)) |
 
-The `#print axioms` commands at the bottom of `Basic.lean` will show exactly which
-foundational axioms each theorem depends on. You should see ONLY:
+### `RHCrystal/NymanBeurlingL2.lean` (July 2026 — Milestones 1–2)
+| Theorem | Meaning |
+|---------|---------|
+| `eDil_memLp_two` | the dilation family e_k ∈ L²(0,∞) |
+| `fract_half` | fract(y/2) = fract(y)/2 + (⌊y⌋ mod 2)/2, all real y |
+| `chainDiff_eq_squareWave` | f_k = e_{2k} − e_k/2 is the square wave |
+| `chainDiff_values`, `chainDiff_eq_zero` | values {0, ½}; support (0, 1/k] |
+| `chainDiff_memLp_two` | chain differences ∈ L² |
 
-- `propext` (propositional extensionality)
-- `Quot.sound` (quotient soundness)
-- `Classical.choice` (classical logic)
+### `RHCrystal/NymanBeurlingMain.lean` (July 2026 — Milestones 3–4)
+| Theorem | Meaning |
+|---------|---------|
+| `Dt_volume_le` | volume of the t-space disagreement set ≤ (H_J+1)/(J(J+1)) |
+| `witness_integral_le` | ∫ (f_J − f_{J+1})² ≤ (H_J+1)/(4J(J+1)) |
+| `nb_gram_eigenvalue_le` | **THEOREM 1 END TO END**: some eigenvalue of the N×N Nyman–Beurling Gram matrix is ≤ (H_J+1)/(10·J·(J+1)) |
 
-These are standard Lean 4 foundations. If you see ANYTHING else (especially anything
-with "riemann" or "hypothesis" in the name), something is wrong.
+The last entry is the complete machine verification of the project's
+Theorem 1 (`nyman-beurling/chains_theory.md` §0): from the L²
+definition of the dilation family, through the square-wave identity and
+the measure-theoretic core (in t-coordinates the u⁻²du weight is plain
+Lebesgue measure — no change of variables needed), to the spectral
+conclusion via the Rayleigh principle.
 
-The one `sorry` in `xi_weight_min` will show up as the `sorryAx` axiom if you
-print its axioms. This is expected and flagged explicitly.
-
-## Build and Verify
+## Build and verify
 
 ```bash
 # Install elan (Lean version manager) if you don't have it
 curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh
 
-# Build (first build downloads Mathlib — may take a while)
-cd rh-lean
+cd lean
 lake update
-lake exe cache get    # Download prebuilt Mathlib (MUCH faster)
-lake build
+lake exe cache get    # prebuilt Mathlib (~3GB, one-time)
+lake build            # completes cleanly: zero sorries
 ```
 
-If it compiles with no errors (only the one expected sorry warning),
-the proofs are machine-verified.
-
-## What This Means
-
-If `lake build` succeeds, Lean has machine-checked that:
-
-1. The Xi weight function is symmetric under σ to 1-σ
-2. The Gram matrix satisfies G(σ) = G(1-σ)
-3. Therefore κ(σ) = κ(1-σ)
-
-No human trust required for these steps. The hard parts
-(minimization, boundedness) remain unproven and are explicitly
-marked as such.
+The `#print axioms` commands at the bottom of each module print the
+audit; you should see ONLY propext, Classical.choice, Quot.sound. If
+anything else appears (in particular `sorryAx`), something is wrong.
