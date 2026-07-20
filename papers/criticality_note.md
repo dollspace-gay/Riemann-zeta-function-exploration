@@ -1,5 +1,19 @@
 # Note: Zeta at the Critical Point — de Bruijn–Newman, the Zero Gas, and What Our Data Already Says
 
+> *"Zeta lives exactly at a phase transition and we don't know why. The
+> zeros are interference nulls of a wave system; that system is
+> maximally chaotic with broken time-reversal; its zeros move like a
+> repulsive particle gas; and RH is the claim that this gas sits at
+> exactly its condensation temperature, with Rodgers–Tao guaranteeing
+> it can sit no colder. The remaining mystery — the entire remaining
+> mystery — is what enforces the criticality."*
+>
+> — doll, thinking out loud, July 20, 2026. (Two caveats it accepted in
+> the same conversation: the mystery has a second half — proving that
+> zeta is the system the enforcing principle governs — and the framing
+> is a bet that the proof will be a mechanism rather than an estimate,
+> a bet history does not always honor.)
+
 *July 2026. Origin: doll's physics questions (GUE/time-reversal → black
 holes → big bang → "find the drum"), an external agent's summary of the
 de Bruijn–Newman picture supplied by doll, fact-checked and corrected
