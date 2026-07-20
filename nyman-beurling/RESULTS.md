@@ -437,6 +437,47 @@ in `plans/04`.
 
 ---
 
+## Session 12 — July 20, 2026: OUT-OF-SAMPLE PASS — the law holds to N = 10⁶, eight zeros visible
+
+Code: `bigN_trial.py` (predictions committed BEFORE the run),
+`bigN_analysis.py`. Data: `bigN_curve.npz`. Log: `bigN_analysis.txt`.
+Figure: `figures/out_of_sample_10e6.png`.
+
+**Method leap.** The trial curve needs no Gram matrix: the Plan-3A
+divisor-sieve scheme evaluates D̃² exactly in near-linear time — the
+full N = 50…10⁶ curve (576 points, range factor 20,000) took 10 min on
+CPU, vs ~73 days for a Gram build at 10⁵. Validated against the
+Gram-based curve to 2e−7 and U-converged before use. Matched filter:
+rectifying by √N/(4 log 2π) makes every line constant-amplitude
+1/(|ρ_j|²|ζ′(ρ_j)|) — the law read off as a flat spectrum.
+
+**Pre-registered test.** γ₄, γ₅ amplitudes stated in advance
+(`predicted_lines.npy`, commit before run). Result, after CLEANing the
+known lines and predicted beats (astronomy-style):
+
+| zero | predicted | measured | ratio | SNR | status |
+|------|-----------|----------|-------|-----|--------|
+| γ₄ = 30.4249 | 8.28e−4 | 9.16e−4 | 1.11 | **6.3** | **DETECTED (pre-registered)** |
+| γ₅ = 32.9351 | 6.67e−4 | 7.10e−4 | 1.06 | **4.9** | **DETECTED (pre-registered)** |
+| γ₆ = 37.5862 | 3.66e−4 | 3.90e−4 | 1.07 | 2.7 | peak at 37.590, sub-threshold |
+| γ₇ = 40.9187 | 4.01e−4 | 4.33e−4 | 1.08 | — | unprompted peak at 40.950 |
+| γ₈ = 43.3271 | 2.91e−4 | 3.35e−4 | 1.15 | — | unprompted peak at 43.230 |
+
+In-sample lines: γ₁ 22.2σ (ratio 1.11), γ₂ 7.2σ (1.14), γ₃ 3.9σ
+(1.07). **All eight ratios in 1.05–1.15** — a systematic ~+9% offset
+worth chasing (second-order term of the derivation?), but the law's
+structure (½ exponent, |ρ|²|ζ′| weights, absolute scale) is confirmed
+out of sample across 4.5 octaves of amplitude. Beat lines confirmed as
+population: peaks at γ₂−γ₁, γ₃−γ₁, γ₄−γ₃, γ₆−γ₃ frequencies; the
+uncleaned floor (3.2e−4) drops to 1.5e−4 after removing them.
+
+Honest boundaries: γ₆–γ₈ are consistent candidates, not formal
+detections (sub-3σ or not pre-registered); the ~9% common offset is
+unexplained; the seam between Gram-based (N < 10⁴) and sieve-based
+(N ≥ 10⁴) data contributes a small systematic noted in the analysis.
+
+---
+
 ## Session 11 — July 20, 2026: the amplitude law DERIVED, parameter-free (Plan 2 Step 2)
 
 Writeup: `amplitude_theory.md`. Check: `~/rh_output/amplitude_theory_check.txt`.
