@@ -437,6 +437,45 @@ in `plans/04`.
 
 ---
 
+## Session 10 — July 20, 2026: N = 10⁴ on GPU — detection sharpens, envelope ~ N^−1/2
+
+Code: GPU build (`nb_gram.py`, RTX 3090, 30.4M coprime pairs, 105 min)
++ `gpu10k_analysis.txt`. Data: `~/rh_output/nb_10k_gpu.npz`,
+`gpu10k_curves.npz`. Figure: `figures/zero_detection_10k.png`.
+
+**Theorem 1 order-sharp, confirmed at 10⁴.** λ_min(A_10⁴) = 1.7315×10⁻⁸,
+so λ_min·N² = 1.7315 — the June law 0.50 + 0.134 log N predicts 1.7342
+(0.15%). First exact λ_min at this scale; the N⁻²·(slowly varying) law
+holds across 20× in N. d²logN = 0.04512 (Burnol C = 0.04619), the
+small negative second-order deviation of Session 4 persisting.
+
+**Detection sharpens at 5× range.** Trial-curve periodogram, N ≤ 10⁴:
+
+| zero | amp | SNR (was, N≤2000) |
+|------|-----|-------------------|
+| γ₁ = 14.13 | 2.45e−3 | **12.8** (9.1) |
+| γ₂ = 21.02 | 7.27e−4 | 3.8 |
+| γ₃ = 25.01 | 5.05e−4 | 2.6 |
+
+γ₁ is the top peak (at 14.165); γ₂, γ₃ are the 2nd/3rd peaks (at 20.970,
+24.895). γ₄, γ₅ remain below the floor (SNR 1.5, 1.3) — the 5× range
+did not yet raise them, consistent with the fast envelope decay below.
+Frequency accuracy on γ₁: 14.165 vs 14.1347 (0.2%).
+
+**Envelope decays as N^−1/2.** γ₁ amplitude across four N-octaves
+(mean N = 106 → 5657): 4.77e−3 → 2.60e−3 → 1.22e−3 → 5.99e−4, fitting
+**A₁ ~ N^−0.524**. A clean near-½ exponent — the target the Plan 2
+Step 2 derivation must reproduce, and the reason γ₄, γ₅ stay hidden
+(their base intensity is already low and the envelope crushes it).
+
+**Intensity law, sharper.** Extended-range ratios 1 : 0.297 : 0.206
+against the four laws: **1/(|ρ|²|ζ′(ρ)|) fits at log-rms 0.089** (was
+0.127 at N ≤ 2000), versus 0.430 for 1/|ρ|² and 0.459 for 1/(|ρ||ζ′|).
+The screen strengthens with more data — the amplitude law carries an
+inverse |ζ′(ρ)| weight, now the concrete analytic target.
+
+---
+
 ## Session 9 — July 20, 2026: spectroscopy instrument tests (Plan 7)
 
 Code: `spectroscopy.py`; raw output `~/rh_output/spectroscopy.txt`.
