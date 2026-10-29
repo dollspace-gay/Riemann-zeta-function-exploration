@@ -23,6 +23,7 @@ from weil_signature import window_transform
 
 # Rounded ordinates already recorded in nyman-beurling/symbol_zero.py.
 # Used for a low-height cross-check only; never used to assemble prime-side W.
+# The validation sum assigns unit multiplicity to each recorded zero.
 KNOWN_ORDINATES = np.array([14.134725142, 21.022039639, 25.010857580,
                             30.424876126, 32.935061588, 37.586178159,
                             40.918719012])

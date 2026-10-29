@@ -3,6 +3,7 @@
 
 This is a diagnostic model of the zero-side Weil form, NOT an evaluation
 of the full zeta explicit formula and NOT a numerical test of RH.
+Planted pairs, clusters, and masking backgrounds use unit-multiplicity atoms.
 
 Run from the repository root:
   python compute/weil_signature.py --output compute/results/weil_signature.json
@@ -54,10 +55,11 @@ def transform_by_quadrature(z, bandwidth):
 
 
 def pair_forms(center, displacement, probes, bandwidth=1.0):
-    """Same-height reflected off-line pair z=center +/- i*displacement.
+    """Unit-multiplicity reflected pair z=center +/- i*displacement.
 
     Correct zero-side contribution: vv^T + conjugate(vv^T).
     PSD control: vv* + conjugate(v)v^T. The latter erases inertia.
+    For common multiplicity m, multiply both returned matrices by m.
     """
     v = window_transform(center + 1j * displacement - probes, bandwidth)
     signed = 2 * np.real(np.outer(v, v))
@@ -66,6 +68,7 @@ def pair_forms(center, displacement, probes, bandwidth=1.0):
 
 
 def online_form(zeros, probes, bandwidth=1.0):
+    """Sum unit-multiplicity on-line atoms; repeated ordinates add weight."""
     v = window_transform(np.asarray(zeros)[:, None] - probes, bandwidth).real
     return v.T @ v
 

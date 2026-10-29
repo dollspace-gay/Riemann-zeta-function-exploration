@@ -64,35 +64,50 @@ does not settle that criterion.
 ## 3. Exact pair/cluster bridge — derived here
 
 Take `F` real entire and even, and `F_j(z)=F(z-t_j)` for real probe
-centers. If `rho=1/2+delta+i gamma`, its reflected partner
+centers. For an off-line zero `rho=1/2+delta+i gamma`, its reflected partner
 `1-conjugate(rho)` has spectral coordinate conjugate to `z_rho`.
-Writing the probe vector as `v=a+i b`, the pair contributes
+The two off-line zeros have the same multiplicity `m >= 1`.
+Writing the probe vector as `v=a+i b`, their contribution is
 
-    Q = vv^T + conjugate(vv^T) = 2 aa^T - 2 bb^T.
+    Q = m [vv^T + conjugate(vv^T)] = 2m aa^T - 2m bb^T.
 
 Its restriction has one positive and one negative direction when `a,b`
 are independent. Under projection they need not remain independent.
 Replacing the transpose by a conjugate transpose instead gives
 
-    H = vv* + conjugate(v)v^T = 2 aa^T + 2 bb^T,
+    H = m [vv* + conjugate(v)v^T] = 2m aa^T + 2m bb^T,
 
 which erases the signature. The distinction is structural, not numerical.
 
 For two symmetric probes `t_1=gamma-h`, `t_2=gamma+h`, the off-line pair
 has eigenvalues exactly
 
-    4 Re(F(h+i delta))^2,    -4 Im(F(h+i delta))^2.
+    4m Re(F(h+i delta))^2,    -4m Im(F(h+i delta))^2.
 
-For two *on-line* zeros at `gamma-epsilon`, `gamma+epsilon`, the two
+For two **simple on-line zeros** at `gamma-epsilon`, `gamma+epsilon`, the two
 eigenvalues are exactly
 
     [F(h+epsilon)+F(h-epsilon)]^2,
     [F(h+epsilon)-F(h-epsilon)]^2.
 
-Thus the channels that tend to zero satisfy
+If both on-line zeros have a common multiplicity `m`, multiply both
+eigenvalues by `m`. For unequal multiplicities `m_-`, `m_+`, use the
+weighted matrix
+
+    C = m_- u_- u_-^T + m_+ u_+ u_+^T,
+    u_- = (F(h-epsilon), F(h+epsilon))^T,
+    u_+ = (F(h+epsilon), F(h-epsilon))^T.
+
+Its sum and difference vectors need not be eigenvectors.
+
+For the simple on-line cluster and the off-line pair of fixed multiplicity
+`m`, the channels that tend to zero satisfy
 
     lambda_cluster = +4 epsilon^2 F'(h)^2 + O(epsilon^4),
-    lambda_offline = -4 delta^2 F'(h)^2 + O(delta^4).
+    lambda_offline = -4m delta^2 F'(h)^2 + O(delta^4).
+
+Since `m > 0`, multiplicity preserves the off-line signature and the
+quadratic resolution scale.
 
 These are labeled channels; near zero they are the small eigenvalues
 if `F(h)` and `F'(h)` are nonzero. This is the direct connection to the
@@ -101,7 +116,10 @@ positive cluster degeneracy and visibility of negative pair directions.
 
 An additional exact two-probe identity, without symmetric centers, is
 
-    det Q = -4(a_1 b_2 - a_2 b_1)^2.
+    det Q = -4m^2(a_1 b_2 - a_2 b_1)^2.
+
+The planted pair, cluster, and background-masking experiments below use
+unit multiplicity. The weighted formulas above also cover multiple zeros.
 
 **A necessary negative control:** on-line background can mask the
 negative direction in a finite compression. The experiment exhibits
@@ -195,6 +213,9 @@ python compute/weil_prime_side.py --output compute/results/weil_prime_side.json
 
 Runtime: Python 3.12.14, NumPy 2.3.5, SciPy 1.17.0. CPU only.
 The saved JSON files contain parameters, controls, and raw matrices.
+The planted spectra in `weil_signature.json` use unit-multiplicity atoms.
+The arithmetic-side reconstruction retains the full Weil form; its separate
+seven-pair validation sum assigns unit multiplicity to the recorded zeros.
 
 | Exercise | Observation |
 |---|---|
@@ -228,9 +249,22 @@ over `(0.8,[11,16])`, `(1.6,[20,22])`, and
 the gamma term agreed with the panel implementation to `1.18e-11`
 or better across those cases. Invalid bandwidths and an insufficient
 cutoff were rejected. These are additional numerical checks, not
-rigorous interval enclosures. None of this is a Lean verification of the
-new lemmas. Existing Lean files were not changed or rebuilt this session;
-the runtime has no `lake` executable.
+rigorous interval enclosures. Those computational checks did not formalize
+the new lemmas. The original computational session did not rebuild the
+existing Lean files; its runtime had no `lake` executable.
+
+**Lean verification follow-up:**
+[`WeilVerification.lean`](../lean/RHCrystal/WeilVerification.lean) now proves
+25 theorems covering the finite pair/cluster identities, multiplicity
+scaling, the integer moment obstruction, exponential envelope comparisons,
+and the rank-one operator-norm and tail-summation steps. The tail results
+take componentwise Fourier decay and scalar summability as explicit
+hypotheses. From `lean/`, `lake build` and
+`lake env lean check_pr1_axioms.lean` pass; the fail-closed audit checks
+157 declarations across five project modules and permits only `propext`,
+`Classical.choice`, and `Quot.sound`. The Fourier-decay derivation, zero
+counting, Taylor remainder, explicit formula, and external strip results
+remain outside this local formalization.
 
 ## 7. What would make this advance RH further
 
