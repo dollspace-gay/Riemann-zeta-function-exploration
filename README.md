@@ -2,6 +2,16 @@
 
 Here's what we found, what we got wrong, and what survived.
 
+**October 2026 extension:** [Combine the project with the recent RH
+results](papers/rh_synthesis_2026_10.md). This adds a signed Weil-form
+instrument, an arithmetic-side explicit-formula reconstruction, and a
+conditional zero-free-strip tail lemma, with saved execution records.
+Run `python compute/weil_signature.py` and `python compute/weil_prime_side.py`
+(NumPy + SciPy, CPU). The current Nyman–Beurling status includes the
+[Session-27 refutation](nyman-beurling/kfloor.md#session-27-lemma-a-is-false--the-primorial-refutation-inter-agent-verified-and-what-falls-with-it)
+of the earlier GCD-floor conjecture; the historical narrative below
+primarily describes the March–June Gram-matrix phase.
+
 ---
 
 ## What This Is

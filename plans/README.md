@@ -1,5 +1,12 @@
 # Plans — July 2026
 
+**October 28 update:** [Plan 9 — cluster-adapted Weil compressions](09-weil-signature.md)
+connects the recent zeta results to this repository. Gates 1–2 have
+reproducible implementations; certification and the new analytic estimate
+remain open. The July table below is historical: Session 27 of
+`nyman-beurling/kfloor.md` subsequently refuted Lemma (A) and the old
+polylogarithmic K-floor upgrade path.
+
 Five pathways selected after the June 2026 sessions (external contact
 deliberately excluded for now, per doll). Each plan is self-contained:
 current state, staged milestones with validation gates, honest
