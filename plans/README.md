@@ -7,6 +7,16 @@ remain open. The July table below is historical: Session 27 of
 `nyman-beurling/kfloor.md` subsequently refuted Lemma (A) and the old
 polylogarithmic K-floor upgrade path.
 
+**September 24 continuation:** [Arithmetic and autocorrelation](../nyman-beurling/autocorrelation_decay.md)
+sharpens Plan 9's remaining decay problem. Exact self-correlation allows slow
+L² modes; their arithmetic admissibility is governed by ζ(s). No sufficient
+decay or uniform gain estimate has been proved.
+
+**September 10 continuation:** [Plan 9 — residual reduction](09-residual-reduction.md)
+is the active next proof target. The block/chain instrument and convergence
+implication are verified; a uniform gain estimate remains open. The entries
+below preserve the July history.
+
 Five pathways selected after the June 2026 sessions (external contact
 deliberately excluded for now, per doll). Each plan is self-contained:
 current state, staged milestones with validation gates, honest

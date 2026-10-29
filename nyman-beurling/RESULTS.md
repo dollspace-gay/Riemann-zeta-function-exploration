@@ -1,5 +1,210 @@
 # Results Log
 
+## September 24, 2026 — exact autocorrelation does not itself force summability
+
+**The joint arithmetic decay estimate remains unproved.** The
+[decay investigation](autocorrelation_decay.md) proves that the canonical
+autocorrelation identity follows from projection onto a dilation-invariant
+subspace. It constructs normalized complex L² functions with
+F_n=E_s n^(−s), exact self-correlation, and Σ|F_n|=∞ for 1/2<Re(s)<1.
+Their full arithmetic defect is −E_s ζ(s) k^(−s). A real conjugate-pair
+projection has the same normalization, exact self-correlation, and
+nonsummability, with the corresponding real combination of zeta defects.
+
+These are controls, not actual off-line zeros or counterexamples to the
+desired joint theorem. A hypothetical off-line zero would make their
+arithmetic defects vanish. The real control is canonical for an explicitly
+defined auxiliary invariant space, not asserted to be the actual remainder
+for the integer-dilation span. Its nonzero target overlap would nevertheless
+force the actual canonical remainder to be nonzero. Thus positivity cannot
+be promoted to the missing decay without a further arithmetic argument.
+
+Four controls at two nonzero-zeta points were checked. Independent log-variable
+quadrature of norms, target pairings, primitives, and covariances agrees within
+1.35e−14. Twelve direct cell-integration checks retain their omitted tails;
+the largest actual-error/bound ratio is below 0.250. Twelve residue checks
+using independently grouped Hurwitz zeta values agree within 1.8e−41 at
+40-digit working precision. These are floating-point diagnostics, not interval
+certificates. The generated report is ignored and records its source hash.
+
+All **28 NB tests pass**. The full pinned Lean build succeeds (3505 jobs).
+The two new general projection lemmas compile; the axiom audit passes for
+**203 declarations across nine modules**, allowing only `propext`,
+`Classical.choice`, and `Quot.sound`. The analytic control constructions and
+the desired infinite decay theorem are not Lean formalizations.
+
+## September 24, 2026 — arithmetic structure of the hypothetical annihilator
+
+**No unrestricted rigidity theorem or RH proof obtained.** The
+[annihilator investigation](annihilator_rigidity.md) derives the residue
+equations Σ(j mod n)d_j=0 for every modulus, their exact Abel boundary terms,
+and adjoint decimation F_k → F_nk. It describes how this step-space model
+recovers the original full-tail projection through one explicit additional
+direction. The sequence family agrees with Bagchi's published reformulation;
+it is not claimed as a new RH criterion.
+
+The canonical remainder has the additional identity
+F_n=⟨h,D_n h⟩, giving a positive-definite dilation correlation kernel.
+Finite-prime Möbius inversion proves that an annihilator with Σ|F_n|<∞
+vanishes in the step model, and hence the canonical remainder vanishes.
+The required summability has not been established. Splitting a convergent
+difference into divergent series is the exact failure in the attempted
+unconditional inversion. Explicit power modes show that an off-line zero
+would fit the weighted Hilbert-space constraints; critical-line modes fail
+the norm condition and are not counterexamples.
+
+All 22 NB Python tests pass. The finite probe checks five optimal residuals
+through N=4096, 30 residue constraints, and 13 dilation-covariance identities;
+the finite orthogonality defect is at most 7.994e−15 and the Abel identity
+error at most 2.112e−19. These are floating-point checks, not infinite-remainder
+computations or interval certificates. Exact rational tests also check the
+finite prime sieve. Three identities in the new Lean `Annihilator` module
+compile, and the pinned full project builds successfully. Generated reports
+remain ignored and record source and matrix hashes. The axiom audit passes
+for 201 declarations across nine modules, allowing only `propext`,
+`Classical.choice`, and `Quot.sound`.
+
+## September 24, 2026 — fixed-residual noncancellation and its cost obstruction
+
+**The requested uniform estimate remains unproved.** The
+[new proof attempt](mobius_correlation_identity.md) uses the established
+unconditional L1 convergence of natural Möbius sums to prove, for each fixed
+N, that Σ_(N<k≤M) μ(k)⟨r_N,e_k⟩ → −E_N as M → ∞. It supplies an explicit
+transfer error bound and derives the distinct limit for the original chains.
+These are written consequences of the cited L1 theorem, not new Lean
+formalizations of that arithmetic theorem.
+
+The proof does not control the cutoff uniformly in N or the projected
+correction norm. An explicit Hilbert-space example has the same fixed-residual
+correlation limit but error tending to 1 because its correction cost diverges.
+The general gain/cost obstruction is Lean-checked in
+`gain_le_visible_energy` and `cost_lower_of_half_capture`.
+
+The numerical probe checks 24 (N,M) pairs using the existing 8192 Gram matrix.
+At N=32, increasing M from 1024 to 8192 retains near-complete correlation but
+reduces normalized gain from 0.990317 to 0.390348 as the cost increases.
+The N=4096, M=8192 block captures about 42% of its fixed-N limiting signal.
+These are floating-point diagnostics. All 15 Python tests pass, including
+independent periodic quadrature and the explicit counterexample. The pinned
+Lean project builds successfully; its audit passes for 198 declarations across
+eight modules with only the three permitted standard axioms. Generated reports
+remain ignored.
+
+## September 23, 2026 — actual Möbius residual capture through N=4096
+
+**No uniform gain proof obtained.** The [full investigation](residual_capture_theory.md)
+derives exact unit-cell and Mertens-sum expressions for the correlation with the
+optimal residual. A rigorous tail inequality isolates a more specific sufficient
+arithmetic target. Its uniform lower bound is still missing.
+
+The numerical scan covers 946 distinct sizes through N=4096 and uses a newly
+built 8192×8192 matrix. The new bulk implementation evaluates the established
+Vasyunin formula; it agrees with the earlier independently integrated 1024
+prefix within 5.773e−12. Squared errors are E_4096=0.005400479114 and
+E_8192=0.005064489997. These are floating-point observations, not enclosures.
+
+The raw Möbius-chain normalized gain reaches 0.01785777 at N=1132, below the
+previous finite minimum 0.0379382 through N=512. Removing the correction's
+old-span component improves its gain without changing its residual correlation;
+the projected recipe's finite minimum is 0.04113155. The projected full-block
+Möbius recipe has finite minimum 0.06820084. No asymptotic floor follows.
+
+The tapered-trial transfer bound supplies no positive correlation lower bound
+in any of the 946 checked cases. The actual residual and trial must remain
+distinct. Twelve Python tests pass; the pinned Lean build succeeds and its
+audit passes for 196 declarations in eight modules. New general results are
+`orthogonal_cleanup_gain`, `trial_correlation_transfer`, and `trial_excess_energy`.
+Generated matrices, binaries, reports, and hashes are ignored under
+`Riemann_Continuation_Verification/residual_capture/`.
+
+## September 10, 2026 — direct attempt at the uniform residual-gain estimate
+
+**No uniform gain estimate or RH proof obtained.** The full argument and
+its stopping point are in [`uniform_gain_attempt.md`](uniform_gain_attempt.md).
+
+A written unconditional obstruction was established: every finite combination
+of the doubling chains alone leaves squared error at least
+1−2(log 2)² = 0.0390939721635972. An explicit dyadically periodic L²
+witness is orthogonal to every chain and has both squared norm and target
+correlation equal to that constant. This prevents replacing full reprojection
+with a chain-only approximation scheme; it does not refute the proposed
+estimate evaluated at the actual optimal residuals. This new obstruction
+is not claimed as a Lean theorem or as novel in the literature.
+
+`gain_attempt.py` screens five explicit correction directions at all 497
+integers 16 ≤ N ≤ 512. Their finite minimum normalized gains range from
+0.01497 to 0.03794. These observations provide no positive uniform lower
+bound. The run verifies projection/gain identities and the witness integrals.
+
+An exact connection to the prime-based bundle was derived: on 1 ≤ u ≤ N,
+the tapered-Möbius trial residual equals (θ_N u−ψ(u))/log N, while the
+Suzuki prime sum is a signed smoothed integral of ψ. `verify_prime_bridge.py`
+checks the pointwise, head-energy, and smoothing identities independently
+through N=1024 and t=12. Largest numerical discrepancies are 8.58e−17,
+1.78e−17, and 3.34e−16 respectively. These are checks of identities, not
+asymptotic estimates. The optimum and the explicit trial must not be identified.
+
+The positive coefficient bound controls finite syntheses; it does not control
+the component of χ orthogonal to their full closed span. The attempted proof
+still lacks an unconditional lower bound on the signed residual correlations.
+The standard tapered-Möbius asymptotic assumes RH and cannot fill that gap.
+Generated outputs and source hashes are in the ignored
+`Riemann_Continuation_Verification/gain_candidate_screen.json` and
+`Riemann_Continuation_Verification/prime_bridge_checks.json`.
+
+## September 10, 2026 — jump bound formalized; residual refinement through N=1024
+
+The next proof target is persistent reduction of the actual optimal residual.
+Definitions, the complete written argument, and reproducible commands are in
+[`refinement_theory.md`](refinement_theory.md); the active work is
+[Plan 9](../plans/09-residual-reduction.md).
+
+**New unconditional theorem:** for arbitrary real coefficients and N > 0,
+
+    ∫₀∞ (Σ_(k=1)^N c_k fract(1/(kt)))² dt
+      ≥ (Σ_(k=1)^N c_k²)/(36 N² H_N).
+
+Lean verifies this end to end as
+`NymanBeurling.Jump.synthesis_integral_lower_bound`, including the actual
+fractional-part jumps, the change of variables, weighted disjoint-cell sum,
+and Möbius recovery. The complex extension and sharper P_N constant are
+written consequences, not additional formalized final theorems.
+
+The general implication “divergent guaranteed fractional gains force energy
+to zero” is also Lean verified, with the gain hypotheses explicit. It does
+not establish those hypotheses for Nyman–Beurling or formalize RH itself.
+
+**Computation:** built an independent 1024×1024 NumPy Gram matrix in 579 s;
+its 500×500 prefix matches the earlier verified matrix exactly. At N=512,
+E_N = 0.00738650782210 and E_2N = 0.00652872048819. New doubling chains
+capture 95.0283% of the full gain with old coefficients refitted and 61.3137%
+with the old approximation fixed. For the latter correction,
+
+    log(N) × gain/E_N = 0.444187454
+                      = 2.474953999 × 0.179473014,
+
+where the factors measure available tail energy and the fraction captured.
+No uniform lower bound is inferred from these finite values. The H² control
+with family (1−2z)z^j has Gram eigenvalues ≥ 1 but residual energy → 3/4,
+confirming why a spectral floor alone does not suffice.
+
+**Verification:** six independent Python tests pass. All eight Lean modules
+build under pinned Lean 4.33.0-rc1; the audit checks all 193 project
+declarations, permitting only `propext`, `Classical.choice`, and `Quot.sound`.
+Three existing warnings remain in the older modules; no new-module warnings.
+
+The newly supplied prime–zero archive was read, safely extracted, ignored,
+and rerun unchanged. Its 64 floating fields match the archive within
+6.29e−13; all six 55-digit references match exactly. The five prime-derived
+peaks and six positive sampled kernel matrices reproduce. Suzuki's pointwise
+positivity criterion is an additional exact target, not a proved bridge from
+this coefficient bound. See the proof note for the source check and the
+limited heat-semigroup obstruction.
+
+Raw outputs and hashes remain in the ignored `Riemann_Continuation_Verification/`
+and `Prime_Zero_Object_Reproduction/` directories. No asymptotic residual-gain
+estimate or RH proof is claimed.
+
 ## Session 1 — June 9, 2026: first computation, N ≤ 500
 
 Code: `compute_dN.py`. Raw output: `~/rh_output/nb_results.txt`; Gram matrix

@@ -22,13 +22,20 @@ Started in one evening (March 2026) by a trans woman with no formal math educati
 
 - **One mechanistic theory, tested:** The invisible directions are k-th divided differences over zero clusters — the prime sum cannot resolve the k-th derivative of the phase at small scales. Planted-cluster experiments confirm the predicted δ², δ⁴, δ⁶ scaling for pairs/triples/quadruples (measured exponents 1.95/4.01/6.05). Combined with GUE extreme-gap statistics this predicts λ_min ~ N^(−2/(k+2)) per channel, bracketing every measured exponent, and conjectures λ_min = N^(−2/3+o(1)) asymptotically, conditional on the GUE Hypothesis. See [`papers/scaling_theory.md`](papers/scaling_theory.md).
 
-- **One robust geometric property:** The Xi-weighted Gram matrix has minimum condition number at σ = 1/2, confirmed across 10 L-functions, at scales up to N = 20,000, and at zero heights up to 600,000. Machine-precision symmetry under σ ↔ 1−σ. The second-order minimum condition is verified to N = 2000 with 4–5 decimal agreement.
+- **A cutoff-dependent geometric property:** The Xi-weighted Gram matrix has a condition-number minimum at σ = 1/2 in the original experiments across 10 L-functions, up to N = 20,000 and zero heights up to 600,000. A September review proves a sufficient global-minimum criterion and reproduces an interval certificate for the 20-zero-bracket / 120-prime example. The universal claim is false: two actual zero brackets and five primes give better conditioning away from the center. See [the proof and verification review](papers/gram_extremum_review.md).
 
 - **Two machine-verified proofs:** The symmetry κ(σ) = κ(1−σ), and the interlacing pair bound λ_min(G) ≤ Σ_p w(p,σ)(1 − cos(δ·log p)) — the latter ties the smallest eigenvalue to close zero pairs. Both formally proven in Lean 4, zero sorries, zero custom axioms.
 
 - **One bug, and one revised claim:** The initial Rust implementation doubled the diagonal, inflating results by 10×; the "bounded conditioning" result in early drafts was wrong. And v3's "Lehmer pair localization" claim was refined to tight-cluster localization in v4 after sliding-window analysis. Both are documented in full — the corrections are part of the record.
 
 **This is not a proof of the Riemann Hypothesis.** It's a computational exploration with a few new findings, a tested mechanism, corrected mistakes, and an honest writeup of all of it.
+
+The current [Nyman–Beurling investigation](nyman-beurling/autocorrelation_decay.md)
+asks whether arithmetic constraints force enough decay of a hypothetical
+surviving remainder. Exact autocorrelation permits slowly decaying L² modes;
+their arithmetic defects involve ζ(s). The required decay remains unproved.
+The follow-up includes written derivations, numerical checks, and two general
+projection lemmas verified in Lean.
 
 ---
 
@@ -80,6 +87,7 @@ python compute/rh_theory.py
 
 - [`papers/rh_crystal_v4.md`](papers/rh_crystal_v4.md) — The mathematical findings (current version)
 - [`papers/scaling_theory.md`](papers/scaling_theory.md) — Toward deriving the scaling law: stencil theory + GUE extreme-value channels
+- [`papers/gram_extremum_review.md`](papers/gram_extremum_review.md) — Global finite extremum criterion, reproduced interval certificate, counterexamples, and corrected geometry claims
 - [`papers/rh_crystal_v3_final.md`](papers/rh_crystal_v3_final.md) — v3, kept as the historical record
 - [`papers/progress_notes_2026-06-09.md`](papers/progress_notes_2026-06-09.md) — Lab notes for the v4 experiments
 - [`papers/rh_process_paper.md`](papers/rh_process_paper.md) — How we did it, what went wrong, and who gets to do math
@@ -130,8 +138,9 @@ rh-crystal/
 | Claim | Status | Evidence |
 |-------|--------|----------|
 | κ(σ) = κ(1−σ) | **Proven** (Lean 4) | `lean/RHCrystal/RHCrystal.lean` |
-| σ = 1/2 minimizes κ | **Observed** (N ≤ 20,000) | GPU results, 10 L-functions |
-| σ = 1/2 minimum holds at all heights | **Observed** (γ up to 600k) | `rh_postfix.py` Test 5 |
+| σ = 1/2 minimizes κ in the original cutoff regimes | **Observed** (N ≤ 20,000); not universal | GPU results, 10 L-functions; counterexamples in `papers/gram_extremum_review.md` |
+| Strict global minimum for the specified 20-bracket / 120-prime family | **Written theorem + reproduced interval verification**, not Lean | `compute/certify_gram_extremum.py`, `papers/gram_extremum_review.md` |
+| σ = 1/2 minimum at tested heights and cutoffs | **Observed** (γ up to 600k) | `rh_postfix.py` Test 5 |
 | Bounded conditioning (κ < 4) | **WRONG** (bug) | See `rust/BUGFIX.md` |
 | κ grows as N^{0.61} | **Observed** | `rh_gpu.py` Test 1 |
 | λ_min eigenvector localized on tight clusters (v4; v3 said "Lehmer pairs") | **Observed** (new) | `rh_windows.py` |

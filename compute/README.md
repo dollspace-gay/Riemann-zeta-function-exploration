@@ -1,5 +1,27 @@
 # Riemann Hypothesis Crystal Analysis (Rust)
 
+## September 2026 finite-extremum verification (CPU)
+
+The universal minimum question below now has counterexamples. The specified
+20-zero-bracket / 120-prime family does satisfy a sufficient criterion for a
+strict global minimum, verified by interval arithmetic. See the
+[reviewed proof and scope](../papers/gram_extremum_review.md).
+
+From the repository root, with NumPy and mpmath:
+
+```bash
+python compute/certify_gram_extremum.py \
+  --output Riemann_Continuation_Verification/shared-conversation-20260923/fresh_certificate.json
+python compute/verify_gram_extremum.py --xi \
+  --output Riemann_Continuation_Verification/shared-conversation-20260923/independent_checks.json
+python -m unittest discover -s compute -p test_gram_extremum.py -v
+```
+
+The certificate script encloses roots and proves the finite hinge inequalities.
+The second script independently checks the numbers at 45 and 75 digits, the
+feature geometry, and optionally the completed-xi energy quadrature. Neither is
+a Lean proof or a uniform theorem as the number of zeros and primes increases.
+
 ## Setup
 
 ### Step 1: Precompute zeros (Python, one-time)

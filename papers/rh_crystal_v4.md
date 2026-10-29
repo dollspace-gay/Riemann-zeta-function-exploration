@@ -1,5 +1,7 @@
 # The Critical Line as Point of Maximum Isotropy: A Numerical Study of Prime-Zero Coupling
 
+**September 23, 2026 verification addendum:** the [finite-extremum review](gram_extremum_review.md) proves a sufficient global-minimum criterion and reproduces an interval certificate for 20 supplied zero brackets and 120 primes. It also verifies a two-zero/five-prime counterexample to an unrestricted minimum claim. The June observations below retain their original parameter scope. The new result concerns the real cosine kernel actually computed by the code; the complex exponential definition in this paper is a different matrix and should not be substituted into that certificate.
+
 **Version 4 (June 2026).** This version revises the close-pair localization claim of v3 (§5.5): sliding-window analysis shows the λ_min eigenvector localizes on tight *clusters* of zeros selected by a local window eigenvalue, not on minimal-gap (Lehmer) pairs per se. It also adds a rigorous interlacing bound on λ_min, ensemble control experiments (GUE/Poisson/picket fence), an extension of the second-order minimum verification from N = 30 to N = 2000, and a resolution of the height-degradation question via prime-cutoff scaling. All changes are catalogued in Appendix D.
 
 ---

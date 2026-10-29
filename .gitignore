@@ -26,3 +26,11 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Local Riemann continuation notes and verification bundle
+/Riemann_Hypothesis_Continuation.md
+/Riemann_Continuation_Verification.zip
+/Riemann_Continuation_Verification/
+/The_Prime_Zero_Object.md
+/Prime_Zero_Object_Reproduction.zip
+/Prime_Zero_Object_Reproduction/

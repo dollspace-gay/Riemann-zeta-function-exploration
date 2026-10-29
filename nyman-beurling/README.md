@@ -1,5 +1,38 @@
 # Nyman–Beurling / Báez-Duarte: Studying an Object Whose Smallness IS RH
 
+**Latest decay investigation — September 24:** [Arithmetic and autocorrelation](autocorrelation_decay.md)
+shows that the canonical correlation identity follows automatically from
+projection. Explicit real and complex L² controls have exact self-correlation
+and nonsummable primitives; their arithmetic defects are computed in terms of
+ζ(s). They are not counterexamples to RH. The required arithmetic decay remains
+unproved. Two projection lemmas are Lean-checked, and all 28 NB tests pass.
+
+**September 24:** [Annihilator rigidity](annihilator_rigidity.md)
+studies the hypothetical surviving remainder. Its interval integrals satisfy
+all residue-class equations and a dilation autocorrelation identity. Finite
+prime inclusion-exclusion proves rigidity under an extra summability condition;
+that condition is unproved for the remainder. The unrestricted theorem and RH
+remain open. The new residue and finite-boundary identities are Lean-checked.
+
+**September 24 continuation:** [Fixed-residual noncancellation](mobius_correlation_identity.md)
+proves that the full Möbius correlation tends to −E_N when N is fixed and
+the summation cutoff grows. It derives the different limit for the chain
+recipe and shows why neither limit supplies the uniform gain estimate:
+the cutoff and correction norm must be controlled as N grows. RH remains open.
+
+**September 23 continuation:** [Möbius residual capture](residual_capture_theory.md)
+derives the actual residual correlation in terms of Möbius partial sums,
+extends the gain investigation to 946 sizes through N=4096 (using an 8192-term
+Gram matrix), and formalizes three projection/transfer lemmas in Lean. The
+uniform arithmetic estimate remains open; the trial-transfer shortcut is too
+weak in every tested case.
+
+**September 10 continuation:** [Residual reduction](refinement_theory.md)
+derives the exact gain from new doubling chains, separates tail energy from
+capture, records checked experiments through N=1024, and states the unproved
+uniform estimate that would imply RH. Run `python -m unittest
+test_block_refinement -v` in this directory to check the new instrument.
+
 *Started June 2026, after the Gram-matrix exploration (see repo root). The
 lesson from that project: our matrix was built FROM zeros on the line, so
 no discovery about it could bear on RH (paper v4, §7.2). This direction

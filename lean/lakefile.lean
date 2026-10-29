@@ -12,4 +12,5 @@ require mathlib from git
 @[default_target]
 lean_lib «RHCrystal» where
   srcDir := "RHCrystal"
-  roots := #[`RHCrystal, `NymanBeurling, `NymanBeurlingL2, `NymanBeurlingMain, `WeilVerification]
+  roots := #[`RHCrystal, `NymanBeurling, `NymanBeurlingL2, `NymanBeurlingMain,
+    `JumpLocal, `JumpArithmetic, `JumpSynthesis, `Refinement, `Annihilator, `WeilVerification]
